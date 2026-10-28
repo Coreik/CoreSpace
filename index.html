@@ -506,6 +506,30 @@ details.bom summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:15px
 .rnum{font-family:var(--display);font-stretch:70%;font-weight:900;font-size:30px;line-height:1.05;font-variant-numeric:tabular-nums;text-align:right}
 @media (max-width:420px){.wrap{padding-inline:16px}.pgrid{gap:10px}.pbody{padding:10px 10px 12px}.addsplit .addmain{font-size:13px}.sheetp{padding-inline:16px}.rnum{font-size:26px}}
 #packages,#catalogue,.bdoc,#estimate{scroll-margin-top:140px}
+@media (max-width:1180px){nav.main{display:none}.menubtn{display:inline-grid}}
+.pr small{font:400 12.5px var(--body);color:var(--ink-2)}
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:20px}
+.lcard{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--ink);background:var(--paper);transition:border-color .15s,transform .15s}
+.lcard:hover{border-color:var(--ink);transform:translateY(-2px)}
+.lart{display:block;aspect-ratio:4/3;background:var(--surface);border-bottom:1px solid var(--line)}
+.lart svg,.lart img,.lfig svg,.lfig img{display:block;width:100%;height:100%;object-fit:cover}
+.lbody{display:grid;gap:6px;padding:16px 18px 18px}
+.lbody b{font-family:var(--display);font-stretch:70%;font-weight:900;font-size:34px;line-height:1}
+.lbody .muted{font-size:15px}
+.lby{font:500 12px var(--mono);letter-spacing:.04em;color:var(--ok)}
+.lpr{font-family:var(--display);font-stretch:74%;font-weight:800;font-size:22px;margin-top:6px;font-variant-numeric:tabular-nums}
+.lpr small{display:block;font:400 12.5px var(--body);color:var(--ink-2)}
+.lhero{display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:start}
+.lhero>*{min-width:0}
+@media (max-width:920px){.lhero{grid-template-columns:1fr;gap:28px}}
+.lfig{margin:0}
+.lfig svg,.lfig img{aspect-ratio:4/3;height:auto;border-radius:var(--r);border:2px solid var(--ink)}
+.lfig figcaption{font-size:13.5px;color:var(--ink-2);margin-top:8px}
+.sws{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:18px}
+.sw{display:inline-flex;align-items:center;gap:8px;font:500 12px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2)}
+.sw i{width:26px;height:26px;border-radius:50%;border:1px solid rgba(0,0,0,.18)}
+.lsteps{grid-template-columns:repeat(4,1fr)}
+@media (max-width:980px){.lsteps{grid-template-columns:1fr}}
 </style>
 
 <header class="site" id="hdr"><div class="wrap bar">
@@ -537,18 +561,22 @@ details.bom summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:15px
 // WhatsApp number that receives "Send quote on WhatsApp" from My bathrooms: country code + number, digits only.
 const WHATSAPP_NUMBER = "918660117432";
 const CATALOG = {
-  // brand: id, name, priceClass (value | mid | premium | luxury), what they sell
+  // brand: id, name, kind (fittings | tiles | picks), priceClass, what they sell
   brands:[
-    {"id": "jaquar", "name": "Jaquar", "priceClass": "mid", "range": "Full range: ceramics, fittings, showers, accessories"},
-    {"id": "kohler", "name": "Kohler", "priceClass": "premium", "range": "Full range: ceramics, fittings, showers, accessories"},
-    {"id": "cera", "name": "Cera", "priceClass": "value", "range": "Full range: ceramics, fittings, showers, accessories"},
-    {"id": "hindware", "name": "Hindware", "priceClass": "value", "range": "Full range: ceramics, fittings, showers, accessories"},
-    {"id": "parryware", "name": "Parryware", "priceClass": "value", "range": "Full range: ceramics, fittings, showers, accessories"},
-    {"id": "grohe", "name": "Grohe", "priceClass": "luxury", "range": "Fittings and showers; ceramics range launched in India (confirm models)"},
-    {"id": "hansgrohe", "name": "Hansgrohe", "priceClass": "luxury", "range": "Fittings and showers only. Packages pair it with Kohler ceramics"},
-    {"id":"corespace","name":"CoreSpace pick","priceClass":"value","range":"Unbranded drains, vanities, mirrors and glass chosen by CoreSpace"}
+    {"id": "jaquar", "name": "Jaquar", "kind": "fittings", "priceClass": "mid", "range": "Full range: ceramics, fittings, showers, accessories"},
+    {"id": "kohler", "name": "Kohler", "kind": "fittings", "priceClass": "premium", "range": "Full range: ceramics, fittings, showers, accessories"},
+    {"id": "cera", "name": "Cera", "kind": "fittings", "priceClass": "value", "range": "Full range: ceramics, fittings, showers, accessories"},
+    {"id": "hindware", "name": "Hindware", "kind": "fittings", "priceClass": "value", "range": "Full range: ceramics, fittings, showers, accessories"},
+    {"id": "parryware", "name": "Parryware", "kind": "fittings", "priceClass": "value", "range": "Full range: ceramics, fittings, showers, accessories"},
+    {"id": "grohe", "name": "Grohe", "kind": "fittings", "priceClass": "luxury", "range": "Fittings and showers; ceramics range launched in India (confirm models)"},
+    {"id": "hansgrohe", "name": "Hansgrohe", "kind": "fittings", "priceClass": "luxury", "range": "Fittings and showers only. Packages pair it with Kohler ceramics"},
+    {"id":"kajaria","name":"Kajaria","kind":"tiles","priceClass":"value","range":"Floor, wall and feature tiles"},
+    {"id":"somany","name":"Somany","kind":"tiles","priceClass":"value","range":"Floor, wall and feature tiles"},
+    {"id":"orientbell","name":"Orientbell","kind":"tiles","priceClass":"value","range":"Floor, wall and feature tiles"},
+    {"id":"corespace","name":"CoreSpace pick","kind":"picks","priceClass":"value","range":"Unbranded drains, vanities, mirrors and glass chosen by CoreSpace"}
   ],
   categories:[
+    {"id": "tiles", "name": "Tiles", "icon": "tiles", "subcategories": [{"id": "floor-tile", "name": "Floor tile"}, {"id": "wall-tile", "name": "Wall tile"}, {"id": "feature-tile", "name": "Feature tile"}]},
     {"id": "sanitary", "name": "Sanitaryware", "icon": "sanitary", "subcategories": [{"id": "wc-wall", "name": "Wall-hung WC"}, {"id": "wc-floor", "name": "Floor-mounted WC"}, {"id": "wc-onepiece", "name": "One-piece WC"}, {"id": "basin-counter", "name": "Counter-top basin"}, {"id": "basin-wall", "name": "Wall-hung basin"}, {"id": "basin-under", "name": "Under-counter basin"}, {"id": "urinal", "name": "Urinal"}]},
     {"id": "flushing", "name": "Flushing", "icon": "flushing", "subcategories": [{"id": "cistern-concealed", "name": "Concealed cistern"}, {"id": "flush-plate", "name": "Flush plate"}, {"id": "cistern-exposed", "name": "Exposed cistern"}, {"id": "seat", "name": "Seat cover, soft-close"}]},
     {"id": "faucets", "name": "Faucets", "icon": "faucets", "subcategories": [{"id": "basin-mixer", "name": "Basin mixer, single-lever"}, {"id": "tall-mixer", "name": "Basin mixer, tall"}, {"id": "pillar-tap", "name": "Pillar tap"}, {"id": "wall-mixer", "name": "Wall mixer"}, {"id": "bib-tap", "name": "Bib tap"}, {"id": "sink-cock", "name": "Sink cock"}]},
@@ -558,9 +586,9 @@ const CATALOG = {
     {"id": "accessories", "name": "Accessories", "icon": "accessories", "subcategories": [{"id": "acc-set", "name": "Accessory set"}, {"id": "towel-rail", "name": "Towel rail"}, {"id": "robe-hook", "name": "Robe hook"}, {"id": "soap-dish", "name": "Soap dish"}, {"id": "tumbler", "name": "Tumbler holder"}, {"id": "roll-holder", "name": "Toilet-roll holder"}, {"id": "shelf", "name": "Shelf"}, {"id": "grab-bar", "name": "Grab bar"}]},
     {"id": "extras", "name": "Extras", "icon": "glass", "subcategories": [{"id": "vanity", "name": "Vanity unit"}, {"id": "mirror", "name": "Mirror"}, {"id": "led-mirror", "name": "LED mirror"}, {"id": "glass", "name": "Shower glass"}, {"id": "water-heater", "name": "Water heater"}, {"id": "exhaust", "name": "Exhaust fan"}]},
   ],
-  // Every product: modelCode "TBC" and priceMRP null until checked against the brand's official India price list.
-  // priceRange [low, high] is an indicative MRP band for that brand's price class, in INR. When you verify a product,
-  // set modelCode, priceMRP (a number) and priceStatus:"verified"; the site then shows that exact MRP.
+  // code: CoreSpace's own product code (CS-<brand>-<type>-<nn>). modelCode: the brand's model number, "TBC" until confirmed.
+  // priceStatus "site-rate": priceMRP is the rate from the CoreSpace price list. "indicative": no rate yet, priceRange is an estimate.
+  // To price an indicative product, set priceMRP to a number and priceStatus to "site-rate"; the site then shows that exact rate.
   products:[
     {"id": "jaquar-wc-floor", "code": "CS-JAQ-WCF-01", "brand": "jaquar", "category": "sanitary", "subcategory": "wc-floor", "name": "Floor-mounted WC with cistern and seat", "modelCode": "TBC", "finish": "White", "priceMRP": null, "priceStatus": "indicative", "priceRange": [12000, 20000], "image": null, "notes": "No CoreSpace rate yet: indicative range. Model and MRP to confirm from the Jaquar India price list."},
     {"id": "jaquar-wc-wall", "code": "CS-JAQ-WCW-01", "brand": "jaquar", "category": "sanitary", "subcategory": "wc-wall", "name": "Rimless wall-hung WC, soft-close seat", "modelCode": "TBC", "finish": "White", "priceMRP": 18500, "priceStatus": "site-rate", "priceRange": null, "image": null, "notes": "Rate from the CoreSpace price list; brand model confirmed in your quote.", "includesSeat": true},
@@ -741,6 +769,14 @@ const CATALOG = {
     {"id": "cs-shelf", "code": "CS-CSP-SHF-01", "brand": "corespace", "category": "accessories", "subcategory": "shelf", "name": "Glass shelf, 600 mm, chrome brackets", "modelCode": "TBC", "finish": "Toughened glass", "priceMRP": 1500, "priceStatus": "site-rate", "priceRange": null, "image": null, "notes": "Rate from the CoreSpace price list; item model confirmed in your quote."},
     {"id": "cs-grab", "code": "CS-CSP-GRB-01", "brand": "corespace", "category": "accessories", "subcategory": "grab-bar", "name": "Grab bar for elders, 450 mm", "modelCode": "TBC", "finish": "Stainless steel", "priceMRP": 1800, "priceStatus": "site-rate", "priceRange": null, "image": null, "notes": "Rate from the CoreSpace price list; item model confirmed in your quote."},
     {"id": "cs-towel-rack", "code": "CS-CSP-TWR-01", "brand": "corespace", "category": "accessories", "subcategory": "towel-rail", "name": "Double towel rack, 600 mm", "modelCode": "TBC", "finish": "Stainless steel", "priceMRP": 2500, "priceStatus": "site-rate", "priceRange": null, "image": null, "notes": "Rate from the CoreSpace price list; item model confirmed in your quote."},
+    {"id": "somany-wall-tile-1", "code": "CS-SOM-WTL-01", "brand": "somany", "category": "tiles", "subcategory": "wall-tile", "name": "Ceramic wall tile, glossy", "modelCode": "TBC", "finish": "300 × 450 mm", "unit": "sqft", "priceMRP": 45, "priceStatus": "site-rate", "priceRange": null, "image": null, "notes": "Rate per sq ft from the CoreSpace price list; colour and series chosen with you at the visit."},
+    {"id": "kajaria-wall-tile-1", "code": "CS-KAJ-WTL-01", "brand": "kajaria", "category": "tiles", "subcategory": "wall-tile", "name": "Digital wall tile, satin", "modelCode": "TBC", "finish": "300 × 600 mm", "unit": "sqft", "priceMRP": 62, "priceStatus": "site-rate", "priceRange": null, "image": null, "notes": "Rate per sq ft from the CoreSpace price list; colour and series chosen with you at the visit."},
+    {"id": "kajaria-wall-tile-2", "code": "CS-KAJ-WTL-02", "brand": "kajaria", "category": "tiles", "subcategory": "wall-tile", "name": "Glazed porcelain slab, wall and floor", "modelCode": "TBC", "finish": "600 × 1200 mm", "unit": "sqft", "priceMRP": 115, "priceStatus": "site-rate", "priceRange": null, "image": null, "notes": "Rate per sq ft from the CoreSpace price list; colour and series chosen with you at the visit."},
+    {"id": "somany-floor-tile-1", "code": "CS-SOM-FTL-01", "brand": "somany", "category": "tiles", "subcategory": "floor-tile", "name": "Anti-skid ceramic floor tile", "modelCode": "TBC", "finish": "300 × 300 mm, high grip", "unit": "sqft", "priceMRP": 48, "priceStatus": "site-rate", "priceRange": null, "image": null, "notes": "Rate per sq ft from the CoreSpace price list; colour and series chosen with you at the visit."},
+    {"id": "kajaria-floor-tile-1", "code": "CS-KAJ-FTL-01", "brand": "kajaria", "category": "tiles", "subcategory": "floor-tile", "name": "Matte vitrified floor tile, anti-skid", "modelCode": "TBC", "finish": "600 × 600 mm", "unit": "sqft", "priceMRP": 70, "priceStatus": "site-rate", "priceRange": null, "image": null, "notes": "Rate per sq ft from the CoreSpace price list; colour and series chosen with you at the visit."},
+    {"id": "orientbell-floor-tile-1", "code": "CS-ORB-FTL-01", "brand": "orientbell", "category": "tiles", "subcategory": "floor-tile", "name": "Textured porcelain floor tile, stone look", "modelCode": "TBC", "finish": "600 × 600 mm", "unit": "sqft", "priceMRP": 98, "priceStatus": "site-rate", "priceRange": null, "image": null, "notes": "Rate per sq ft from the CoreSpace price list; colour and series chosen with you at the visit."},
+    {"id": "kajaria-feature-tile-1", "code": "CS-KAJ-XTL-01", "brand": "kajaria", "category": "tiles", "subcategory": "feature-tile", "name": "Highlighter decor tile", "modelCode": "TBC", "finish": "300 × 600 mm", "unit": "sqft", "priceMRP": 125, "priceStatus": "site-rate", "priceRange": null, "image": null, "notes": "Rate per sq ft from the CoreSpace price list; colour and series chosen with you at the visit."},
+    {"id": "orientbell-feature-tile-1", "code": "CS-ORB-XTL-01", "brand": "orientbell", "category": "tiles", "subcategory": "feature-tile", "name": "Fluted 3D feature tile, matte", "modelCode": "TBC", "finish": "300 × 600 mm", "unit": "sqft", "priceMRP": 140, "priceStatus": "site-rate", "priceRange": null, "image": null, "notes": "Rate per sq ft from the CoreSpace price list; colour and series chosen with you at the visit."},
   ],
   // items: [productId, qty]. Totals are computed from the products above.
   packages:[
@@ -765,6 +801,16 @@ const CATALOG = {
     {"id": "hansgrohe-essential", "brand": "hansgrohe", "tier": "essential", "name": "Hansgrohe Essential", "fittings": "hansgrohe", "ceramics": "kohler", "popular": false, "summary": "Everything a bathroom needs, done properly.", "items": [["kohler-wc-floor", 1], ["kohler-basin-wall", 1], ["hansgrohe-mixer", 1], ["hansgrohe-wall-mixer", 1], ["hansgrohe-overhead", 1], ["hansgrohe-hand-shower", 1], ["hansgrohe-health", 1], ["kohler-angle", 2], ["cs-bottle-trap", 1], ["cs-waste", 1], ["cs-conn-pipe", 2], ["cs-floor-drain", 1], ["hansgrohe-acc-set", 1], ["cs-mirror", 1]]},
     {"id": "hansgrohe-signature", "brand": "hansgrohe", "tier": "signature", "name": "Hansgrohe Signature", "fittings": "hansgrohe", "ceramics": "kohler", "popular": true, "summary": "Wall-hung WC, vanity and concealed shower.", "items": [["kohler-wc-wall", 1], ["kohler-cistern", 1], ["kohler-plate", 1], ["kohler-basin-counter", 1], ["cs-vanity", 1], ["hansgrohe-mixer", 1], ["hansgrohe-diverter", 1], ["hansgrohe-overhead", 1], ["hansgrohe-hand-shower", 1], ["hansgrohe-health", 1], ["kohler-angle", 2], ["cs-bottle-trap", 1], ["cs-waste", 1], ["cs-conn-pipe", 2], ["cs-floor-drain", 1], ["hansgrohe-acc-set", 1], ["cs-mirror", 1]]},
     {"id": "hansgrohe-luxe", "brand": "hansgrohe", "tier": "luxe", "name": "Hansgrohe Luxe", "fittings": "hansgrohe", "ceramics": "kohler", "popular": false, "summary": "Rimless WC, thermostatic rain shower, glass and LED mirror.", "items": [["kohler-wc-rimless", 1], ["kohler-seat", 1], ["kohler-cistern", 1], ["kohler-plate", 1], ["kohler-basin-designer", 1], ["cs-vanity-designer", 1], ["hansgrohe-mixer-tall", 1], ["hansgrohe-thermostat", 1], ["hansgrohe-rain-panel", 1], ["hansgrohe-hand-shower", 1], ["hansgrohe-health", 1], ["kohler-angle", 2], ["cs-bottle-trap", 1], ["cs-waste", 1], ["cs-conn-pipe", 2], ["cs-shower-channel", 1], ["cs-partition", 1], ["cs-led-mirror", 1], ["hansgrohe-acc-set", 1], ["cs-shelf", 1]]},
+  ],
+  // Designs page. items: [productId, qty, finish note]. Tile qty: "floor", "wall" or "feature" is worked out from the bathroom size.
+  // designer: the person credited on the look. palette: colours for the drawn elevation. image: set to a published render path to show a photo instead.
+  looks:[
+    {"id": "filter-coffee", "name": "Filter Coffee", "designer": "CoreSpace Studio", "tier": "signature", "brand": "jaquar", "tagline": "Warm terracotta, cream walls, oak vanity.", "story": "Earthy and calm. A terracotta matte floor and one terracotta feature wall behind the vanity, cream satin walls everywhere else, and a wall-hung WC to keep the floor clear.", "palette": {"wall": "#E9DCC8", "floor": "#9A5B3A", "feature": "#C27C4E", "featureStyle": "panel", "wood": "#B07A4F", "metal": "#AEB3B7", "wallTile": [300, 600]}, "image": null, "items": [["kajaria-floor-tile-1", "floor", "Terracotta brown, matte"], ["kajaria-wall-tile-1", "wall", "Cream, satin"], ["kajaria-feature-tile-1", "feature", "Terracotta relief, behind the vanity"], ["jaquar-wc-wall", 1, ""], ["jaquar-cistern", 1, ""], ["jaquar-basin-counter", 1, ""], ["cs-vanity", 1, ""], ["jaquar-mixer", 1, ""], ["jaquar-diverter", 1, ""], ["jaquar-overhead", 1, ""], ["jaquar-hand-shower", 1, ""], ["jaquar-health", 1, ""], ["jaquar-angle", 2, ""], ["jaquar-bottle-trap", 1, ""], ["jaquar-waste", 1, ""], ["cs-conn-pipe", 2, ""], ["cs-floor-drain", 1, ""], ["jaquar-acc-set", 1, ""], ["cs-mirror", 1, ""]]},
+    {"id": "monsoon-grey", "name": "Monsoon Grey", "designer": "CoreSpace Studio", "tier": "essential", "brand": "cera", "tagline": "Soft grey, white and chrome. Easy to keep clean.", "story": "A quiet, practical bathroom for everyday use or a rental. Light grey gloss walls, a charcoal anti-skid floor and white Cera sanitaryware.", "palette": {"wall": "#D3D7DA", "floor": "#4A4F54", "feature": null, "featureStyle": null, "wood": null, "metal": "#AEB3B7", "wallTile": [300, 450]}, "image": null, "items": [["somany-floor-tile-1", "floor", "Charcoal, anti-skid"], ["somany-wall-tile-1", "wall", "Light grey, gloss"], ["cera-wc-floor", 1, ""], ["cera-basin-wall", 1, ""], ["cera-pillar", 1, ""], ["cera-wall-mixer", 1, ""], ["cera-overhead", 1, ""], ["cera-hand-shower", 1, ""], ["cera-health", 1, ""], ["cera-angle", 2, ""], ["cera-bottle-trap", 1, ""], ["cs-waste", 1, ""], ["cs-conn-pipe", 2, ""], ["cera-floor-drain", 1, ""], ["cera-acc-set", 1, ""], ["cs-mirror", 1, ""]]},
+    {"id": "lalbagh-green", "name": "Lalbagh Green", "designer": "CoreSpace Studio", "tier": "signature", "brand": "hindware", "tagline": "Sage fluted wall, matt black, rain shower.", "story": "A garden-green fluted wall in the shower, white walls around it, matt black accessories and a glass partition to keep the floor dry.", "palette": {"wall": "#F2F2EE", "floor": "#8F8C86", "feature": "#7E9C82", "featureStyle": "fluted", "wood": "#D8C3A5", "metal": "#1E1F1D", "wallTile": [300, 600]}, "image": null, "items": [["kajaria-floor-tile-1", "floor", "Warm grey, matte"], ["kajaria-wall-tile-1", "wall", "White, satin"], ["orientbell-feature-tile-1", "feature", "Sage green fluted, shower wall"], ["hindware-wc-wall", 1, ""], ["hindware-cistern", 1, ""], ["hindware-plate", 1, ""], ["hindware-basin-counter", 1, ""], ["cs-vanity", 1, ""], ["hindware-mixer", 1, ""], ["hindware-diverter", 1, ""], ["hindware-overhead", 1, ""], ["hindware-hand-shower", 1, ""], ["hindware-health", 1, ""], ["hindware-angle", 2, ""], ["cs-bottle-trap", 1, ""], ["cs-waste", 1, ""], ["cs-conn-pipe", 2, ""], ["cs-floor-drain", 1, ""], ["hindware-acc-set", 1, ""], ["cs-mirror", 1, ""], ["cs-partition", 1, ""], ["cs-led-mirror", 1, ""]]},
+    {"id": "kabini-stone", "name": "Kabini Stone", "designer": "CoreSpace Studio", "tier": "luxe", "brand": "grohe", "tagline": "Large stone-look slabs, thermostatic rain shower.", "story": "Floor-to-ceiling 600 × 1200 mm stone-look slabs with very few joints, a linear drain, a hinged glass enclosure and a thermostatic rain shower.", "palette": {"wall": "#B5ADA1", "floor": "#8C8478", "feature": null, "featureStyle": null, "wood": "#5B544B", "metal": "#AEB3B7", "wallTile": [600, 1200]}, "image": null, "items": [["orientbell-floor-tile-1", "floor", "Warm grey stone look"], ["kajaria-wall-tile-2", "wall", "Stone look slab, to the ceiling"], ["grohe-wc-rimless", 1, ""], ["grohe-cistern", 1, ""], ["grohe-basin-designer", 1, ""], ["cs-vanity-designer", 1, ""], ["grohe-mixer-tall", 1, ""], ["grohe-thermostat", 1, ""], ["grohe-rain-panel", 1, ""], ["grohe-hand-shower", 1, ""], ["grohe-health", 1, ""], ["grohe-angle", 2, ""], ["grohe-bottle-trap", 1, ""], ["cs-waste", 1, ""], ["cs-conn-pipe", 2, ""], ["cs-shower-channel", 1, ""], ["cs-led-mirror", 1, ""], ["grohe-acc-set", 1, ""], ["cs-shelf", 1, ""], ["cs-enclosure", 1, ""]]},
+    {"id": "cubbon-white", "name": "Cubbon White", "designer": "CoreSpace Studio", "tier": "luxe", "brand": "kohler", "tagline": "Bright white slabs, light oak, glass.", "story": "White porcelain slabs, a light oak vanity, one glossy white decor wall and a fixed glass partition. Clean lines, lots of light.", "palette": {"wall": "#F4F4F2", "floor": "#E2DFDA", "feature": "#FFFFFF", "featureStyle": "panel", "wood": "#C8A97E", "metal": "#AEB3B7", "wallTile": [600, 1200]}, "image": null, "items": [["kajaria-floor-tile-1", "floor", "Off-white, matte"], ["kajaria-wall-tile-2", "wall", "White porcelain slab"], ["kajaria-feature-tile-1", "feature", "White gloss decor, vanity wall"], ["kohler-wc-rimless", 1, ""], ["kohler-seat", 1, ""], ["kohler-cistern", 1, ""], ["kohler-plate", 1, ""], ["kohler-basin-designer", 1, ""], ["cs-vanity-designer", 1, ""], ["kohler-mixer-tall", 1, ""], ["kohler-thermostat", 1, ""], ["kohler-rain-panel", 1, ""], ["kohler-hand-shower", 1, ""], ["kohler-health", 1, ""], ["kohler-angle", 2, ""], ["kohler-bottle-trap", 1, ""], ["cs-waste", 1, ""], ["cs-conn-pipe", 2, ""], ["cs-shower-channel", 1, ""], ["cs-partition", 1, ""], ["cs-led-mirror", 1, ""], ["kohler-acc-set", 1, ""], ["cs-shelf", 1, ""]]},
+    {"id": "kids-splash", "name": "Kids' Splash", "designer": "CoreSpace Studio", "tier": "essential", "brand": "parryware", "tagline": "Anti-skid, washable, a band of blue.", "story": "Made for children's bathrooms: a high-grip floor, washable gloss walls with a blue decor band, a grab bar and a low glass shelf they can reach.", "palette": {"wall": "#FFFFFF", "floor": "#C9CED2", "feature": "#3E7CB1", "featureStyle": "band", "wood": null, "metal": "#AEB3B7", "wallTile": [300, 450]}, "image": null, "items": [["somany-floor-tile-1", "floor", "Light grey, high grip"], ["somany-wall-tile-1", "wall", "White, gloss"], ["kajaria-feature-tile-1", "feature", "Blue decor band"], ["parryware-wc-floor", 1, ""], ["parryware-basin-wall", 1, ""], ["parryware-pillar", 1, ""], ["parryware-wall-mixer", 1, ""], ["parryware-overhead", 1, ""], ["parryware-hand-shower", 1, ""], ["parryware-health", 1, ""], ["parryware-angle", 2, ""], ["cs-bottle-trap", 1, ""], ["cs-waste", 1, ""], ["cs-conn-pipe", 2, ""], ["cs-floor-drain", 1, ""], ["parryware-acc-set", 1, ""], ["cs-mirror", 1, ""], ["cs-grab", 1, ""], ["cs-shelf", 1, ""]]},
   ]
 };
 
@@ -845,6 +891,9 @@ const CORDER = CATALOG.categories.map(c=>c.id);
 const SUB = {}; CATALOG.categories.forEach(c=>c.subcategories.forEach(s=>{ SUB[s.id]={...s, cat:c.id}; }));
 const PBY = Object.fromEntries(CATALOG.products.map(p=>[p.id,p]));
 const PKG = Object.fromEntries(CATALOG.packages.map(p=>[p.id,p]));
+const LOOK = Object.fromEntries(CATALOG.looks.map(l=>[l.id,l]));
+const FITTING_BRANDS = CATALOG.brands.filter(b=>b.kind==="fittings");
+const baseName = id => PKG[id] ? `${PKG[id].name} package` : LOOK[id] ? `${LOOK[id].name} look` : "";
 const TIERNAME = {essential:"Essential", signature:"Signature", luxe:"Luxe"};
 const MRP_NOTE = `<span class="mrp">Indicative MRP — final price in your quote</span>`;
 const pIcon = p => CAT[p.category].icon;
@@ -852,6 +901,11 @@ const pRange = p => typeof p.priceMRP==="number" ? [p.priceMRP, p.priceMRP] : (p
 const addR = (a, b, k=1) => [a[0]+b[0]*k, a[1]+b[1]*k];
 const fmtR = r => r[0]===r[1] ? inr(r[0]) : `${inr(r[0])} – ${inr(r[1])}`;
 const pModel = p => p.code;
+const isSqft = p => p.unit==="sqft";
+const maxQty = p => isSqft(p) ? 1000 : 20;
+const stepQty = p => isSqft(p) ? 10 : 1;
+const qtyLabel = (p, q) => isSqft(p) ? `${q} sq ft` : String(q);
+const perUnit = p => isSqft(p) ? " / sq ft" : "";
 const SIZES = {"4x6":[4,6],"5x7":[5,7],"5x8":[5,8],"6x8":[6,8],"6x10":[6,10]};
 const sizeLabel = s => s.replace("x"," × ") + " ft";
 function areas(size){ const [w,l]=SIZES[size]||SIZES["5x8"]; const floor=w*l, perim=2*(w+l); return {floor, tiled:floor+Math.max(0,perim*8-17.5), wp:floor+perim+30}; }
@@ -861,9 +915,18 @@ const SERVICES = [
   {id:"waterproofing", name:"Waterproofing", note:"2-coat membrane, filmed flood test", r:a=>[a.wp*160, a.wp*260]},
   {id:"tiling", name:"Tiling (laying only)", note:"Floor and walls to 8 ft; tiles priced separately", r:a=>[a.tiled*55, a.tiled*85]}
 ];
+function tileQty(kind, size, hasFeature){
+  const [w,l]=SIZES[size]||SIZES["5x8"], floor=w*l, wall=Math.max(0,2*(w+l)*8-17.5), feat=w*8;
+  const a = kind==="floor" ? floor : kind==="feature" ? feat : wall-(hasFeature?feat:0);
+  return Math.ceil(a*1.1/10)*10;
+}
+function defaultQty(p, b){ return isSqft(p) ? tileQty(p.subcategory==="floor-tile"?"floor":p.subcategory==="feature-tile"?"feature":"wall", b.size, false) : 1; }
+function lookItems(look, size){ const hasF=look.items.some(i=>i[1]==="feature"); return look.items.map(([productId,q,note])=>({productId, qty:typeof q==="number"?q:tileQty(q,size,hasF), note:note||""})); }
 function svcRange(s, size){ const r=s.r(areas(size)); return [Math.round(r[0]/500)*500, Math.round(r[1]/500)*500]; }
 function pkgMaterials(pk){ return pk.items.reduce((r,[pid,q])=>addR(r,pRange(PBY[pid]),q),[0,0]); }
 function pkgTotal(pk, size="5x8"){ return SERVICES.reduce((r,s)=>addR(r,svcRange(s,size)), pkgMaterials(pk)); }
+const lookMaterials = (look, size) => lookItems(look,size).reduce((r,i)=>addR(r,pRange(PBY[i.productId]),i.qty),[0,0]);
+const lookTotal = (look, size) => SERVICES.reduce((r,s)=>addR(r,svcRange(s,size)), lookMaterials(look,size));
 
 /* ============ PROJECT: several bathrooms, each with its own products ============ */
 const PROJ_KEY = "corespace-project-v1";
@@ -874,8 +937,8 @@ function cleanProject(p){
   if (!p || !Array.isArray(p.bathrooms) || !p.bathrooms.length) return null;
   const bathrooms = p.bathrooms.slice(0,12).map(b=>({
     id:String(b.id||uid()), name:String(b.name||"Bathroom").slice(0,40), size:SIZES[b.size]?b.size:"5x8",
-    basePackageId:PKG[b.basePackageId]?b.basePackageId:null,
-    items:(Array.isArray(b.items)?b.items:[]).filter(i=>PBY[i?.productId]).map(i=>({productId:i.productId, qty:Math.max(1,Math.min(20,Math.round(+i.qty)||1))})),
+    basePackageId:(PKG[b.basePackageId]||LOOK[b.basePackageId])?b.basePackageId:null,
+    items:(Array.isArray(b.items)?b.items:[]).filter(i=>PBY[i?.productId]).map(i=>({productId:i.productId, qty:Math.max(1,Math.min(maxQty(PBY[i.productId]),Math.round(+i.qty)||1)), note:String(i.note||"").slice(0,80)})),
     services:{install:b.services?.install!==false, waterproofing:b.services?.waterproofing!==false, tiling:b.services?.tiling!==false}
   }));
   return {bathrooms, activeBathroomId:bathrooms.some(b=>b.id===p.activeBathroomId)?p.activeBathroomId:bathrooms[0].id};
@@ -889,9 +952,11 @@ function createBath(){
   let n=project.bathrooms.length+1; while(project.bathrooms.some(b=>b.name===`Bathroom ${n}`)) n++;
   const b=newBath(`Bathroom ${n}`); project.bathrooms.push(b); return b;
 }
-function addItem(b, pid, qty=1){ const it=b.items.find(i=>i.productId===pid); if(it) it.qty=Math.min(20,it.qty+qty); else b.items.push({productId:pid, qty}); }
-function applyPackage(b, pk){ b.items=pk.items.map(([productId,qty])=>({productId, qty})); b.basePackageId=pk.id; }
-const itemCount = () => project.bathrooms.reduce((t,b)=>t+b.items.reduce((s,i)=>s+i.qty,0),0);
+function addItem(b, pid, qty){ const p=PBY[pid]; qty=qty||defaultQty(p,b); const it=b.items.find(i=>i.productId===pid); if(it) it.qty=Math.min(maxQty(p),it.qty+qty); else b.items.push({productId:pid, qty, note:""}); }
+function applyPackage(b, pk){ b.items=pk.items.map(([productId,qty])=>({productId, qty, note:""})); b.basePackageId=pk.id; }
+function applyLook(b, look){ b.items=lookItems(look,b.size); b.basePackageId=look.id; }
+const bathCount = b => b.items.reduce((s,i)=>s+(isSqft(PBY[i.productId])?1:i.qty),0);
+const itemCount = () => project.bathrooms.reduce((t,b)=>t+bathCount(b),0);
 const bathMaterials = b => b.items.reduce((r,i)=>addR(r,pRange(PBY[i.productId]),i.qty),[0,0]);
 const bathServices = b => SERVICES.filter(s=>b.services[s.id]).reduce((r,s)=>addR(r,svcRange(s,b.size)),[0,0]);
 const bathTotal = b => addR(bathMaterials(b), bathServices(b));
@@ -910,9 +975,9 @@ function checklist(b){ const have=new Set(b.items.map(i=>PBY[i.productId].subcat
 function projectText(){
   const n=project.bathrooms.length, L=[`Hi CoreSpace, here is my bathroom project: ${n} bathroom${n===1?"":"s"}.`];
   project.bathrooms.forEach((b,k)=>{
-    L.push("", `${k+1}. ${b.name} (${sizeLabel(b.size)})${b.basePackageId?` · started from ${PKG[b.basePackageId].name}`:""}`);
+    L.push("", `${k+1}. ${b.name} (${sizeLabel(b.size)})${b.basePackageId?` · started from the ${baseName(b.basePackageId)}`:""}`);
     if (!b.items.length) L.push("- No products chosen yet");
-    b.items.forEach(i=>{ const p=PBY[i.productId]; L.push(`- ${BRAND[p.brand].name} · ${p.name} · ${pModel(p)} × ${i.qty}`); });
+    b.items.forEach(i=>{ const p=PBY[i.productId]; L.push(`- ${BRAND[p.brand].name} · ${p.name} · ${pModel(p)}${i.note?` (${i.note})`:""} × ${qtyLabel(p,i.qty)}`); });
     L.push(`Services: ${SERVICES.filter(s=>b.services[s.id]).map(s=>s.name).join(", ")||"none"}`);
     L.push(`Materials ${fmtR(bathMaterials(b))} · Services ${fmtR(bathServices(b))} · Bathroom total ${fmtR(bathTotal(b))}`);
     const miss=checklist(b).filter(c=>!c.ok).map(c=>c.label); if (miss.length) L.push(`Not chosen yet: ${miss.join(", ")}`);
@@ -956,18 +1021,18 @@ function estimate(jobId){
 }
 
 /* ============ RENDER HELPERS ============ */
-const ROUTES = ["account","shop","my-bathrooms","photo","home","bathroom","process","projects","about","book","terms","admin"];
+const ROUTES = ["account","designs","shop","my-bathrooms","photo","home","bathroom","process","projects","about","book","terms","admin"];
 function waLink(text){ return `https://wa.me/${CO.wa}?text=${encodeURIComponent(text)}`; }
 function payBar(total){
   return `<div class="paybar">${SPLIT.map(([p,l,h])=>`<div class="${h?'held':''} ${p===10?'narrow':''}"><b>${p}%</b><small>${l}${total?`<span class="amt">${inr(total*p/100)}</span>`:""}</small></div>`).join("")}</div>`;
 }
 function figure(cap){ return `<figure><div class="ph" role="img" aria-label="Placeholder: ${esc(cap)}">${ico("bath")}<span class="label">Photo coming soon</span></div><figcaption>${esc(cap)}</figcaption></figure>`; }
 function finalCta(){ return `<section class="final"><div class="wrap"><h2>Get your bathroom measured this week.</h2><p>An architect visits, checks for leaks at the source and gives you a Locked Quote with a fixed price and handover date for every bathroom. The ₹999 visit fee is adjusted against your first payment when you sign.</p><div class="actions"><a class="btn" href="#book">Book a site visit</a><a class="btn line" href="${waLink("Hi CoreSpace, I'd like to book a site visit for my bathroom.")}" target="_blank" rel="noopener">WhatsApp ${CO.waShow}</a></div></div></section>`; }
-const NAV = [["bathroom","Bathroom packages"],["shop","Shop"],["my-bathrooms","My bathrooms"],["photo","Photo quote"],["projects","Projects"],["process","How it works"],["about","About"]];
+const NAV = [["bathroom","Packages"],["designs","Designs"],["shop","Shop"],["my-bathrooms","My bathrooms"],["photo","Photo quote"],["process","How it works"],["about","About"]];
 
 function renderNav(route){
-  $("#nav").innerHTML = NAV.map(([k,l])=>`<a href="#${k}" ${route===k?'aria-current="page"':''}>${l}</a>`).join("");
-  $("#fjobs").innerHTML = `<li><a href="#bathroom">${JOBS.bathroom.title}</a></li><li><a href="#shop">Shop fittings</a></li><li><a href="#shop" data-act="gopkgs">Packages by brand</a></li><li><a href="#my-bathrooms">My bathrooms</a></li>`;
+  $("#nav").innerHTML = NAV.map(([k,l])=>`<a href="#${k}" ${route===k||(route==="look"&&k==="designs")?'aria-current="page"':''}>${l}</a>`).join("");
+  $("#fjobs").innerHTML = `<li><a href="#bathroom">${JOBS.bathroom.title}</a></li><li><a href="#designs">Designs</a></li><li><a href="#shop">Shop fittings</a></li><li><a href="#shop" data-act="gopkgs">Packages by brand</a></li><li><a href="#my-bathrooms">My bathrooms</a></li>`;
   $("#ico-cart").innerHTML = ico("cart"); $("#ico-user").innerHTML = PROFILE&&PROFILE.name ? `<span style="font:800 16px var(--display)">${esc(PROFILE.name.trim()[0].toUpperCase())}</span>` : ico("user"); $("#ico-menu").innerHTML = ico("menu");
   updateBadge();
 }
@@ -979,7 +1044,7 @@ function openSheet(kind, html){
 function closeSheet(){ const sh=$("#sheet"); if(!sh || sh.hidden) return; sh.hidden=true; sh.innerHTML=""; sh.dataset.kind=""; document.body.style.overflow=""; }
 function sheetHead(t){ return `<div class="sheeth"><h3>${t}</h3><button type="button" class="iconbtn" data-act="closesheet" aria-label="Close">${ico("close")}</button></div>`; }
 function openMenu(){
-  openSheet("right", sheetHead("Menu") + `<nav class="mnav" aria-label="Mobile"><h4>Bathrooms</h4><a href="#bathroom">Bathroom packages<span>from ${inr(tierPrice("bathroom","std","essential"))}</span></a><a href="#photo">Photo quote</a>
+  openSheet("right", sheetHead("Menu") + `<nav class="mnav" aria-label="Mobile"><h4>Bathrooms</h4><a href="#bathroom">Bathroom packages<span>from ${inr(tierPrice("bathroom","std","essential"))}</span></a><a href="#designs">Designs<span>6 looks</span></a><a href="#photo">Photo quote</a>
   <h4>Shop</h4><a href="#shop">Shop fittings<span>7 brands</span></a><a href="#shop" data-act="gopkgs">Packages by brand</a><a href="#my-bathrooms">My bathrooms${itemCount()?`<span>${itemCount()} items</span>`:""}</a>
   <h4>CoreSpace</h4><a href="#projects">Projects</a><a href="#process">How it works</a><a href="#about">About and contact</a><a href="#account">My account</a></nav>
   <a class="btn block" href="#book">Book a site visit</a><a class="btn line block" href="${waLink("Hi CoreSpace")}" target="_blank" rel="noopener">WhatsApp ${CO.waShow}</a>`);
@@ -1018,7 +1083,7 @@ function pageHome(){
   <div class="head"><h2>One crew. One contract. Fixed price.</h2><p class="lede">Every bathroom, master or guest, runs on the same four rules.</p></div>
   <div class="rules"><div><b>The Locked Quote</b><span>Scope, fittings, price and handover date agreed in writing before work starts. Changes only with your written approval.</span></div><div><b>The Daily Report</b><span>Photos of the day's work on WhatsApp, so you see every coat and pipe without visiting.</span></div><div><b>The Gate</b><span>40% of the price waits until your bathroom floor passes a filmed flood test.</span></div><div><b>The Handover</b><span>Snag list closed, waterproofing warranty issued, site cleaned, then the final 10%.</span></div></div>
   <div class="facts"><div><b>5-year</b><span>waterproofing warranty on every bathroom</span></div><div><b>1 free</b><span>service visit after handover</span></div><div><b>Certified</b><span>crew, trained in Jaquar and Hindware brand programs</span></div></div>
-  <div class="brands">${CATALOG.brands.filter(b=>b.id!=="corespace").map(b=>`<span>${b.name}</span>`).join("")}</div>
+  <div class="brands">${FITTING_BRANDS.map(b=>`<span>${b.name}</span>`).join("")}</div>
 </div></section>
 <section class="block"><div class="wrap builder">
   <div><p class="label">Photo quote</p><h2 style="margin-top:8px">Price it from a photo.</h2><p class="lede" style="margin-top:14px">Upload a photo of the bathroom you want, or of yours as it is now. We match it to the closest package and show the price.</p><div class="actions"><a class="btn" href="#photo">Try photo quote</a></div></div>
@@ -1163,7 +1228,7 @@ function pageShop(){
   const brands=CATALOG.brands, cats=CATALOG.categories;
   return `<section class="hero" style="padding-bottom:36px"><div class="wrap"><p class="crumb"><a href="#home">Home</a> / Shop</p>
   <h1 class="mega" style="font-size:clamp(44px,7vw,88px)"><span>Seven brands.</span><span>Every bathroom fitting.</span></h1>
-  <p class="lede" style="margin-top:18px">WCs, basins, taps, showers, drains and accessories from Jaquar, Kohler, Cera, Hindware, Parryware, Grohe and Hansgrohe. Fill one bathroom or several, mix brands, and send the list for a fixed quote.</p>
+  <p class="lede" style="margin-top:18px">WCs, basins, taps, showers, drains and accessories from Jaquar, Kohler, Cera, Hindware, Parryware, Grohe and Hansgrohe, plus tiles from Kajaria, Somany and Orientbell. Fill one bathroom or several, mix brands, and send the list for a fixed quote.</p>
   <div class="actions"><a class="btn" href="#shop" data-act="gopkgs">See bathroom packages</a><a class="btn line" href="#my-bathrooms">My bathrooms</a></div>
 </div></section>
 <div class="bswitch" id="bswitch" aria-label="Bathroom you are adding to"></div>
@@ -1202,7 +1267,7 @@ function keepFocus(fn){
 }
 function drawSwitcher(){
   const el=$("#bswitch"); if(!el) return; const a=activeBath();
-  el.innerHTML = `<div class="wrap"><span class="label">Adding to</span>${project.bathrooms.map(b=>`<button type="button" class="bchip" data-act="setactive" data-b="${b.id}" aria-pressed="${b.id===a.id}">${esc(b.name)}<span class="n">${b.items.reduce((s,i)=>s+i.qty,0)}</span></button>`).join("")}<button type="button" class="bchip ghost" data-act="newbath">+ Add bathroom</button><button type="button" class="bchip dark" data-act="opencart">Review</button></div>`;
+  el.innerHTML = `<div class="wrap"><span class="label">Adding to</span>${project.bathrooms.map(b=>`<button type="button" class="bchip" data-act="setactive" data-b="${b.id}" aria-pressed="${b.id===a.id}">${esc(b.name)}<span class="n">${bathCount(b)}</span></button>`).join("")}<button type="button" class="bchip ghost" data-act="newbath">+ Add bathroom</button><button type="button" class="bchip dark" data-act="opencart">Review</button></div>`;
 }
 function drawShop(){
   const g=$("#pgrid"); if(!g) return; const L=shopList();
@@ -1221,19 +1286,19 @@ function productCard(p){
     : `<div class="addsplit"><button type="button" class="addmain" data-act="add" data-id="${p.id}" aria-label="Add ${esc(BRAND[p.brand].name)} ${esc(p.name)} to ${esc(a.name)}">Add to bathroom</button><button type="button" class="addmore" data-act="addto" data-id="${p.id}" aria-label="Choose a bathroom for ${esc(BRAND[p.brand].name)} ${esc(p.name)}">▾</button></div>`;
   return `<article class="pcard"><button type="button" class="pimg" data-act="pdetail" data-id="${p.id}" aria-label="Details: ${esc(BRAND[p.brand].name)} ${esc(p.name)}">${ico(pIcon(p))}<span class="tierpill">${esc(SUB[p.subcategory].name)}</span></button>
   <div class="pbody"><span class="brand">${esc(BRAND[p.brand].name)}</span><button type="button" class="nm" data-act="pdetail" data-id="${p.id}">${esc(p.name)}</button><span class="spec">${pModel(p)} · ${esc(p.finish)}</span>
-  <span class="pr">${fmtR(pRange(p))}</span>${MRP_NOTE}${inA?`<span class="inb">In ${esc(a.name)} × ${inA.qty}</span>`:""}${btn}</div></article>`;
+  <span class="pr">${fmtR(pRange(p))}<small>${perUnit(p)}</small></span>${MRP_NOTE}${inA?`<span class="inb">In ${esc(a.name)} × ${qtyLabel(p,inA.qty)}</span>`:""}${btn}</div></article>`;
 }
 function openProduct(id){
   const p=PBY[id], b=BRAND[p.brand];
   openSheet("center", sheetHead(esc(b.name)) + `<div class="pd"><div class="art">${ico(pIcon(p))}<span class="tierpill">${esc(CAT[p.category].name)}</span></div><div>
     <span class="label">${esc(SUB[p.subcategory].name)}</span><h3>${esc(p.name)}</h3>
-    <div class="pr" style="font-size:30px;margin-top:10px">${fmtR(pRange(p))}</div>${MRP_NOTE}
+    <div class="pr" style="font-size:30px;margin-top:10px">${fmtR(pRange(p))}<small>${perUnit(p)}</small></div>${MRP_NOTE}
     <dl><dt>Brand</dt><dd>${esc(b.name)}</dd><dt>CoreSpace code</dt><dd class="tnum">${esc(p.code)}</dd><dt>Brand model</dt><dd>${p.modelCode==="TBC"?"Confirmed in your quote":esc(p.modelCode)}</dd><dt>Finish</dt><dd>${esc(p.finish)}</dd><dt>Price</dt><dd>${p.priceStatus==="indicative"?"Indicative range; no CoreSpace rate yet":"CoreSpace list rate"}</dd>${p.notes?`<dt>Note</dt><dd>${esc(p.notes)}</dd>`:""}</dl>
     <div class="actions" style="margin-top:6px"><button type="button" class="btn" data-act="add" data-id="${p.id}">Add to ${esc(activeBath().name)}</button><button type="button" class="btn line" data-act="addto" data-id="${p.id}">Another bathroom</button></div>
   </div></div>`);
 }
 function openBathPicker(title, note, act, id){
-  openSheet("center", sheetHead(title) + `${note?`<p class="muted">${note}</p>`:""}<div class="picker">${project.bathrooms.map(b=>`<button type="button" class="pickrow" data-act="${act}" data-b="${b.id}" data-id="${id}"><b>${esc(b.name)}</b><span>${sizeLabel(b.size)} · ${b.items.length?`${b.items.reduce((s,i)=>s+i.qty,0)} items`:"empty"}${b.id===project.activeBathroomId?" · active":""}</span></button>`).join("")}<button type="button" class="pickrow ghost" data-act="${act}" data-b="new" data-id="${id}"><b>+ New bathroom</b><span>Start another one</span></button></div>`);
+  openSheet("center", sheetHead(title) + `${note?`<p class="muted">${note}</p>`:""}<div class="picker">${project.bathrooms.map(b=>`<button type="button" class="pickrow" data-act="${act}" data-b="${b.id}" data-id="${id}"><b>${esc(b.name)}</b><span>${sizeLabel(b.size)} · ${b.items.length?`${bathCount(b)} items`:"empty"}${b.id===project.activeBathroomId?" · active":""}</span></button>`).join("")}<button type="button" class="pickrow ghost" data-act="${act}" data-b="new" data-id="${id}"><b>+ New bathroom</b><span>Start another one</span></button></div>`);
 }
 
 /* ============ PACKAGES ============ */
@@ -1249,14 +1314,14 @@ function pkgCard(pk){
   <div class="pkacts"><button type="button" class="btn" data-act="pkchoose" data-id="${pk.id}">Choose this package</button><button type="button" class="btn line" data-act="pkcustom" data-id="${pk.id}">Customise this package</button></div></article>`;
 }
 function compareTable(){
-  const pks=CATALOG.brands.filter(b=>b.id!=="corespace").map(b=>PKG[`${b.id}-signature`]);
+  const pks=FITTING_BRANDS.map(b=>PKG[`${b.id}-signature`]);
   const pickSub=(pk,subs)=>pk.items.map(([pid])=>PBY[pid]).filter(p=>subs.includes(p.subcategory)).map(p=>`${esc(BRAND[p.brand].name)} ${esc(p.name)}`).join("; ")||"—";
   const rows=[["Fittings · ceramics",pk=>`${esc(BRAND[pk.fittings].name)} · ${esc(BRAND[pk.ceramics].name)}`],["WC and flushing",pk=>pickSub(pk,["wc-wall","wc-floor","cistern-concealed","flush-plate"])],["Basin and tap",pk=>pickSub(pk,["basin-counter","basin-wall","basin-mixer","tall-mixer","pillar-tap"])],["Shower",pk=>pickSub(pk,["diverter","thermostat","overhead","hand-shower","rain-panel"])],["Materials",pk=>fmtR(pkgMaterials(pk))],["Services",()=>fmtR(SERVICES.reduce((r,s)=>addR(r,svcRange(s,"5x8")),[0,0]))],["Total, 5 × 8 ft",pk=>`<b>${fmtR(pkgTotal(pk))}</b>`]];
   return `<div class="tbl cmp"><table><caption class="label" style="text-align:left;padding:12px 14px">Signature package, all seven brands</caption><thead><tr><th scope="col">Item</th>${pks.map(pk=>`<th scope="col">${esc(BRAND[pk.brand].name)}</th>`).join("")}</tr></thead><tbody>${rows.map(([l,f])=>`<tr><th scope="row">${l}</th>${pks.map(pk=>`<td>${f(pk)}</td>`).join("")}</tr>`).join("")}<tr><th scope="row"></th>${pks.map(pk=>`<td><button type="button" class="btn sm" data-act="pkcustom" data-id="${pk.id}">Customise</button></td>`).join("")}</tr></tbody></table></div><p class="fine">${MRP_NOTE} Services are the same for every brand: installation and plumbing, waterproofing and tile laying for 5 × 8 ft.</p>`;
 }
 function drawPackages(){
   const el=$("#pkgbody"); if(!el) return;
-  const brands=CATALOG.brands.filter(b=>b.id!=="corespace");
+  const brands=FITTING_BRANDS;
   el.innerHTML = `<div class="pkbar"><div class="atabs" role="tablist" aria-label="Package brand">${brands.map(b=>`<button type="button" role="tab" id="pt-${b.id}" aria-controls="pkpanel" aria-selected="${!SHOP.compare&&SHOP.pkgBrand===b.id}" data-act="pkbrand" data-k="${b.id}">${esc(b.name)}</button>`).join("")}</div>
   <button type="button" class="fchip" data-act="pkcompare" aria-pressed="${SHOP.compare}">Compare brands</button></div>
   <div id="pkpanel" ${SHOP.compare?"":`role="tabpanel" aria-labelledby="pt-${SHOP.pkgBrand}"`}>${SHOP.compare ? compareTable() : `<div class="tiers">${TIERS.map(t=>pkgCard(PKG[`${SHOP.pkgBrand}-${t}`])).join("")}</div><p class="fine">Tiles are chosen at the site visit and priced separately; tiling here is laying only. Hansgrohe makes fittings and showers, so its packages use Kohler ceramics. Unbranded drains, vanities, mirrors and glass are CoreSpace picks.</p>`}</div>`;
@@ -1272,12 +1337,12 @@ function bathDoc(b, k){
   <div class="field"><label for="bs-${b.id}">Size</label><select id="bs-${b.id}" data-act="bsize" data-b="${b.id}">${Object.keys(SIZES).map(s=>`<option value="${s}" ${b.size===s?"selected":""}>${sizeLabel(s)}</option>`).join("")}</select></div></div>
   <div class="bacts">${act?"":`<button type="button" class="linkbtn" data-act="setactive" data-b="${b.id}">Add products here</button>`}<button type="button" class="linkbtn" data-act="shopfor" data-b="${b.id}">Browse the shop</button><button type="button" class="linkbtn" data-act="bdup" data-b="${b.id}">Duplicate</button><button type="button" class="linkbtn" data-act="bdel" data-b="${b.id}">${project.bathrooms.length>1?"Delete":"Clear"}</button></div>
   ${BCONF===b.id?`<div class="confirm"><span>${project.bathrooms.length>1?`Delete ${esc(b.name)} and its ${b.items.length} products?`:`Remove every product from ${esc(b.name)}?`}</span><button type="button" class="btn sm" style="background:var(--err);border-color:var(--err);color:#fff" data-act="bdelyes" data-b="${b.id}">${project.bathrooms.length>1?"Delete":"Clear"}</button><button type="button" class="linkbtn" data-act="bdelno">Keep it</button></div>`:""}
-  ${b.basePackageId?`<div class="notice ok">Started from the ${esc(PKG[b.basePackageId].name)} package. Swap or remove anything.</div>`:""}
+  ${b.basePackageId?`<div class="notice ok">Started from the ${esc(baseName(b.basePackageId))}. Swap or remove anything.</div>`:""}
   <div class="check" aria-label="Essentials checklist">${miss.length<ck.length?`<div class="ck ok"><span>✓ ${ck.filter(c=>c.ok).map(c=>c.label).join(" · ")}</span></div>`:""}${miss.map(c=>`<div class="ck miss"><span>No ${c.label.toLowerCase()} yet</span><button type="button" class="btn line sm" data-act="needadd" data-b="${b.id}" data-k="${c.subs.join(",")}" aria-label="Add ${c.label.toLowerCase()} to ${esc(b.name)}">Add</button></div>`).join("")}</div>
   ${miss.length?`<p class="hint" style="margin-top:0">Missing items don't block your quote; we'll ask about them on the visit.</p>`:""}
-  ${groups.length?groups.map(([c,xs])=>`<div class="bgrp">${esc(CAT[c].name)}</div>${xs.map(x=>`<div class="bitem"><span class="ci">${ico(pIcon(x.p))}</span><span><span class="bn">${esc(x.p.name)}</span><span class="bm">${esc(BRAND[x.p.brand].name)} · ${pModel(x.p)} · ${esc(x.p.finish)}</span></span><span class="ba">${fmtR(addR([0,0],pRange(x.p),x.qty))}</span>
-    <div class="bact"><span class="qty"><button type="button" data-act="bq" data-b="${b.id}" data-i="${x.i}" data-d="-1" aria-label="One less ${esc(x.p.name)}">−</button><output>${x.qty}</output><button type="button" data-act="bq" data-b="${b.id}" data-i="${x.i}" data-d="1" aria-label="One more ${esc(x.p.name)}">+</button></span><button type="button" class="linkbtn" data-act="bswap" data-b="${b.id}" data-i="${x.i}">Swap</button><button type="button" class="linkbtn" data-act="brm" data-b="${b.id}" data-i="${x.i}">Remove</button></div></div>`).join("")}`).join("")
-    :`<div class="empty" style="padding:18px 0"><p>No products yet.</p><div class="actions" style="justify-content:center;margin-top:12px"><button type="button" class="btn sm" data-act="shopfor" data-b="${b.id}">Browse the shop</button><a class="btn line sm" href="#shop" data-act="gopkgs">Start from a package</a></div></div>`}
+  ${groups.length?groups.map(([c,xs])=>`<div class="bgrp">${esc(CAT[c].name)}</div>${xs.map(x=>`<div class="bitem"><span class="ci">${ico(pIcon(x.p))}</span><span><span class="bn">${esc(x.p.name)}</span><span class="bm">${esc(BRAND[x.p.brand].name)} · ${pModel(x.p)} · ${esc(x.note||x.p.finish)}</span></span><span class="ba">${fmtR(addR([0,0],pRange(x.p),x.qty))}</span>
+    <div class="bact"><span class="qty"><button type="button" data-act="bq" data-b="${b.id}" data-i="${x.i}" data-d="-1" aria-label="One less ${esc(x.p.name)}">−</button><output>${qtyLabel(x.p,x.qty)}</output><button type="button" data-act="bq" data-b="${b.id}" data-i="${x.i}" data-d="1" aria-label="One more ${esc(x.p.name)}">+</button></span><button type="button" class="linkbtn" data-act="bswap" data-b="${b.id}" data-i="${x.i}">Swap</button><button type="button" class="linkbtn" data-act="brm" data-b="${b.id}" data-i="${x.i}">Remove</button></div></div>`).join("")}`).join("")
+    :`<div class="empty" style="padding:18px 0"><p>No products yet.</p><div class="actions" style="justify-content:center;margin-top:12px"><button type="button" class="btn sm" data-act="shopfor" data-b="${b.id}">Browse the shop</button><a class="btn line sm" href="#designs">Start from a design</a></div></div>`}
   <div class="bgrp">Services</div><div class="addons">${SERVICES.map(s=>`<label class="addon"><input type="checkbox" data-act="bsvc" data-b="${b.id}" data-s="${s.id}" ${b.services[s.id]?"checked":""}><span><b>${s.name}</b><small>${s.note}</small></span><span class="ap">${fmtR(svcRange(s,b.size))}</span></label>`).join("")}</div>
   <div class="kv" style="margin-top:12px"><span>Materials subtotal</span><span>${fmtR(bathMaterials(b))}</span></div><div class="kv"><span>Services subtotal</span><span>${fmtR(bathServices(b))}</span></div>
   <div class="total"><span class="label">Bathroom total</span><span class="rnum">${fmtR(bathTotal(b))}</span></div>${MRP_NOTE}
@@ -1286,7 +1351,7 @@ function bathDoc(b, k){
 function projectSummary(){
   const n=project.bathrooms.length;
   return `<div class="doc"><div class="doc-h"><span class="label">Project summary</span><span class="label">${n} bathroom${n===1?"":"s"}</span></div><div class="doc-b">
-  ${project.bathrooms.map(b=>`<div class="kv"><span>${esc(b.name)} · ${b.items.reduce((s,i)=>s+i.qty,0)} items</span><span>${fmtR(bathTotal(b))}</span></div>`).join("")}
+  ${project.bathrooms.map(b=>`<div class="kv"><span>${esc(b.name)} · ${bathCount(b)} items</span><span>${fmtR(bathTotal(b))}</span></div>`).join("")}
   <div class="total"><span class="label">Grand total<br><span class="muted" style="text-transform:none;letter-spacing:0">excl. GST</span></span><span class="rnum">${fmtR(projectTotal())}</span></div>${MRP_NOTE}
   <div style="display:grid;gap:10px;margin-top:16px"><a class="btn block" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(projectText())}" target="_blank" rel="noopener">Send quote on WhatsApp</a><a class="btn line block" href="#book">Book a site visit</a><button type="button" class="linkbtn" data-act="newbath">+ Add another bathroom</button></div>
   <p class="fine">No payment here. We confirm models, stock and the final price on the site visit.</p></div></div>`;
@@ -1307,6 +1372,90 @@ function drawBaths(){
   });
 }
 function goShop(scrollTo){ closeSheet(); PENDING_SCROLL=scrollTo; if (location.hash==="#shop") render(); else location.hash="#shop"; }
+
+/* ============ DESIGNS: complete bathroom looks ============ */
+let LOOKSIZE = "5x8";
+function lookArt(look){
+  const pal=look.palette, subs=new Set(look.items.map(([pid])=>PBY[pid].subcategory)), ids=new Set(look.items.map(([pid])=>pid));
+  const S=230/2438, [tw,th]=pal.wallTile||[300,600], gw=tw*S, gh=th*S, top=20, fl=250;
+  let s=`<rect x="0" y="0" width="400" height="300" fill="${pal.wall}"/><g stroke="rgba(0,0,0,.09)" stroke-width="1">`;
+  for (let x=gw; x<400; x+=gw) s+=`<line x1="${x.toFixed(1)}" y1="${top}" x2="${x.toFixed(1)}" y2="${fl}"/>`;
+  for (let y=fl-gh; y>top; y-=gh) s+=`<line x1="0" y1="${y.toFixed(1)}" x2="400" y2="${y.toFixed(1)}"/>`;
+  s+=`</g><rect x="0" y="0" width="400" height="${top}" fill="#FFFFFF" opacity=".55"/>`;
+  if (pal.featureStyle==="panel") s+=`<rect x="14" y="${top}" width="146" height="${fl-top}" fill="${pal.feature}"/><g stroke="rgba(0,0,0,.08)">${[1,2,3,4,5,6,7].map(i=>`<line x1="14" y1="${top+i*28.5}" x2="160" y2="${top+i*28.5}"/>`).join("")}</g>`;
+  if (pal.featureStyle==="fluted") s+=`<rect x="250" y="${top}" width="150" height="${fl-top}" fill="${pal.feature}"/><g stroke="rgba(0,0,0,.16)">${Array.from({length:24},(_,i)=>`<line x1="${253+i*6.2}" y1="${top}" x2="${253+i*6.2}" y2="${fl}"/>`).join("")}</g>`;
+  if (pal.featureStyle==="band") s+=`<rect x="0" y="150" width="400" height="26" fill="${pal.feature}"/>`;
+  // floor
+  s+=`<rect x="0" y="${fl}" width="400" height="${300-fl}" fill="${pal.floor}"/><g stroke="rgba(0,0,0,.18)">${[-200,-120,-40,40,120,200,280,360,440,520].map(x=>`<line x1="${200+(x-200)*.8}" y1="${fl}" x2="${200+(x-200)*1.15}" y2="300"/>`).join("")}<line x1="0" y1="${fl+22}" x2="400" y2="${fl+22}"/></g><line x1="0" y1="${fl}" x2="400" y2="${fl}" stroke="rgba(0,0,0,.35)"/>`;
+  // basin zone
+  const big=ids.has("cs-vanity-designer");
+  if (subs.has("vanity")) s+=`<rect x="26" y="168" width="${big?124:112}" height="44" rx="3" fill="${pal.wood||"#C9A27A"}"/><line x1="${big?88:82}" y1="172" x2="${big?88:82}" y2="208" stroke="rgba(0,0,0,.25)"/>`;
+  if (subs.has("basin-counter")) s+=`<ellipse cx="82" cy="164" rx="30" ry="8" fill="#FFFFFF" stroke="rgba(0,0,0,.25)"/>`;
+  else if (subs.has("basin-wall")) s+=`<path d="M48 158h68l-6 22H54z" fill="#FFFFFF" stroke="rgba(0,0,0,.25)"/>`;
+  const tall=subs.has("tall-mixer");
+  s+=`<path d="M82 ${tall?156:158}v${tall?-22:-12}h10" fill="none" stroke="${pal.metal}" stroke-width="3" stroke-linecap="round"/>`;
+  if (subs.has("led-mirror")) s+=`<rect x="44" y="52" width="76" height="86" rx="8" fill="#EEF3F5" stroke="#FFF6D8" stroke-width="5"/>`;
+  else s+=`<circle cx="82" cy="98" r="36" fill="#EEF3F5" stroke="${pal.metal}" stroke-width="3"/>`;
+  // WC
+  if (subs.has("wc-wall")) s+=`<rect x="180" y="104" width="22" height="14" rx="2" fill="${pal.metal}"/><path d="M168 186h52v8c0 14-12 22-26 22h-6c-12 0-20-8-20-18z" fill="#FFFFFF" stroke="rgba(0,0,0,.25)"/>`;
+  else if (subs.has("wc-floor")) s+=`<rect x="172" y="132" width="46" height="40" rx="4" fill="#FFFFFF" stroke="rgba(0,0,0,.25)"/><path d="M166 182h58v6c0 14-10 22-22 22h-8l4 40h-22l2-40c-8-4-12-12-12-20z" fill="#FFFFFF" stroke="rgba(0,0,0,.25)"/>`;
+  if (subs.has("health-faucet")) s+=`<path d="M232 158v14" stroke="${pal.metal}" stroke-width="3" stroke-linecap="round"/>`;
+  if (subs.has("grab-bar")) s+=`<path d="M150 150h0M142 140v40" stroke="${pal.metal}" stroke-width="4" stroke-linecap="round"/>`;
+  // shower
+  const rain=subs.has("rain-panel");
+  s+=`<path d="M372 ${top+20}v18h-${rain?28:20}" fill="none" stroke="${pal.metal}" stroke-width="3"/><rect x="${rain?314:330}" y="${top+36}" width="${rain?60:36}" height="5" rx="2" fill="${pal.metal}"/>`;
+  s+=`<g stroke="rgba(120,160,190,.55)" stroke-width="1.2">${[0,1,2,3,4,5,6].map(i=>`<line x1="${(rain?318:334)+i*(rain?9:5)}" y1="${top+46}" x2="${(rain?314:332)+i*(rain?9.6:5.2)}" y2="${top+96}"/>`).join("")}</g>`;
+  s+=`<rect x="${subs.has("thermostat")?352:356}" y="128" width="${subs.has("thermostat")?30:20}" height="${subs.has("thermostat")?30:20}" rx="4" fill="${pal.metal}"/>`;
+  if (subs.has("hand-shower")) s+=`<path d="M384 170v26" stroke="${pal.metal}" stroke-width="3" stroke-linecap="round"/>`;
+  if (subs.has("shelf")) s+=`<rect x="300" y="146" width="40" height="4" fill="rgba(160,200,215,.8)"/>`;
+  if (subs.has("glass")) s+=`<rect x="262" y="${top+6}" width="4" height="${fl-top-6}" fill="${pal.metal}" opacity=".6"/><rect x="266" y="${top+6}" width="${ids.has("cs-enclosure")?130:70}" height="${fl-top-6}" fill="rgba(170,210,225,.22)" stroke="rgba(120,160,180,.5)"/>`;
+  s+= subs.has("shower-channel") ? `<rect x="290" y="${fl+6}" width="100" height="4" fill="${pal.metal}"/>` : `<rect x="322" y="${fl+8}" width="18" height="6" rx="2" fill="${pal.metal}"/>`;
+  return `<svg viewBox="0 0 400 300" role="img" aria-label="Concept drawing of the ${esc(look.name)} bathroom" preserveAspectRatio="xMidYMid slice">${s}</svg>`;
+}
+function lookVisual(look){ return look.image ? `<img src="${esc(look.image)}" alt="${esc(look.name)} bathroom render" loading="lazy">` : lookArt(look); }
+function swatches(look){ const p=look.palette; return [["Walls",p.wall],["Floor",p.floor],p.feature?["Feature",p.feature]:null,p.wood?["Vanity",p.wood]:null,["Metal",p.metal]].filter(Boolean).map(([l,c])=>`<span class="sw"><i style="background:${c}"></i>${l}</span>`).join(""); }
+function lookCard(look){
+  const tot=lookTotal(look,"5x8");
+  return `<a class="lcard" href="#look-${look.id}"><span class="lart">${lookVisual(look)}</span><span class="lbody"><span class="label">${TIERNAME[look.tier]} · ${esc(BRAND[look.brand].name)} fittings</span><b>${esc(look.name)}</b><span class="muted">${esc(look.tagline)}</span><span class="lby">Designed by ${esc(look.designer)}</span><span class="lpr">${fmtR(tot)}<small>5 × 8 ft, fittings, tiles and work</small></span></span></a>`;
+}
+function pageDesigns(){
+  return `<section class="hero" style="padding-bottom:36px"><div class="wrap"><p class="crumb"><a href="#home">Home</a> / Designs</p>
+  <h1 class="mega" style="font-size:clamp(44px,7vw,92px)"><span>Designed once.</span><span>Built in your bathroom.</span></h1>
+  <p class="lede" style="margin-top:18px">Complete bathroom looks from the CoreSpace studio. Every tile, fitting and accessory is listed with its code and price. Pick a look, make it yours, and our crew builds it with the same flood test and fixed price.</p></div></section>
+<section class="block" style="padding-top:28px"><div class="wrap"><div class="lgrid">${CATALOG.looks.map(lookCard).join("")}</div>
+  <p class="fine">Drawings are concepts. Tile colours and series are chosen with you at the site visit; prices are for a 5 × 8 ft bathroom and change with your size.</p></div></section>
+<section class="block"><div class="wrap"><div class="head"><h2>From a look to your bathroom</h2><p class="lede">The same four steps for every look.</p></div>
+  <ol class="process lsteps"><li><span class="n">Step 1</span><h3>Pick a look</h3><p>Every finish is listed with its brand, CoreSpace code and price.</p></li><li><span class="n">Step 2</span><h3>Make it yours</h3><p>Copy it into one of your bathrooms, set the size, swap any fitting.</p></li><li><span class="n">Step 3</span><h3>Site visit</h3><p>We measure, choose tile colours with you and send a Locked Quote.</p></li><li class="g"><span class="n">Step 4</span><h3>Built and flood-tested</h3><p>One crew builds it; 40% waits until the floor passes the flood test.</p></li></ol></div></section>
+<section class="block"><div class="wrap builder"><div><p class="label">For designers</p><h2 style="margin-top:8px">Design a look for CoreSpace.</h2></div>
+  <div><p class="lede">Architects and interior designers: send us a bathroom look. We credit you by name on its page and on every bathroom built from it. Terms are agreed on a call.</p><div class="actions"><a class="btn line" href="${waLink("Hi CoreSpace, I'm a designer and would like to submit a bathroom look.")}" target="_blank" rel="noopener">Talk to us on WhatsApp</a></div></div></div></section>${finalCta()}`;
+}
+function pageLook(id){
+  const look=LOOK[id]; if(!look) return pageDesigns();
+  const its=lookItems(look,LOOKSIZE), mat=lookMaterials(look,LOOKSIZE), tot=lookTotal(look,LOOKSIZE);
+  const groups=CORDER.map(c=>[c, its.filter(x=>PBY[x.productId].category===c)]).filter(([,xs])=>xs.length);
+  const others=CATALOG.looks.filter(l=>l.id!==id).slice(0,3);
+  return `<section class="hero"><div class="wrap lhero">
+  <figure class="lfig">${lookVisual(look)}<figcaption>${look.image?"Concept render.":"Concept drawing."} Final finishes are chosen with you at the site visit.</figcaption></figure>
+  <div><p class="crumb"><a href="#home">Home</a> / <a href="#designs">Designs</a> / ${esc(look.name)}</p>
+    <p class="label">${TIERNAME[look.tier]} · ${esc(BRAND[look.brand].name)} fittings</p>
+    <h1 class="mega" style="font-size:clamp(46px,7vw,96px);margin-top:8px"><span>${esc(look.name)}</span></h1>
+    <p class="lby" style="margin-top:12px">Designed by ${esc(look.designer)}</p>
+    <p class="lede" style="margin-top:14px">${esc(look.story)}</p>
+    <div class="sws">${swatches(look)}</div>
+    <div class="field" style="margin-top:20px;max-width:220px"><label for="looksize">Your bathroom size</label><select id="looksize" data-act="looksize">${Object.keys(SIZES).map(s=>`<option value="${s}" ${LOOKSIZE===s?"selected":""}>${sizeLabel(s)}</option>`).join("")}</select></div>
+    <div class="total" style="justify-content:flex-start;gap:18px"><span class="rnum" style="text-align:left;font-size:40px">${fmtR(tot)}</span></div>${MRP_NOTE}
+    <div class="actions"><button type="button" class="btn" data-act="lookmine" data-id="${look.id}">Make it mine</button><a class="btn line" href="#book">Book a design visit</a><a class="btn line" href="${waLink(`Hi CoreSpace, I like the ${look.name} look for a ${sizeLabel(LOOKSIZE)} bathroom (${fmtR(tot)}). Can we book a design visit?`)}" target="_blank" rel="noopener">WhatsApp</a></div>
+  </div></div></section>
+<section class="block"><div class="wrap bwrap"><div class="doc"><div class="doc-h"><span class="label">Finish list · ${esc(look.name)}</span><span class="label">${sizeLabel(LOOKSIZE)}</span></div><div class="doc-b">
+  ${groups.map(([c,xs])=>`<div class="bgrp">${esc(CAT[c].name)}</div>${xs.map(x=>{ const p=PBY[x.productId]; return `<div class="kv"><span>${esc(SUB[p.subcategory].name)} · ${qtyLabel(p,x.qty)}<small>${esc(BRAND[p.brand].name)} · ${esc(p.name)} · ${esc(p.code)}${x.note?` · ${esc(x.note)}`:""}</small></span><span>${fmtR(addR([0,0],pRange(p),x.qty))}</span></div>`; }).join("")}`).join("")}
+  </div></div>
+  <aside class="summary"><div class="doc"><div class="doc-h"><span class="label">Price for ${sizeLabel(LOOKSIZE)}</span></div><div class="doc-b">
+    <div class="kv"><span>Fittings and tiles</span><span>${fmtR(mat)}</span></div>${SERVICES.map(s=>`<div class="kv"><span>${s.name}</span><span>${fmtR(svcRange(s,LOOKSIZE))}</span></div>`).join("")}
+    <div class="kv tot"><span>Total</span><span>${fmtR(tot)}</span></div>${MRP_NOTE}
+    <button type="button" class="btn block" style="margin-top:16px" data-act="lookmine" data-id="${look.id}">Make it mine</button>
+    <p class="fine">Copies every finish into one of your bathrooms at its size. Swap anything there.</p></div></div></aside></div></section>
+<section class="block"><div class="wrap"><div class="head"><h2>More looks</h2><p class="lede"><a href="#designs">See all designs</a></p></div><div class="lgrid">${others.map(lookCard).join("")}</div></div></section>${finalCta()}`;
+}
 
 function pagePhoto(){
   return `<section class="hero"><div class="wrap builder">
@@ -1465,13 +1614,13 @@ function refresh(){
 }
 
 /* ============ ROUTER ============ */
-function currentRoute(){ const h=(location.hash||"").slice(1); return ROUTES.includes(h)?h:"home"; }
+function currentRoute(){ const h=(location.hash||"").slice(1); return ROUTES.includes(h)?h:(h.startsWith("look-")&&LOOK[h.slice(5)])?"look":"home"; }
 function render(keep){
   if (location.hash==="#kits"){ history.replaceState(null,"","#shop"); PENDING_SCROLL="packages"; }
   const r=currentRoute();
   renderNav(r); closeSheet();
   const page=$("#page");
-  const html=({account:pageAccount,shop:pageShop,"my-bathrooms":pageBaths,bathroom:()=>pageJob("bathroom"),photo:pagePhoto,home:pageHome,process:pageProcess,projects:pageProjects,about:pageAbout,book:pageBook,terms:pageTerms,admin:pageAdmin}[r]||pageHome)();
+  const html=({account:pageAccount,designs:pageDesigns,look:()=>pageLook(location.hash.slice(6)),shop:pageShop,"my-bathrooms":pageBaths,bathroom:()=>pageJob("bathroom"),photo:pagePhoto,home:pageHome,process:pageProcess,projects:pageProjects,about:pageAbout,book:pageBook,terms:pageTerms,admin:pageAdmin}[r]||pageHome)();
   const y=window.scrollY; page.innerHTML=html;
   if (JOBS[r]) renderEstimator(r);
   if (r==="admin") mountAdmin();
@@ -1479,11 +1628,12 @@ function render(keep){
   if (r==="my-bathrooms") drawBaths();
   if (r==="account"){ ACCT.reqs=null; ACCT.confirmDel=false; mountAccount(); }
   if (r==="photo") bindDrop();
-  document.title = r==="home"?"CoreSpace · Bathrooms":`${(JOBS[r]?.title||({process:"How it works",projects:"Projects",about:"About",book:"Book a site visit",terms:"Terms",account:"My account",shop:"Shop","my-bathrooms":"My bathrooms",photo:"Photo quote",admin:"Dashboard"})[r])} · CoreSpace`;
+  document.title = r==="home"?"CoreSpace · Bathrooms":`${(JOBS[r]?.title||({designs:"Designs",look:LOOK[location.hash.slice(6)]?.name,process:"How it works",projects:"Projects",about:"About",book:"Book a site visit",terms:"Terms",account:"My account",shop:"Shop","my-bathrooms":"My bathrooms",photo:"Photo quote",admin:"Dashboard"})[r])} · CoreSpace`;
   $("#wafab").href = waLink("Hi CoreSpace, I'd like a site visit for my bathroom.");
-  if (PENDING_SCROLL){ const el=document.getElementById(PENDING_SCROLL); PENDING_SCROLL=null; if(el){ el.scrollIntoView(); LAST=r; return; } }
-  if (keep && LAST===r) window.scrollTo(0,y); else if (LAST!==r){ window.scrollTo(0,0); }
-  LAST=r;
+  const key=r==="look"?location.hash:r;
+  if (PENDING_SCROLL){ const el=document.getElementById(PENDING_SCROLL); PENDING_SCROLL=null; if(el){ el.scrollIntoView(); LAST=key; return; } }
+  if (keep && LAST===key) window.scrollTo(0,y); else if (LAST!==key){ window.scrollTo(0,0); }
+  LAST=key;
 }
 window.addEventListener("hashchange",()=>render());
 
@@ -1526,11 +1676,11 @@ document.addEventListener("click", async e=>{
   else if (act==="pkapply"||act==="pkcopy"){ const pk=PKG[b.dataset.id], t=bathFrom(b.dataset.b); if(!t) return; applyPackage(t,pk); project.activeBathroomId=t.id; saveProject(); toast(`${pk.name} copied into ${t.name}`);
     if (act==="pkapply"){ drawSwitcher(); drawShop(); openBaths(); } else { closeSheet(); PENDING_SCROLL="bath-"+t.id; if(location.hash==="#my-bathrooms") render(); else location.hash="#my-bathrooms"; } }
   // editing bathrooms
-  else if (act==="bq"){ const t=bathById(b.dataset.b), it=t?.items[+b.dataset.i]; if(!it) return; it.qty=Math.max(1,Math.min(20,it.qty+(+b.dataset.d))); saveProject(); drawBaths(); }
+  else if (act==="bq"){ const t=bathById(b.dataset.b), it=t?.items[+b.dataset.i]; if(!it) return; const p=PBY[it.productId]; it.qty=Math.max(stepQty(p),Math.min(maxQty(p),it.qty+(+b.dataset.d)*stepQty(p))); saveProject(); drawBaths(); }
   else if (act==="brm"){ const t=bathById(b.dataset.b); if(!t) return; const [it]=t.items.splice(+b.dataset.i,1); saveProject(); drawBaths(); if(it) toast(`Removed ${PBY[it.productId].name}`); }
   else if (act==="bswap"){ const t=bathById(b.dataset.b), it=t?.items[+b.dataset.i]; if(!it) return; const p=PBY[it.productId]; SHOP.swap={b:t.id, i:+b.dataset.i}; SHOP.subs=[p.subcategory]; SHOP.cats=new Set([p.category]); SHOP.brands.clear(); SHOP.q=""; goShop("catalogue"); }
   else if (act==="swapin"){ const sw=SHOP.swap, t=sw&&bathById(sw.b), it=t?.items[sw.i]; if(!it) return; const dup=t.items.findIndex((x,k)=>k!==sw.i&&x.productId===b.dataset.id);
-    if (dup>=0){ t.items[dup].qty=Math.min(20,t.items[dup].qty+it.qty); t.items.splice(sw.i,1); } else it.productId=b.dataset.id;
+    if (dup>=0){ t.items[dup].qty=Math.min(maxQty(PBY[b.dataset.id]),t.items[dup].qty+it.qty); t.items.splice(sw.i,1); } else { if(isSqft(PBY[it.productId])!==isSqft(PBY[b.dataset.id])) it.qty=defaultQty(PBY[b.dataset.id],t); it.productId=b.dataset.id; }
     SHOP.swap=null; SHOP.subs=null; SHOP.cats.clear(); saveProject(); toast(`Swapped in ${t.name}`); PENDING_SCROLL="bath-"+t.id; location.hash="#my-bathrooms"; }
   else if (act==="swapcancel"){ const t=SHOP.swap&&bathById(SHOP.swap.b); SHOP.swap=null; SHOP.subs=null; SHOP.cats.clear(); if(t){ PENDING_SCROLL="bath-"+t.id; location.hash="#my-bathrooms"; } else drawShop(); }
   else if (act==="needadd"){ const t=bathById(b.dataset.b); if(!t) return; project.activeBathroomId=t.id; saveProject(); SHOP.swap=null; SHOP.subs=b.dataset.k.split(","); SHOP.cats=new Set(SHOP.subs.map(s=>SUB[s].cat)); SHOP.brands.clear(); SHOP.q=""; goShop("catalogue"); }
@@ -1539,6 +1689,8 @@ document.addEventListener("click", async e=>{
   else if (act==="bdel"){ BCONF=b.dataset.b; drawBaths(); }
   else if (act==="bdelno"){ BCONF=null; drawBaths(); }
   else if (act==="bdelyes"){ const t=bathById(b.dataset.b); BCONF=null; if(!t) return; if(project.bathrooms.length>1){ project.bathrooms=project.bathrooms.filter(x=>x!==t); if(project.activeBathroomId===t.id) project.activeBathroomId=project.bathrooms[0].id; toast(`${t.name} deleted`); } else { t.items=[]; t.basePackageId=null; toast(`${t.name} cleared`); } saveProject(); drawBaths(); }
+  else if (act==="lookmine"){ const lk=LOOK[b.dataset.id]; openBathPicker(`Make ${esc(lk.name)} yours in…`, "Copies every finish into the bathroom you pick at that bathroom's size, replacing what's there. Then swap anything.", "lookcopy", lk.id); }
+  else if (act==="lookcopy"){ const lk=LOOK[b.dataset.id], t=bathFrom(b.dataset.b); if(!t) return; if(b.dataset.b==="new") t.size=LOOKSIZE; applyLook(t,lk); project.activeBathroomId=t.id; saveProject(); toast(`${lk.name} copied into ${t.name}`); closeSheet(); PENDING_SCROLL="bath-"+t.id; location.hash="#my-bathrooms"; }
   else if (act==="atab"){ ADMIN.tab=b.dataset.k; drawAdmin(); }
   else if (act==="csv"){ exportCsv(); }
   else if (act==="saveprices"){ const p={}; document.querySelectorAll("[data-price]").forEach(i=>{ const v=Math.round(+i.value); const [j,vk,t]=i.dataset.price.split("."); if(v>0 && v!==JOBS[j].variants[vk].tiers[t].price) p[i.dataset.price]=v; }); await saveConfig({prices:p}, "Prices saved"); }
@@ -1548,6 +1700,7 @@ document.addEventListener("change", async e=>{
   const t=e.target;
   if (t.dataset.set){ const id=currentRoute(); const st=stateFor(id); const inp=JOBS[id].inputs.find(i=>i.id===t.dataset.set); st[t.dataset.set] = (inp&&inp.type==="step")?+t.value:t.value; if(t.dataset.set==="variant"||t.dataset.set==="tier") renderEstimator(id); else renderSummary(id); }
   else if (t.id==="photo-file"){ handlePhoto(t.files[0]); }
+  else if (t.dataset.act==="looksize"){ if(SIZES[t.value]){ LOOKSIZE=t.value; render(true); $("#looksize")?.focus(); } }
   else if (t.id==="shopsort"){ SHOP.sort=t.value; drawShop(); }
   else if (t.dataset.act==="bname"){ const bb=bathById(t.dataset.b); if(bb){ bb.name=t.value.trim().slice(0,40)||bb.name; t.value=bb.name; saveProject(); drawSwitcher(); const sm=$("#bathsum"); if(sm) sm.innerHTML=projectSummary(); } }
   else if (t.dataset.act==="bsize"){ const bb=bathById(t.dataset.b); if(bb&&SIZES[t.value]){ bb.size=t.value; saveProject(); drawBaths(); } }
