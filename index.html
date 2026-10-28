@@ -1,0 +1,1460 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>CoreSpace</title>
+<meta name="description" content="CoreSpace, Bengaluru: fixed-price renovation for apartments. Corebath bathrooms, kitchens, flooring, false ceilings and wardrobes. One crew, one contract, fixed price and fixed date.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout concept: a site-visit report. Condensed headlines, quote-document cards,
+   one loud green block (the payment held until the Gate passes) on a quiet black and white page. */
+:root{
+  --paper:#FFFFFF; --surface:#F3F5F4; --ink:#0B0D0C; --ink-2:#4F5651; --line:#DEE3E0;
+  --green:#34C363; --soft:#E4F6EA; --ok:#1E7A3E; --warn:#8A5A00; --warn-bg:#FFF3D6; --err:#9A2A1D; --err-bg:#FDE8E5;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:6px; --wrap:1200px; color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font:17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3,h4{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-0.01em;text-wrap:balance}
+h2{font-size:clamp(32px,5vw,56px);font-stretch:74%;font-weight:800}
+h3{font-size:23px;font-stretch:88%;font-weight:700}
+:focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:20px}
+.lede{color:var(--ink-2);font-size:18px;max-width:60ch}
+.muted{color:var(--ink-2)}
+.label{font:500 12px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.tnum{font-variant-numeric:tabular-nums}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 16px/1 var(--body);padding:15px 22px;border-radius:var(--r);border:2px solid var(--green);background:var(--green);color:#000;text-decoration:none;cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.btn.line{background:transparent;border-color:var(--ink);color:var(--ink)}
+.btn.line:hover{background:var(--ink);color:var(--paper)}
+.btn.sm{padding:10px 14px;font-size:14.5px}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.linkbtn{background:none;border:0;padding:4px 0;font:600 15px var(--body);color:var(--ink);cursor:pointer;text-decoration:underline;text-decoration-color:var(--green);text-decoration-thickness:2px;text-underline-offset:4px}
+
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--paper) 84%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line);transition:box-shadow .2s}
+header.site.scrolled{box-shadow:0 10px 30px -18px rgba(0,0,0,.45)}
+.bar{display:flex;align-items:center;gap:14px;min-height:68px}
+.logo{display:inline-flex;align-items:center;color:var(--ink);text-decoration:none;flex:none}
+.logo svg{height:26px;width:auto;display:block}
+nav.main{display:flex;align-items:center;gap:2px;margin-left:10px}
+nav.main>a,.ddbtn{font:500 15px var(--body);padding:9px 13px;border-radius:999px;color:var(--ink-2);text-decoration:none;background:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+nav.main>a:hover,.ddbtn:hover,.ddbtn[aria-expanded="true"]{color:var(--ink);background:var(--surface)}
+nav.main>a[aria-current="page"],.ddbtn.cur{color:var(--ink);background:var(--soft);box-shadow:inset 0 0 0 1.5px var(--green)}
+.ddbtn svg{width:14px;height:14px;transition:transform .15s}
+.ddbtn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.tagnew{font:600 10px/1 var(--mono);background:var(--green);color:#000;border-radius:999px;padding:3px 6px;letter-spacing:.04em}
+.dd{position:relative}
+.ddpanel{position:absolute;left:-8px;top:calc(100% + 12px);width:min(780px,92vw);background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 70px -24px rgba(0,0,0,.45);padding:12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+.ddpanel a{display:grid;gap:3px;padding:12px 14px;border-radius:12px;text-decoration:none;color:var(--ink)}
+.ddpanel a:hover,.ddpanel a:focus-visible{background:var(--surface)}
+.ddpanel b{font-family:var(--display);font-stretch:80%;font-weight:800;font-size:20px;line-height:1.1}
+.ddpanel span{font-size:13.5px;color:var(--ink-2);line-height:1.35}
+.ddpanel em{font:500 12px var(--mono);font-style:normal;color:var(--ok)}
+.ddpanel .ddfoot{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 18px;padding:12px 14px 6px;border-top:1px solid var(--line);margin-top:6px;font-size:14px}
+.ddpanel .ddfoot a{display:inline;padding:0;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
+.hacts{margin-left:auto;display:flex;align-items:center;gap:8px;flex:none}
+.iconbtn{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;text-decoration:none;flex:none}
+.iconbtn:hover{border-color:var(--ink)}
+.iconbtn svg{width:20px;height:20px}
+.badge{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--green);color:#000;font:700 11px/20px var(--body);text-align:center}
+.badge:empty{display:none}
+.menubtn{display:none}
+@media (max-width:1120px){nav.main{display:none}.menubtn{display:inline-grid}}
+@media (max-width:560px){.hacts .btn{display:none}}
+[hidden]{display:none!important}
+.sheet{position:fixed;inset:0;z-index:80;display:flex;justify-content:flex-end}
+.sheet.center{justify-content:center;align-items:center;padding:16px}
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.5);animation:fade .2s ease}
+.sheetp{position:relative;width:min(460px,100%);height:100%;background:var(--paper);overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 18px) 20px calc(env(safe-area-inset-bottom,0px) + 28px);display:flex;flex-direction:column;gap:14px;animation:slidein .22s ease;box-shadow:-20px 0 60px -30px rgba(0,0,0,.5)}
+.sheet.center .sheetp{height:auto;max-height:calc(100% - 32px);width:min(820px,100%);border-radius:16px;animation:pop .18s ease}
+.sheeth{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sheeth h3{font-size:26px;font-stretch:76%;font-weight:900}
+@keyframes slidein{from{transform:translateX(40px);opacity:0}}
+@keyframes pop{from{transform:scale(.97);opacity:0}}
+@keyframes fade{from{opacity:0}}
+.mnav{display:grid;gap:2px}
+.mnav a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 4px;border-bottom:1px solid var(--line);text-decoration:none;font-weight:600;font-size:17px;color:var(--ink)}
+.mnav a span{font:500 12px var(--mono);color:var(--ok)}
+.mnav h4{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:16px 0 4px}
+
+.hero{padding:60px 0 72px;border-bottom:1px solid var(--line)}
+.hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center}
+.hero-grid>*{min-width:0}
+.mega{font-size:clamp(46px,8.4vw,108px);font-stretch:64%;font-weight:900;line-height:.9;letter-spacing:-0.02em}
+.mega span{display:block}
+.hero .lede{margin-top:24px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+@media (max-width:960px){.hero-grid{grid-template-columns:1fr;gap:36px}.hero{padding:40px 0 52px}}
+
+.doc{border:2px solid var(--ink);border-radius:var(--r);background:var(--paper);overflow:hidden}
+.doc-h{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 18px;border-bottom:2px solid var(--ink);background:var(--surface)}
+.doc-b{padding:18px}
+.kv{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:15.5px}
+.kv span:first-child{color:var(--ink-2);min-width:0}
+.kv span:last-child{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kv.inc span:last-child{color:var(--ok)}
+.total{display:flex;justify-content:space-between;align-items:end;gap:12px;padding-top:16px}
+.total .num{font-family:var(--display);font-stretch:70%;font-weight:900;font-size:clamp(40px,5vw,56px);line-height:1;font-variant-numeric:tabular-nums}
+.paybar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,2fr) minmax(0,1fr);margin-top:16px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.paybar div{padding:10px 8px;min-height:92px;display:flex;flex-direction:column;justify-content:space-between;min-width:0}
+.paybar div+div{border-left:1px solid var(--line)}
+.paybar b{font-family:var(--display);font-stretch:72%;font-weight:900;font-size:28px;line-height:1}
+.paybar small{font-size:12px;line-height:1.3;color:var(--ink-2)}
+.paybar .held{background:var(--green);color:#000}
+.paybar .held small{color:#000}
+.paybar .amt{display:block;font:500 12px var(--mono);margin-top:4px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.paybar .narrow b{font-size:22px}
+@media (max-width:520px){.paybar{grid-template-columns:1fr 1fr}.paybar div:nth-child(3){border-left:0;border-top:1px solid var(--line)}.paybar div:nth-child(4){border-top:1px solid var(--line)}}
+
+.band{background:var(--surface);color:var(--ink);padding:80px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.band h2{color:var(--ink)}
+.band .lede{color:var(--ink-2)}
+.head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:40px}
+.head>*{min-width:0}
+@media (max-width:860px){.head{grid-template-columns:1fr;gap:14px}}
+.rows{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr) 220px 160px;gap:24px;align-items:center;padding:22px 16px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);transition:background .15s}
+.row:hover,.row:focus-visible{background:#34C363;color:#000}
+.row:hover .rdesc,.row:hover .rgate,.row:focus-visible .rdesc,.row:focus-visible .rgate{color:#000}
+.rname{font-family:var(--display);font-stretch:66%;font-weight:900;font-size:clamp(34px,5vw,56px);line-height:.95}
+.rdesc{color:var(--ink-2);font-size:15.5px}
+.rgate{color:var(--ink-2);font-size:14px}
+.rgate b{display:block;color:inherit;font-weight:600}
+.rprice{font-family:var(--display);font-stretch:74%;font-weight:800;font-size:26px;text-align:right;white-space:nowrap}
+.rprice small{display:block;font:400 13px var(--body)}
+.rows.light{border-top:1px solid var(--line)}
+.rows.light .row{color:var(--ink);border-bottom:1px solid var(--line)}
+.rows.light .rdesc,.rows.light .rgate{color:var(--ink-2)}
+.rows.light .row:hover,.rows.light .row:focus-visible,.rows.light .row:hover .rdesc,.rows.light .row:hover .rgate,.rows.light .row:focus-visible .rdesc,.rows.light .row:focus-visible .rgate{color:#000}
+@media (max-width:860px){.row{grid-template-columns:1fr auto;gap:6px 16px}.rdesc,.rgate{grid-column:1/-1}.rprice{grid-row:1;grid-column:2}}
+
+section.block{padding:80px 0;border-bottom:1px solid var(--line)}
+@media (max-width:860px){section.block{padding:56px 0}}
+.rules{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--ink)}
+.rules>div{padding:22px 22px 0 0;min-width:0}
+.rules b{display:block;font-family:var(--display);font-stretch:80%;font-weight:800;font-size:24px;line-height:1.05;margin-bottom:8px}
+.rules span{color:var(--ink-2);font-size:15.5px}
+@media (max-width:860px){.rules{grid-template-columns:1fr 1fr;row-gap:24px}}
+@media (max-width:520px){.rules{grid-template-columns:1fr}}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.facts>div{background:var(--surface);border-radius:var(--r);padding:20px;min-width:0}
+.facts b{display:block;font-family:var(--display);font-stretch:70%;font-weight:900;font-size:44px;line-height:1}
+.facts span{color:var(--ink-2);font-size:15px}
+@media (max-width:760px){.facts{grid-template-columns:1fr}}
+.brands{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:24px;font:500 14px var(--mono);color:var(--ink-2);letter-spacing:.04em;text-transform:uppercase}
+
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gallery figure{margin:0;min-width:0}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r);display:block;background:var(--surface)}
+.gallery figcaption{font-size:14px;color:var(--ink-2);margin-top:8px}
+.gallery.big figure:first-child{grid-column:span 2;grid-row:span 2}
+.gallery.big figure:first-child img{aspect-ratio:auto;height:100%;min-height:300px}
+@media (max-width:760px){.gallery{grid-template-columns:1fr 1fr}.gallery.big figure:first-child{grid-column:span 2;grid-row:auto}}
+@media (max-width:460px){.gallery{grid-template-columns:1fr}.gallery.big figure:first-child{grid-column:auto}}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{border:1.5px solid var(--ink);border-radius:999px;padding:8px 16px;font-weight:500;font-size:15.5px}
+
+.final{background:var(--green);color:#000;padding:72px 0}
+.final h2{color:#000}
+.final p{max-width:60ch;margin-top:16px;font-size:18px}
+.final .btn{background:#000;border-color:#000;color:#fff}
+.final .btn:hover{background:#fff;border-color:#fff;color:#000}
+.final .btn.line{background:transparent;color:#000;border-color:#000}
+
+.crumb{font-size:14px;margin-bottom:16px;color:var(--ink-2)}
+.cat-hero{display:grid;grid-template-columns:1.2fr 1fr;gap:52px;align-items:center}
+.cat-hero>*{min-width:0}
+.cat-hero h1{font-size:clamp(42px,7vw,88px);font-stretch:66%;font-weight:900;line-height:.9;letter-spacing:-0.02em}
+.cat-hero h1 span{display:block}
+.cat-hero .lede{margin-top:20px}
+@media (max-width:920px){.cat-hero{grid-template-columns:1fr;gap:32px}}
+.gate h3{font-size:28px;font-stretch:78%;font-weight:800}
+.gate p.d{color:var(--ink-2);margin-top:8px;font-size:16px}
+.gate .fail{margin-top:14px;font-size:14.5px;color:var(--ink-2);padding-top:12px;border-top:1px dashed var(--line)}
+
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.tier{padding:28px 24px;display:flex;flex-direction:column;min-width:0}
+.tier+.tier{border-left:1px solid var(--line)}
+.tier.pop{box-shadow:inset 0 6px 0 var(--green)}
+.tier .tag{font:500 12.5px var(--mono);min-height:18px;letter-spacing:.04em}
+.tier h3{font-size:36px;font-stretch:70%;font-weight:900;margin-top:6px}
+.tier .for{color:var(--ink-2);margin-top:8px;font-size:15.5px;min-height:50px}
+.price{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.price .from{font:500 12px var(--mono);color:var(--ink-2);letter-spacing:.06em;text-transform:uppercase}
+.price .amt{font-family:var(--display);font-stretch:70%;font-weight:900;font-size:48px;line-height:1;margin-top:4px;font-variant-numeric:tabular-nums}
+.price .per{font-size:13px;color:var(--ink-2);margin-top:6px}
+.tier ul{list-style:none;padding:0;margin:20px 0 24px;display:grid;gap:9px;font-size:15.5px}
+.tier li{display:grid;grid-template-columns:14px 1fr;gap:8px;line-height:1.45}
+.tier li::before{content:"";width:9px;height:9px;margin-top:7px;background:var(--green)}
+.tier .btn{margin-top:auto}
+@media (max-width:980px){.tiers{grid-template-columns:1fr}.tier+.tier{border-left:0;border-top:1px solid var(--line)}.tier .for{min-height:0}}
+.fine{margin-top:18px;font-size:14px;color:var(--ink-2);max-width:82ch}
+.scope{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.scope>div{min-width:0}
+.scope ul{margin:10px 0 0;padding-left:18px;color:var(--ink-2);font-size:15.5px;display:grid;gap:4px}
+@media (max-width:860px){.scope{grid-template-columns:1fr}}
+
+.builder{display:grid;grid-template-columns:1.05fr 1fr;gap:28px;align-items:start}
+.builder>*{min-width:0}
+@media (max-width:980px){.builder{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.step{padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.step-h{display:flex;gap:12px;align-items:baseline;margin-bottom:14px}
+.step-h i{font-style:normal;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--green);color:#000;font:700 14px var(--body);flex:none;transform:translateY(-3px)}
+.step-h h3{font-size:22px}
+.seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.seg label{position:relative;cursor:pointer;min-width:0}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg span{display:block;border:1.5px solid var(--line);border-radius:var(--r);padding:12px;font-size:15px;font-weight:600;line-height:1.25;background:var(--paper);height:100%}
+.seg span small{display:block;font-weight:400;color:var(--ink-2);font-size:13px;margin-top:2px;font-variant-numeric:tabular-nums}
+.seg input:checked+span{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink),inset 0 -4px 0 var(--green)}
+.seg input:focus-visible+span{outline:3px solid var(--green);outline-offset:2px}
+.inputs{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.field{min-width:0}
+.field label,.field .lbl{display:block;font-size:14px;font-weight:500;color:var(--ink-2);margin-bottom:6px}
+.field input[type=text],.field input[type=tel],.field input[type=date],.field input[type=number],.field select,.field textarea{width:100%;font:500 16px var(--body);color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:var(--r);padding:11px 12px}
+.field textarea{min-height:76px;resize:vertical;font-size:15px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--ink);outline:none}
+.stepper{display:flex;border:1.5px solid var(--line);border-radius:var(--r);background:var(--paper);overflow:hidden}
+.stepper button{width:44px;border:0;background:transparent;color:var(--ink);font-size:20px;cursor:pointer}
+.stepper button:hover{background:var(--soft)}
+.stepper output{flex:1;text-align:center;font:600 16px/44px var(--body);font-variant-numeric:tabular-nums}
+.hint{font-size:13.5px;color:var(--ink-2);margin-top:10px}
+.addons{display:grid;gap:8px}
+.addon{display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:1.5px solid var(--line);border-radius:var(--r);background:var(--paper);cursor:pointer}
+.addon input{width:18px;height:18px;accent-color:var(--green);margin:0}
+.addon b{font-weight:600;font-size:15px;display:block;line-height:1.3}
+.addon small{color:var(--ink-2);font-size:13px}
+.addon .ap{font-weight:600;font-size:14.5px;white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.addon.inc{cursor:default;background:transparent;border-style:dashed}
+.addon.inc .ap{color:var(--ok);font-size:13px}
+.addon:has(input:checked):not(.inc){border-color:var(--ink)}
+.summary{position:sticky;top:calc(84px + env(safe-area-inset-top,0px))}
+@media (max-width:980px){.summary{position:static}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid2 .full{grid-column:1/-1}
+@media (max-width:520px){.grid2{grid-template-columns:1fr}}
+.consent{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:13.5px;color:var(--ink-2);margin-top:12px;align-items:start}
+.consent input{width:18px;height:18px;accent-color:var(--green);margin:2px 0 0}
+.notice{margin-top:14px;padding:12px 14px;border-radius:var(--r);font-size:14.5px}
+.notice.warn{background:var(--warn-bg);color:var(--warn)}
+.notice.ok{background:var(--soft);color:var(--ok)}
+.notice.bad{background:var(--err-bg);color:var(--err)}
+.leadform{margin-top:20px;padding-top:20px;border-top:2px solid var(--ink)}
+.leadform h4{font-size:22px;font-stretch:88%;margin-bottom:12px}
+.sub-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+@media (max-width:420px){.sub-actions{grid-template-columns:1fr}}
+.done{display:grid;gap:12px}
+.done .ref{font:500 14px var(--mono)}
+.done pre{white-space:pre-wrap;font:12.5px/1.5 var(--mono);background:var(--surface);padding:12px;margin:0;max-height:220px;overflow:auto;border-radius:var(--r)}
+
+.process{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);border-top:2px solid var(--ink)}
+.process li{padding:24px 18px 0 0;position:relative;min-width:0}
+.process li::before{content:"";position:absolute;top:-8px;left:0;width:14px;height:14px;background:var(--paper);border:2px solid var(--ink);border-radius:50%}
+.process li.g::before{background:var(--green);border-color:var(--green)}
+.process .n{font:500 12.5px var(--mono);color:var(--ink-2)}
+.process h3{font-size:21px;margin:6px 0 8px}
+.process p{font-size:15px;color:var(--ink-2)}
+.process .pay{display:inline-block;margin-top:12px;font:500 12.5px var(--mono);padding:3px 8px;border-radius:var(--r);border:1px solid var(--ink)}
+.process li.g .pay{background:var(--green);border-color:var(--green);color:#000}
+@media (max-width:980px){.process{grid-template-columns:1fr;border-top:0;border-left:2px solid var(--ink)}.process li{padding:0 0 26px 26px}.process li::before{left:-9px;top:4px}}
+.faq{display:grid;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line);padding:18px 0}
+.faq summary{cursor:pointer;font-family:var(--display);font-stretch:88%;font-weight:700;font-size:21px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:400;font-size:26px;line-height:1}
+.faq details[open] summary::after{content:"\2212"}
+.faq p{margin-top:10px;color:var(--ink-2);max-width:70ch}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);background:var(--surface);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.nw{white-space:nowrap}
+td input[type=number]{width:130px;font:500 15px var(--body);color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:var(--r);padding:8px 10px}
+td select{font:500 14px var(--body);color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:var(--r);padding:6px 8px}
+.pill{display:inline-block;font:500 12px var(--mono);padding:2px 8px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.pill.new{background:var(--warn-bg);color:var(--warn);border-color:transparent}
+.pill.ok{background:var(--soft);color:var(--ok);border-color:transparent}
+.atabs{display:flex;gap:6px;margin:24px 0 20px;flex-wrap:wrap}
+.atabs button{font:600 15px var(--body);padding:10px 16px;border-radius:var(--r);border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.atabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.stats>div{border:1px solid var(--line);border-radius:var(--r);padding:14px;min-width:0}
+.stats b{display:block;font-family:var(--display);font-stretch:72%;font-weight:900;font-size:36px;line-height:1;font-variant-numeric:tabular-nums}
+.stats span{font-size:13px;color:var(--ink-2)}
+@media (max-width:700px){.stats{grid-template-columns:1fr 1fr}}
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:14px}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.switch label{display:flex;align-items:center;gap:12px;cursor:pointer;font-weight:600}
+.switch input{width:22px;height:22px;accent-color:var(--green)}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.about>*{min-width:0}
+@media (max-width:760px){.about{grid-template-columns:1fr}}
+.person{border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.person h3{font-size:30px;font-stretch:72%;font-weight:900}
+.person ul{margin:12px 0 0;padding-left:18px;color:var(--ink-2);font-size:15.5px;display:grid;gap:4px}
+.contact{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.contact>div{border:1px solid var(--line);border-radius:var(--r);padding:20px;min-width:0}
+.contact .v{font-family:var(--display);font-stretch:80%;font-weight:800;font-size:26px;margin-top:6px;user-select:all;overflow-wrap:anywhere}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+.prose{max-width:72ch}
+.prose h3{margin:28px 0 8px}
+.prose p,.prose li{color:var(--ink-2)}
+.prose p+p{margin-top:10px}
+
+.shophero{display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:end}
+.shophero>*{min-width:0}
+@media (max-width:860px){.shophero{grid-template-columns:1fr}}
+.promo{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;padding:18px;border-radius:16px;background:var(--soft);color:var(--ink);border:1.5px solid var(--green);text-decoration:none}
+.promo svg{width:44px;height:44px;color:var(--ok)}
+.promo b{display:block;font-family:var(--display);font-stretch:76%;font-weight:900;font-size:26px;line-height:1.05}
+.promo span{font-size:14.5px;color:var(--ink-2)}
+.shopbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.search{flex:1 1 260px;display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:999px;padding:0 16px;background:var(--paper);min-width:0}
+.search:focus-within{border-color:var(--ink)}
+.search svg{width:18px;height:18px;color:var(--ink-2);flex:none}
+.search input{border:0;background:transparent;font:500 15.5px var(--body);color:var(--ink);padding:12px 0;width:100%;outline:none;min-width:0}
+.selectp{font:500 14.5px var(--body);color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:11px 14px}
+.catrow{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;margin-bottom:12px;scrollbar-width:thin;scroll-snap-type:x proximity}
+.cat{flex:none;scroll-snap-align:start;display:flex;align-items:center;gap:9px;padding:6px 16px 6px 6px;border:1.5px solid var(--line);border-radius:999px;background:var(--paper);font:600 14px var(--body);color:var(--ink);cursor:pointer;white-space:nowrap}
+.cat .ci{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--surface)}
+.cat svg{width:18px;height:18px}
+.cat[aria-pressed="true"]{border-color:var(--ink);background:var(--soft)}
+.cat[aria-pressed="true"] .ci{background:var(--green);color:#000}
+.shopgrid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;align-items:start}
+.fpanel{position:sticky;top:calc(88px + env(safe-area-inset-top,0px));display:grid;gap:18px}
+.fpanel h4{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
+.fpanel label{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:15px;cursor:pointer}
+.fpanel input{width:17px;height:17px;accent-color:var(--green);margin:0}
+.fpanel .cnt{margin-left:auto;font:500 12px var(--mono);color:var(--ink-2)}
+.ftoggle{display:none}
+@media (max-width:900px){.shopgrid{grid-template-columns:1fr}.fpanel{position:static;display:none;border:1px solid var(--line);border-radius:12px;padding:16px}.fpanel.open{display:grid}.ftoggle{display:inline-flex}}
+.rhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.pcard{border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;min-width:0;background:var(--paper);transition:border-color .15s,transform .15s}
+.pcard:hover{border-color:var(--ink-2);transform:translateY(-2px)}
+.pimg{all:unset;box-sizing:border-box;cursor:pointer;aspect-ratio:4/3;background:var(--surface);display:grid;place-items:center;position:relative;width:100%}
+.pimg:focus-visible{outline:3px solid var(--green);outline-offset:-3px}
+.pimg svg{width:34%;height:auto;color:var(--ink);opacity:.85}
+.tierpill{position:absolute;top:10px;left:10px;font:600 11px var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--paper);color:var(--ink-2);border:1px solid var(--line)}
+.tierpill.t-signature{background:var(--soft);color:var(--ok);border-color:transparent}
+.tierpill.t-luxe{background:var(--ink);color:var(--paper);border-color:transparent}
+.pbody{padding:12px 14px 14px;display:flex;flex-direction:column;gap:3px;flex:1}
+.pbody .brand{font:500 11.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.pbody .nm{all:unset;cursor:pointer;font-weight:600;line-height:1.3;font-size:15px}
+.pbody .nm:hover{text-decoration:underline;text-decoration-color:var(--green);text-decoration-thickness:2px}
+.pbody .spec{font-size:13.5px;color:var(--ink-2);line-height:1.35}
+.prow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:10px}
+.pr{font-family:var(--display);font-stretch:74%;font-weight:800;font-size:24px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pr small{font:400 12.5px var(--body);color:var(--ink-2)}
+.addbtn{font:600 14px var(--body);border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap}
+.addbtn:hover{background:var(--ink);color:var(--paper)}
+.addbtn.in{background:var(--green);border-color:var(--green);color:#000}
+.qty{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;background:var(--paper)}
+.qty button{width:34px;height:34px;border:0;background:transparent;color:var(--ink);font-size:18px;cursor:pointer}
+.qty button:hover{background:var(--soft)}
+.qty output{min-width:44px;text-align:center;font:600 14px var(--body);font-variant-numeric:tabular-nums;padding:0 4px}
+.empty{padding:40px 0;text-align:center;color:var(--ink-2)}
+.pd{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.pd>*{min-width:0}
+@media (max-width:640px){.pd{grid-template-columns:1fr}}
+.pd .art{aspect-ratio:1;background:var(--surface);border-radius:14px;display:grid;place-items:center;position:relative}
+.pd .art svg{width:40%;color:var(--ink)}
+.pd h3{font-size:30px;font-stretch:76%;font-weight:900;margin-top:4px}
+.pd dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:14px 0;font-size:14.5px}
+.pd dt{color:var(--ink-2)}
+.pd dd{margin:0}
+.pairs{display:grid;gap:8px;margin-top:6px}
+.pair{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;padding:8px;border:1px solid var(--line);border-radius:10px}
+.pair .ci{display:grid;place-items:center;width:40px;height:40px;border-radius:8px;background:var(--surface)}
+.pair .ci svg{width:20px;height:20px}
+.pair b{font-size:14px;font-weight:600;display:block;line-height:1.25}
+.pair small{color:var(--ink-2);font-size:12.5px}
+.citem{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:6px 12px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:14.5px;align-items:start}
+.citem .ci{display:grid;place-items:center;width:44px;height:44px;border-radius:10px;background:var(--surface)}
+.citem .ci svg{width:22px;height:22px}
+.citem .cn{font-weight:600;line-height:1.3}
+.citem .cm{display:block;color:var(--ink-2);font-size:12.5px;font-weight:400}
+.citem .ca{font-weight:600;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.citem .qty{grid-column:2/-1;justify-self:start}
+.citem .rm{grid-column:3;justify-self:end;background:none;border:0;color:var(--ink-2);font-size:13px;text-decoration:underline;cursor:pointer;margin-top:-30px}
+.acct{display:grid;grid-template-columns:340px minmax(0,1fr);gap:28px;align-items:start}
+.acct>*{min-width:0}
+@media (max-width:900px){.acct{grid-template-columns:1fr}}
+.avatar{width:64px;height:64px;border-radius:50%;background:var(--green);color:#000;display:grid;place-items:center;font-family:var(--display);font-stretch:80%;font-weight:900;font-size:28px}
+.pfacts{display:grid;gap:2px;margin-top:14px}
+.reqs{display:grid;gap:10px}
+.req{border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px}
+.req b{font-weight:600}
+.req .meta{font-size:13.5px;color:var(--ink-2)}
+.confirm{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px;padding:12px 14px;border-radius:var(--r);background:var(--err-bg);color:var(--err);font-size:14.5px}
+.kitsize{display:flex;flex-wrap:wrap;gap:14px;align-items:end}
+.kittiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}
+@media (max-width:760px){.kittiers{grid-template-columns:1fr}}
+.kt{all:unset;box-sizing:border-box;cursor:pointer;border:1.5px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:6px;background:var(--paper)}
+.kt:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.kt[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 -5px 0 var(--green)}
+.kt b{font-family:var(--display);font-stretch:74%;font-weight:900;font-size:28px;line-height:1}
+.kt .amt{font-family:var(--display);font-stretch:72%;font-weight:900;font-size:36px;line-height:1;font-variant-numeric:tabular-nums}
+.kt span{font-size:14px;color:var(--ink-2)}
+.kitwrap{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:28px;align-items:start}
+@media (max-width:980px){.kitwrap{grid-template-columns:1fr}}
+.kitgrp{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);padding:18px 0 6px}
+.kline{display:grid;grid-template-columns:22px 36px minmax(0,1fr) 110px 110px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.kline.off{opacity:.45}
+.kline input[type=checkbox]{width:18px;height:18px;accent-color:var(--green);margin:0}
+.kline .ci{display:grid;place-items:center;width:36px;height:36px;border-radius:8px;background:var(--surface)}
+.kline .ci svg{width:18px;height:18px}
+.kline label{font-size:13px;color:var(--ink-2);display:block;margin-bottom:3px}
+.kline select{width:100%;font:500 14.5px var(--body);color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:8px;padding:7px 8px;min-width:0}
+.kline .kq{font:500 14px var(--body);color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
+.kline .ka{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:640px){.kline{grid-template-columns:22px minmax(0,1fr) auto;}.kline .ci{display:none}.kline .kq{grid-column:2;text-align:left}.kline .ka{grid-column:3;grid-row:1}}
+.drop{position:relative;display:grid;place-items:center;text-align:center;min-height:220px;padding:24px;border:2px dashed var(--ink-2);border-radius:var(--r);background-color:var(--surface);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;cursor:pointer}
+.drop:hover,.drop.over{border-color:var(--green);border-style:solid}
+.drop:focus-within{outline:3px solid var(--green);outline-offset:3px}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.drop .inner{background:var(--paper);padding:16px 20px;border-radius:var(--r);display:grid;gap:6px;max-width:340px}
+.drop strong{font-family:var(--display);font-stretch:80%;font-weight:800;font-size:24px}
+.photo-row{display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:start;margin-top:18px}
+.photo-row>*{min-width:0}
+.photo-row img{width:140px;aspect-ratio:1;object-fit:cover;border-radius:var(--r);border:1px solid var(--line)}
+@media (max-width:460px){.photo-row{grid-template-columns:1fr}.photo-row img{width:100%;aspect-ratio:4/3}}
+.pulse{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--green);margin-right:8px;animation:pl 1s infinite alternate}
+@keyframes pl{to{opacity:.25}}
+.feat{margin:8px 0 0;padding-left:18px;color:var(--ink-2);font-size:15px}
+footer.site{padding:44px 0 56px;background:var(--surface);border-top:1px solid var(--line);font-size:15px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px}
+.fgrid>*{min-width:0}
+@media (max-width:860px){.fgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.fgrid{grid-template-columns:1fr}}
+footer h4{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-bottom:10px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+footer a{text-underline-offset:3px}
+.fbot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 20px;margin-top:32px;padding-top:18px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-2)}
+.wa-fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:25;box-shadow:0 6px 20px rgba(0,0,0,.22)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:12px 18px;border-radius:var(--r);font-size:15px;z-index:60;max-width:calc(100% - 32px)}
+</style>
+
+<header class="site" id="hdr"><div class="wrap bar">
+  <a class="logo" href="#home" aria-label="CoreSpace home"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"   viewBox="22 56 208 40" role="img" aria-label="CoreSpace"  preserveAspectRatio="xMidYMid meet" version="1.0"><defs><g/></defs><g fill="currentColor" fill-opacity="1"><g transform="translate(24.52969, 84.375002)"><g><path d="M 1.1875 -12.671875 C 1.1875 -15.171875 1.722656 -17.394531 2.796875 -19.34375 C 3.878906 -21.300781 5.382812 -22.828125 7.3125 -23.921875 C 9.25 -25.015625 11.441406 -25.5625 13.890625 -25.5625 C 16.890625 -25.5625 19.457031 -24.769531 21.59375 -23.1875 C 23.726562 -21.601562 25.160156 -19.441406 25.890625 -16.703125 L 19.109375 -16.703125 C 18.609375 -17.753906 17.894531 -18.554688 16.96875 -19.109375 C 16.050781 -19.660156 15.003906 -19.9375 13.828125 -19.9375 C 11.929688 -19.9375 10.394531 -19.273438 9.21875 -17.953125 C 8.039062 -16.640625 7.453125 -14.878906 7.453125 -12.671875 C 7.453125 -10.460938 8.039062 -8.695312 9.21875 -7.375 C 10.394531 -6.0625 11.929688 -5.40625 13.828125 -5.40625 C 15.003906 -5.40625 16.050781 -5.679688 16.96875 -6.234375 C 17.894531 -6.785156 18.609375 -7.585938 19.109375 -8.640625 L 25.890625 -8.640625 C 25.160156 -5.898438 23.726562 -3.742188 21.59375 -2.171875 C 19.457031 -0.597656 16.890625 0.1875 13.890625 0.1875 C 11.441406 0.1875 9.25 -0.359375 7.3125 -1.453125 C 5.382812 -2.546875 3.878906 -4.0625 2.796875 -6 C 1.722656 -7.945312 1.1875 -10.171875 1.1875 -12.671875 Z M 1.1875 -12.671875 "/></g></g></g><g fill="currentColor" fill-opacity="1"><g transform="translate(51.961748, 84.375002)"><g><path d="M 11.375 0.28125 C 9.40625 0.28125 7.632812 -0.132812 6.0625 -0.96875 C 4.488281 -1.8125 3.253906 -3.007812 2.359375 -4.5625 C 1.460938 -6.125 1.015625 -7.953125 1.015625 -10.046875 C 1.015625 -12.109375 1.46875 -13.925781 2.375 -15.5 C 3.289062 -17.070312 4.539062 -18.273438 6.125 -19.109375 C 7.707031 -19.953125 9.484375 -20.375 11.453125 -20.375 C 13.421875 -20.375 15.195312 -19.953125 16.78125 -19.109375 C 18.363281 -18.273438 19.609375 -17.070312 20.515625 -15.5 C 21.429688 -13.925781 21.890625 -12.109375 21.890625 -10.046875 C 21.890625 -7.984375 21.425781 -6.164062 20.5 -4.59375 C 19.570312 -3.019531 18.3125 -1.8125 16.71875 -0.96875 C 15.125 -0.132812 13.34375 0.28125 11.375 0.28125 Z M 11.375 -5.046875 C 12.550781 -5.046875 13.550781 -5.472656 14.375 -6.328125 C 15.207031 -7.191406 15.625 -8.429688 15.625 -10.046875 C 15.625 -11.648438 15.222656 -12.882812 14.421875 -13.75 C 13.617188 -14.613281 12.628906 -15.046875 11.453125 -15.046875 C 10.242188 -15.046875 9.242188 -14.617188 8.453125 -13.765625 C 7.660156 -12.910156 7.265625 -11.671875 7.265625 -10.046875 C 7.265625 -8.429688 7.65625 -7.191406 8.4375 -6.328125 C 9.21875 -5.472656 10.195312 -5.046875 11.375 -5.046875 Z M 11.375 -5.046875 "/></g></g></g><g fill="currentColor" fill-opacity="1"><g transform="translate(74.893796, 84.375002)"><g><path d="M 8.390625 -16.734375 C 9.109375 -17.835938 10.003906 -18.707031 11.078125 -19.34375 C 12.160156 -19.976562 13.363281 -20.296875 14.6875 -20.296875 L 14.6875 -13.78125 L 13 -13.78125 C 11.457031 -13.78125 10.300781 -13.453125 9.53125 -12.796875 C 8.769531 -12.140625 8.390625 -10.984375 8.390625 -9.328125 L 8.390625 0 L 2.234375 0 L 2.234375 -20.09375 L 8.390625 -20.09375 Z M 8.390625 -16.734375 "/></g></g></g><g fill="currentColor" fill-opacity="1"><g transform="translate(90.301823, 84.375002)"><g><path d="M 21.171875 -10.375 C 21.171875 -9.789062 21.132812 -9.1875 21.0625 -8.5625 L 7.125 -8.5625 C 7.21875 -7.320312 7.617188 -6.367188 8.328125 -5.703125 C 9.035156 -5.046875 9.90625 -4.71875 10.9375 -4.71875 C 12.476562 -4.71875 13.546875 -5.363281 14.140625 -6.65625 L 20.703125 -6.65625 C 20.367188 -5.34375 19.757812 -4.15625 18.875 -3.09375 C 18 -2.039062 16.898438 -1.210938 15.578125 -0.609375 C 14.265625 -0.015625 12.789062 0.28125 11.15625 0.28125 C 9.1875 0.28125 7.429688 -0.132812 5.890625 -0.96875 C 4.359375 -1.8125 3.160156 -3.007812 2.296875 -4.5625 C 1.441406 -6.125 1.015625 -7.953125 1.015625 -10.046875 C 1.015625 -12.128906 1.4375 -13.953125 2.28125 -15.515625 C 3.132812 -17.078125 4.328125 -18.273438 5.859375 -19.109375 C 7.398438 -19.953125 9.164062 -20.375 11.15625 -20.375 C 13.101562 -20.375 14.832031 -19.960938 16.34375 -19.140625 C 17.851562 -18.328125 19.035156 -17.164062 19.890625 -15.65625 C 20.742188 -14.144531 21.171875 -12.382812 21.171875 -10.375 Z M 14.875 -11.984375 C 14.875 -13.046875 14.507812 -13.882812 13.78125 -14.5 C 13.0625 -15.125 12.164062 -15.4375 11.09375 -15.4375 C 10.0625 -15.4375 9.191406 -15.132812 8.484375 -14.53125 C 7.773438 -13.9375 7.332031 -13.085938 7.15625 -11.984375 Z M 14.875 -11.984375 "/></g></g></g><g fill="#34C363" fill-opacity="1"><g transform="translate(112.478904, 84.375002)"><g><path d="M 11.375 0.25 C 9.53125 0.25 7.875 -0.046875 6.40625 -0.640625 C 4.945312 -1.242188 3.773438 -2.132812 2.890625 -3.3125 C 2.015625 -4.488281 1.554688 -5.90625 1.515625 -7.5625 L 8.0625 -7.5625 C 8.15625 -6.625 8.476562 -5.910156 9.03125 -5.421875 C 9.582031 -4.929688 10.304688 -4.6875 11.203125 -4.6875 C 12.109375 -4.6875 12.820312 -4.894531 13.34375 -5.3125 C 13.875 -5.726562 14.140625 -6.3125 14.140625 -7.0625 C 14.140625 -7.675781 13.929688 -8.1875 13.515625 -8.59375 C 13.097656 -9.007812 12.582031 -9.347656 11.96875 -9.609375 C 11.351562 -9.878906 10.484375 -10.179688 9.359375 -10.515625 C 7.722656 -11.015625 6.390625 -11.515625 5.359375 -12.015625 C 4.328125 -12.523438 3.4375 -13.269531 2.6875 -14.25 C 1.945312 -15.238281 1.578125 -16.523438 1.578125 -18.109375 C 1.578125 -20.460938 2.429688 -22.300781 4.140625 -23.625 C 5.847656 -24.957031 8.066406 -25.625 10.796875 -25.625 C 13.578125 -25.625 15.820312 -24.957031 17.53125 -23.625 C 19.238281 -22.300781 20.148438 -20.453125 20.265625 -18.078125 L 13.609375 -18.078125 C 13.554688 -18.890625 13.253906 -19.53125 12.703125 -20 C 12.148438 -20.46875 11.441406 -20.703125 10.578125 -20.703125 C 9.835938 -20.703125 9.238281 -20.503906 8.78125 -20.109375 C 8.320312 -19.710938 8.09375 -19.140625 8.09375 -18.390625 C 8.09375 -17.578125 8.476562 -16.941406 9.25 -16.484375 C 10.019531 -16.023438 11.222656 -15.535156 12.859375 -15.015625 C 14.484375 -14.460938 15.804688 -13.929688 16.828125 -13.421875 C 17.847656 -12.921875 18.726562 -12.191406 19.46875 -11.234375 C 20.21875 -10.273438 20.59375 -9.039062 20.59375 -7.53125 C 20.59375 -6.082031 20.222656 -4.769531 19.484375 -3.59375 C 18.753906 -2.425781 17.691406 -1.492188 16.296875 -0.796875 C 14.910156 -0.0976562 13.269531 0.25 11.375 0.25 Z M 11.375 0.25 "/></g></g></g><g fill="#34C363" fill-opacity="1"><g transform="translate(134.618951, 84.375002)"><g><path d="M 8.390625 -17.25 C 8.984375 -18.175781 9.804688 -18.925781 10.859375 -19.5 C 11.921875 -20.082031 13.160156 -20.375 14.578125 -20.375 C 16.234375 -20.375 17.734375 -19.953125 19.078125 -19.109375 C 20.421875 -18.273438 21.484375 -17.078125 22.265625 -15.515625 C 23.046875 -13.953125 23.4375 -12.140625 23.4375 -10.078125 C 23.4375 -8.015625 23.046875 -6.195312 22.265625 -4.625 C 21.484375 -3.050781 20.421875 -1.835938 19.078125 -0.984375 C 17.734375 -0.140625 16.234375 0.28125 14.578125 0.28125 C 13.179688 0.28125 11.945312 -0.00390625 10.875 -0.578125 C 9.8125 -1.148438 8.984375 -1.894531 8.390625 -2.8125 L 8.390625 9.578125 L 2.234375 9.578125 L 2.234375 -20.09375 L 8.390625 -20.09375 Z M 17.171875 -10.078125 C 17.171875 -11.617188 16.742188 -12.828125 15.890625 -13.703125 C 15.035156 -14.578125 13.988281 -15.015625 12.75 -15.015625 C 11.519531 -15.015625 10.476562 -14.566406 9.625 -13.671875 C 8.78125 -12.785156 8.359375 -11.578125 8.359375 -10.046875 C 8.359375 -8.503906 8.78125 -7.289062 9.625 -6.40625 C 10.476562 -5.519531 11.519531 -5.078125 12.75 -5.078125 C 13.96875 -5.078125 15.007812 -5.523438 15.875 -6.421875 C 16.738281 -7.328125 17.171875 -8.546875 17.171875 -10.078125 Z M 17.171875 -10.078125 "/></g></g></g><g fill="#34C363" fill-opacity="1"><g transform="translate(159.063004, 84.375002)"><g><path d="M 1.015625 -10.078125 C 1.015625 -12.140625 1.398438 -13.953125 2.171875 -15.515625 C 2.953125 -17.078125 4.015625 -18.273438 5.359375 -19.109375 C 6.703125 -19.953125 8.203125 -20.375 9.859375 -20.375 C 11.273438 -20.375 12.515625 -20.082031 13.578125 -19.5 C 14.648438 -18.925781 15.476562 -18.175781 16.0625 -17.25 L 16.0625 -20.09375 L 22.21875 -20.09375 L 22.21875 0 L 16.0625 0 L 16.0625 -2.84375 C 15.457031 -1.90625 14.617188 -1.148438 13.546875 -0.578125 C 12.484375 -0.00390625 11.242188 0.28125 9.828125 0.28125 C 8.191406 0.28125 6.703125 -0.140625 5.359375 -0.984375 C 4.015625 -1.835938 2.953125 -3.050781 2.171875 -4.625 C 1.398438 -6.195312 1.015625 -8.015625 1.015625 -10.078125 Z M 16.0625 -10.046875 C 16.0625 -11.578125 15.632812 -12.785156 14.78125 -13.671875 C 13.925781 -14.566406 12.882812 -15.015625 11.65625 -15.015625 C 10.4375 -15.015625 9.398438 -14.578125 8.546875 -13.703125 C 7.691406 -12.828125 7.265625 -11.617188 7.265625 -10.078125 C 7.265625 -8.546875 7.691406 -7.328125 8.546875 -6.421875 C 9.398438 -5.523438 10.4375 -5.078125 11.65625 -5.078125 C 12.882812 -5.078125 13.925781 -5.519531 14.78125 -6.40625 C 15.632812 -7.289062 16.0625 -8.503906 16.0625 -10.046875 Z M 16.0625 -10.046875 "/></g></g></g><g fill="#34C363" fill-opacity="1"><g transform="translate(183.507056, 84.375002)"><g><path d="M 1.015625 -10.046875 C 1.015625 -12.128906 1.4375 -13.953125 2.28125 -15.515625 C 3.132812 -17.078125 4.320312 -18.273438 5.84375 -19.109375 C 7.375 -19.953125 9.125 -20.375 11.09375 -20.375 C 13.613281 -20.375 15.71875 -19.710938 17.40625 -18.390625 C 19.09375 -17.078125 20.203125 -15.21875 20.734375 -12.8125 L 14.1875 -12.8125 C 13.632812 -14.351562 12.566406 -15.125 10.984375 -15.125 C 9.847656 -15.125 8.941406 -14.679688 8.265625 -13.796875 C 7.597656 -12.921875 7.265625 -11.671875 7.265625 -10.046875 C 7.265625 -8.410156 7.597656 -7.15625 8.265625 -6.28125 C 8.941406 -5.40625 9.847656 -4.96875 10.984375 -4.96875 C 12.566406 -4.96875 13.632812 -5.734375 14.1875 -7.265625 L 20.734375 -7.265625 C 20.203125 -4.921875 19.082031 -3.078125 17.375 -1.734375 C 15.675781 -0.390625 13.582031 0.28125 11.09375 0.28125 C 9.125 0.28125 7.375 -0.132812 5.84375 -0.96875 C 4.320312 -1.8125 3.132812 -3.007812 2.28125 -4.5625 C 1.4375 -6.125 1.015625 -7.953125 1.015625 -10.046875 Z M 1.015625 -10.046875 "/></g></g></g><g fill="#34C363" fill-opacity="1"><g transform="translate(205.287095, 84.375002)"><g><path d="M 21.171875 -10.375 C 21.171875 -9.789062 21.132812 -9.1875 21.0625 -8.5625 L 7.125 -8.5625 C 7.21875 -7.320312 7.617188 -6.367188 8.328125 -5.703125 C 9.035156 -5.046875 9.90625 -4.71875 10.9375 -4.71875 C 12.476562 -4.71875 13.546875 -5.363281 14.140625 -6.65625 L 20.703125 -6.65625 C 20.367188 -5.34375 19.757812 -4.15625 18.875 -3.09375 C 18 -2.039062 16.898438 -1.210938 15.578125 -0.609375 C 14.265625 -0.015625 12.789062 0.28125 11.15625 0.28125 C 9.1875 0.28125 7.429688 -0.132812 5.890625 -0.96875 C 4.359375 -1.8125 3.160156 -3.007812 2.296875 -4.5625 C 1.441406 -6.125 1.015625 -7.953125 1.015625 -10.046875 C 1.015625 -12.128906 1.4375 -13.953125 2.28125 -15.515625 C 3.132812 -17.078125 4.328125 -18.273438 5.859375 -19.109375 C 7.398438 -19.953125 9.164062 -20.375 11.15625 -20.375 C 13.101562 -20.375 14.832031 -19.960938 16.34375 -19.140625 C 17.851562 -18.328125 19.035156 -17.164062 19.890625 -15.65625 C 20.742188 -14.144531 21.171875 -12.382812 21.171875 -10.375 Z M 14.875 -11.984375 C 14.875 -13.046875 14.507812 -13.882812 13.78125 -14.5 C 13.0625 -15.125 12.164062 -15.4375 11.09375 -15.4375 C 10.0625 -15.4375 9.191406 -15.132812 8.484375 -14.53125 C 7.773438 -13.9375 7.332031 -13.085938 7.15625 -11.984375 Z M 14.875 -11.984375 "/></g></g></g></svg></a>
+  <nav class="main" id="nav" aria-label="Main"></nav>
+  <div class="hacts">
+    <a class="iconbtn" href="#account" aria-label="My account" id="acctbtn"><span id="ico-user"></span></a>
+    <button type="button" class="iconbtn" data-act="opencart" aria-label="Open cart"><span id="ico-cart"></span><span class="badge" id="cartcount"></span></button>
+    <a class="btn sm" href="#book">Book a site visit</a>
+    <button type="button" class="iconbtn menubtn" data-act="menu" aria-label="Open menu"><span id="ico-menu"></span></button>
+  </div>
+</div></header>
+<div id="sheet" hidden></div>
+<main id="page" tabindex="-1"></main>
+<a class="btn wa-fab" id="wafab" target="_blank" rel="noopener">WhatsApp us</a>
+<footer class="site"><div class="wrap">
+  <div class="fgrid">
+    <div><a class="logo" href="#home" aria-label="CoreSpace home"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"   viewBox="22 56 208 40" role="img" aria-label="CoreSpace"  preserveAspectRatio="xMidYMid meet" version="1.0"><defs><g/></defs><g fill="currentColor" fill-opacity="1"><g transform="translate(24.52969, 84.375002)"><g><path d="M 1.1875 -12.671875 C 1.1875 -15.171875 1.722656 -17.394531 2.796875 -19.34375 C 3.878906 -21.300781 5.382812 -22.828125 7.3125 -23.921875 C 9.25 -25.015625 11.441406 -25.5625 13.890625 -25.5625 C 16.890625 -25.5625 19.457031 -24.769531 21.59375 -23.1875 C 23.726562 -21.601562 25.160156 -19.441406 25.890625 -16.703125 L 19.109375 -16.703125 C 18.609375 -17.753906 17.894531 -18.554688 16.96875 -19.109375 C 16.050781 -19.660156 15.003906 -19.9375 13.828125 -19.9375 C 11.929688 -19.9375 10.394531 -19.273438 9.21875 -17.953125 C 8.039062 -16.640625 7.453125 -14.878906 7.453125 -12.671875 C 7.453125 -10.460938 8.039062 -8.695312 9.21875 -7.375 C 10.394531 -6.0625 11.929688 -5.40625 13.828125 -5.40625 C 15.003906 -5.40625 16.050781 -5.679688 16.96875 -6.234375 C 17.894531 -6.785156 18.609375 -7.585938 19.109375 -8.640625 L 25.890625 -8.640625 C 25.160156 -5.898438 23.726562 -3.742188 21.59375 -2.171875 C 19.457031 -0.597656 16.890625 0.1875 13.890625 0.1875 C 11.441406 0.1875 9.25 -0.359375 7.3125 -1.453125 C 5.382812 -2.546875 3.878906 -4.0625 2.796875 -6 C 1.722656 -7.945312 1.1875 -10.171875 1.1875 -12.671875 Z M 1.1875 -12.671875 "/></g></g></g><g fill="currentColor" fill-opacity="1"><g transform="translate(51.961748, 84.375002)"><g><path d="M 11.375 0.28125 C 9.40625 0.28125 7.632812 -0.132812 6.0625 -0.96875 C 4.488281 -1.8125 3.253906 -3.007812 2.359375 -4.5625 C 1.460938 -6.125 1.015625 -7.953125 1.015625 -10.046875 C 1.015625 -12.109375 1.46875 -13.925781 2.375 -15.5 C 3.289062 -17.070312 4.539062 -18.273438 6.125 -19.109375 C 7.707031 -19.953125 9.484375 -20.375 11.453125 -20.375 C 13.421875 -20.375 15.195312 -19.953125 16.78125 -19.109375 C 18.363281 -18.273438 19.609375 -17.070312 20.515625 -15.5 C 21.429688 -13.925781 21.890625 -12.109375 21.890625 -10.046875 C 21.890625 -7.984375 21.425781 -6.164062 20.5 -4.59375 C 19.570312 -3.019531 18.3125 -1.8125 16.71875 -0.96875 C 15.125 -0.132812 13.34375 0.28125 11.375 0.28125 Z M 11.375 -5.046875 C 12.550781 -5.046875 13.550781 -5.472656 14.375 -6.328125 C 15.207031 -7.191406 15.625 -8.429688 15.625 -10.046875 C 15.625 -11.648438 15.222656 -12.882812 14.421875 -13.75 C 13.617188 -14.613281 12.628906 -15.046875 11.453125 -15.046875 C 10.242188 -15.046875 9.242188 -14.617188 8.453125 -13.765625 C 7.660156 -12.910156 7.265625 -11.671875 7.265625 -10.046875 C 7.265625 -8.429688 7.65625 -7.191406 8.4375 -6.328125 C 9.21875 -5.472656 10.195312 -5.046875 11.375 -5.046875 Z M 11.375 -5.046875 "/></g></g></g><g fill="currentColor" fill-opacity="1"><g transform="translate(74.893796, 84.375002)"><g><path d="M 8.390625 -16.734375 C 9.109375 -17.835938 10.003906 -18.707031 11.078125 -19.34375 C 12.160156 -19.976562 13.363281 -20.296875 14.6875 -20.296875 L 14.6875 -13.78125 L 13 -13.78125 C 11.457031 -13.78125 10.300781 -13.453125 9.53125 -12.796875 C 8.769531 -12.140625 8.390625 -10.984375 8.390625 -9.328125 L 8.390625 0 L 2.234375 0 L 2.234375 -20.09375 L 8.390625 -20.09375 Z M 8.390625 -16.734375 "/></g></g></g><g fill="currentColor" fill-opacity="1"><g transform="translate(90.301823, 84.375002)"><g><path d="M 21.171875 -10.375 C 21.171875 -9.789062 21.132812 -9.1875 21.0625 -8.5625 L 7.125 -8.5625 C 7.21875 -7.320312 7.617188 -6.367188 8.328125 -5.703125 C 9.035156 -5.046875 9.90625 -4.71875 10.9375 -4.71875 C 12.476562 -4.71875 13.546875 -5.363281 14.140625 -6.65625 L 20.703125 -6.65625 C 20.367188 -5.34375 19.757812 -4.15625 18.875 -3.09375 C 18 -2.039062 16.898438 -1.210938 15.578125 -0.609375 C 14.265625 -0.015625 12.789062 0.28125 11.15625 0.28125 C 9.1875 0.28125 7.429688 -0.132812 5.890625 -0.96875 C 4.359375 -1.8125 3.160156 -3.007812 2.296875 -4.5625 C 1.441406 -6.125 1.015625 -7.953125 1.015625 -10.046875 C 1.015625 -12.128906 1.4375 -13.953125 2.28125 -15.515625 C 3.132812 -17.078125 4.328125 -18.273438 5.859375 -19.109375 C 7.398438 -19.953125 9.164062 -20.375 11.15625 -20.375 C 13.101562 -20.375 14.832031 -19.960938 16.34375 -19.140625 C 17.851562 -18.328125 19.035156 -17.164062 19.890625 -15.65625 C 20.742188 -14.144531 21.171875 -12.382812 21.171875 -10.375 Z M 14.875 -11.984375 C 14.875 -13.046875 14.507812 -13.882812 13.78125 -14.5 C 13.0625 -15.125 12.164062 -15.4375 11.09375 -15.4375 C 10.0625 -15.4375 9.191406 -15.132812 8.484375 -14.53125 C 7.773438 -13.9375 7.332031 -13.085938 7.15625 -11.984375 Z M 14.875 -11.984375 "/></g></g></g><g fill="#34C363" fill-opacity="1"><g transform="translate(112.478904, 84.375002)"><g><path d="M 11.375 0.25 C 9.53125 0.25 7.875 -0.046875 6.40625 -0.640625 C 4.945312 -1.242188 3.773438 -2.132812 2.890625 -3.3125 C 2.015625 -4.488281 1.554688 -5.90625 1.515625 -7.5625 L 8.0625 -7.5625 C 8.15625 -6.625 8.476562 -5.910156 9.03125 -5.421875 C 9.582031 -4.929688 10.304688 -4.6875 11.203125 -4.6875 C 12.109375 -4.6875 12.820312 -4.894531 13.34375 -5.3125 C 13.875 -5.726562 14.140625 -6.3125 14.140625 -7.0625 C 14.140625 -7.675781 13.929688 -8.1875 13.515625 -8.59375 C 13.097656 -9.007812 12.582031 -9.347656 11.96875 -9.609375 C 11.351562 -9.878906 10.484375 -10.179688 9.359375 -10.515625 C 7.722656 -11.015625 6.390625 -11.515625 5.359375 -12.015625 C 4.328125 -12.523438 3.4375 -13.269531 2.6875 -14.25 C 1.945312 -15.238281 1.578125 -16.523438 1.578125 -18.109375 C 1.578125 -20.460938 2.429688 -22.300781 4.140625 -23.625 C 5.847656 -24.957031 8.066406 -25.625 10.796875 -25.625 C 13.578125 -25.625 15.820312 -24.957031 17.53125 -23.625 C 19.238281 -22.300781 20.148438 -20.453125 20.265625 -18.078125 L 13.609375 -18.078125 C 13.554688 -18.890625 13.253906 -19.53125 12.703125 -20 C 12.148438 -20.46875 11.441406 -20.703125 10.578125 -20.703125 C 9.835938 -20.703125 9.238281 -20.503906 8.78125 -20.109375 C 8.320312 -19.710938 8.09375 -19.140625 8.09375 -18.390625 C 8.09375 -17.578125 8.476562 -16.941406 9.25 -16.484375 C 10.019531 -16.023438 11.222656 -15.535156 12.859375 -15.015625 C 14.484375 -14.460938 15.804688 -13.929688 16.828125 -13.421875 C 17.847656 -12.921875 18.726562 -12.191406 19.46875 -11.234375 C 20.21875 -10.273438 20.59375 -9.039062 20.59375 -7.53125 C 20.59375 -6.082031 20.222656 -4.769531 19.484375 -3.59375 C 18.753906 -2.425781 17.691406 -1.492188 16.296875 -0.796875 C 14.910156 -0.0976562 13.269531 0.25 11.375 0.25 Z M 11.375 0.25 "/></g></g></g><g fill="#34C363" fill-opacity="1"><g transform="translate(134.618951, 84.375002)"><g><path d="M 8.390625 -17.25 C 8.984375 -18.175781 9.804688 -18.925781 10.859375 -19.5 C 11.921875 -20.082031 13.160156 -20.375 14.578125 -20.375 C 16.234375 -20.375 17.734375 -19.953125 19.078125 -19.109375 C 20.421875 -18.273438 21.484375 -17.078125 22.265625 -15.515625 C 23.046875 -13.953125 23.4375 -12.140625 23.4375 -10.078125 C 23.4375 -8.015625 23.046875 -6.195312 22.265625 -4.625 C 21.484375 -3.050781 20.421875 -1.835938 19.078125 -0.984375 C 17.734375 -0.140625 16.234375 0.28125 14.578125 0.28125 C 13.179688 0.28125 11.945312 -0.00390625 10.875 -0.578125 C 9.8125 -1.148438 8.984375 -1.894531 8.390625 -2.8125 L 8.390625 9.578125 L 2.234375 9.578125 L 2.234375 -20.09375 L 8.390625 -20.09375 Z M 17.171875 -10.078125 C 17.171875 -11.617188 16.742188 -12.828125 15.890625 -13.703125 C 15.035156 -14.578125 13.988281 -15.015625 12.75 -15.015625 C 11.519531 -15.015625 10.476562 -14.566406 9.625 -13.671875 C 8.78125 -12.785156 8.359375 -11.578125 8.359375 -10.046875 C 8.359375 -8.503906 8.78125 -7.289062 9.625 -6.40625 C 10.476562 -5.519531 11.519531 -5.078125 12.75 -5.078125 C 13.96875 -5.078125 15.007812 -5.523438 15.875 -6.421875 C 16.738281 -7.328125 17.171875 -8.546875 17.171875 -10.078125 Z M 17.171875 -10.078125 "/></g></g></g><g fill="#34C363" fill-opacity="1"><g transform="translate(159.063004, 84.375002)"><g><path d="M 1.015625 -10.078125 C 1.015625 -12.140625 1.398438 -13.953125 2.171875 -15.515625 C 2.953125 -17.078125 4.015625 -18.273438 5.359375 -19.109375 C 6.703125 -19.953125 8.203125 -20.375 9.859375 -20.375 C 11.273438 -20.375 12.515625 -20.082031 13.578125 -19.5 C 14.648438 -18.925781 15.476562 -18.175781 16.0625 -17.25 L 16.0625 -20.09375 L 22.21875 -20.09375 L 22.21875 0 L 16.0625 0 L 16.0625 -2.84375 C 15.457031 -1.90625 14.617188 -1.148438 13.546875 -0.578125 C 12.484375 -0.00390625 11.242188 0.28125 9.828125 0.28125 C 8.191406 0.28125 6.703125 -0.140625 5.359375 -0.984375 C 4.015625 -1.835938 2.953125 -3.050781 2.171875 -4.625 C 1.398438 -6.195312 1.015625 -8.015625 1.015625 -10.078125 Z M 16.0625 -10.046875 C 16.0625 -11.578125 15.632812 -12.785156 14.78125 -13.671875 C 13.925781 -14.566406 12.882812 -15.015625 11.65625 -15.015625 C 10.4375 -15.015625 9.398438 -14.578125 8.546875 -13.703125 C 7.691406 -12.828125 7.265625 -11.617188 7.265625 -10.078125 C 7.265625 -8.546875 7.691406 -7.328125 8.546875 -6.421875 C 9.398438 -5.523438 10.4375 -5.078125 11.65625 -5.078125 C 12.882812 -5.078125 13.925781 -5.519531 14.78125 -6.40625 C 15.632812 -7.289062 16.0625 -8.503906 16.0625 -10.046875 Z M 16.0625 -10.046875 "/></g></g></g><g fill="#34C363" fill-opacity="1"><g transform="translate(183.507056, 84.375002)"><g><path d="M 1.015625 -10.046875 C 1.015625 -12.128906 1.4375 -13.953125 2.28125 -15.515625 C 3.132812 -17.078125 4.320312 -18.273438 5.84375 -19.109375 C 7.375 -19.953125 9.125 -20.375 11.09375 -20.375 C 13.613281 -20.375 15.71875 -19.710938 17.40625 -18.390625 C 19.09375 -17.078125 20.203125 -15.21875 20.734375 -12.8125 L 14.1875 -12.8125 C 13.632812 -14.351562 12.566406 -15.125 10.984375 -15.125 C 9.847656 -15.125 8.941406 -14.679688 8.265625 -13.796875 C 7.597656 -12.921875 7.265625 -11.671875 7.265625 -10.046875 C 7.265625 -8.410156 7.597656 -7.15625 8.265625 -6.28125 C 8.941406 -5.40625 9.847656 -4.96875 10.984375 -4.96875 C 12.566406 -4.96875 13.632812 -5.734375 14.1875 -7.265625 L 20.734375 -7.265625 C 20.203125 -4.921875 19.082031 -3.078125 17.375 -1.734375 C 15.675781 -0.390625 13.582031 0.28125 11.09375 0.28125 C 9.125 0.28125 7.375 -0.132812 5.84375 -0.96875 C 4.320312 -1.8125 3.132812 -3.007812 2.28125 -4.5625 C 1.4375 -6.125 1.015625 -7.953125 1.015625 -10.046875 Z M 1.015625 -10.046875 "/></g></g></g><g fill="#34C363" fill-opacity="1"><g transform="translate(205.287095, 84.375002)"><g><path d="M 21.171875 -10.375 C 21.171875 -9.789062 21.132812 -9.1875 21.0625 -8.5625 L 7.125 -8.5625 C 7.21875 -7.320312 7.617188 -6.367188 8.328125 -5.703125 C 9.035156 -5.046875 9.90625 -4.71875 10.9375 -4.71875 C 12.476562 -4.71875 13.546875 -5.363281 14.140625 -6.65625 L 20.703125 -6.65625 C 20.367188 -5.34375 19.757812 -4.15625 18.875 -3.09375 C 18 -2.039062 16.898438 -1.210938 15.578125 -0.609375 C 14.265625 -0.015625 12.789062 0.28125 11.15625 0.28125 C 9.1875 0.28125 7.429688 -0.132812 5.890625 -0.96875 C 4.359375 -1.8125 3.160156 -3.007812 2.296875 -4.5625 C 1.441406 -6.125 1.015625 -7.953125 1.015625 -10.046875 C 1.015625 -12.128906 1.4375 -13.953125 2.28125 -15.515625 C 3.132812 -17.078125 4.328125 -18.273438 5.859375 -19.109375 C 7.398438 -19.953125 9.164062 -20.375 11.15625 -20.375 C 13.101562 -20.375 14.832031 -19.960938 16.34375 -19.140625 C 17.851562 -18.328125 19.035156 -17.164062 19.890625 -15.65625 C 20.742188 -14.144531 21.171875 -12.382812 21.171875 -10.375 Z M 14.875 -11.984375 C 14.875 -13.046875 14.507812 -13.882812 13.78125 -14.5 C 13.0625 -15.125 12.164062 -15.4375 11.09375 -15.4375 C 10.0625 -15.4375 9.191406 -15.132812 8.484375 -14.53125 C 7.773438 -13.9375 7.332031 -13.085938 7.15625 -11.984375 Z M 14.875 -11.984375 "/></g></g></g></svg></a><p class="muted" style="margin-top:12px;max-width:34ch">Interiors, space by space. One crew, one contract, fixed price and fixed date. Bengaluru.</p></div>
+    <div><h4>Renovate</h4><ul id="fjobs"></ul></div>
+    <div><h4>Company</h4><ul><li><a href="#more">More services</a></li><li><a href="#process">How it works</a></li><li><a href="#projects">Projects</a></li><li><a href="#about">About</a></li><li><a href="#terms">Terms, privacy and refunds</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li>WhatsApp <span class="tnum">+91 86601 17432</span></li><li>Phone <span class="tnum">+91 99450 39109</span></li><li style="overflow-wrap:anywhere">Corebuildconindia@gmail.com</li><li class="muted">HSR Layout, Bellandur, Sarjapur Road, Marathahalli, Whitefield</li></ul></div>
+  </div>
+  <div class="fbot"><span>© 2026 CoreSpace, Bengaluru. Prices exclude GST.</span><span>Built by Build with ❤️ India · <a href="#admin">Team login</a></span></div>
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+/* ============ SITE DATA ============ */
+const CO = { wa:"918660117432", waShow:"+91 86601 17432", phone:"+91 99450 39109", email:"Corebuildconindia@gmail.com" };
+const AREAS = ["HSR Layout","Bellandur","Sarjapur Road","Marathahalli","Whitefield","Somewhere else in Bengaluru"];
+const SLOTS = ["10 am – 12 pm","12 pm – 2 pm","3 pm – 5 pm","5 pm – 7 pm"];
+const SPLIT = [[10,"At signing"],[40,"At work start"],[40,"After the Gate passes",1],[10,"At handover"]];
+const TN = {essential:"Core Essential", signature:"Core Signature", luxe:"Core Luxe"};
+const TIERS = ["essential","signature","luxe"];
+const STATUSES = ["New","Visit booked","Quote sent","Signed","Lost","Waitlist"];
+const IMG = {
+  island:["img/kitchen-island.jpg","Kitchen with island, lacquered tall units and lit shelves"],
+  lshape:["img/kitchen-l.jpg","L-shaped kitchen with under-cabinet lighting"],
+  grey:["img/kitchen-grey.jpg","Gloss grey kitchen"],
+  ushape:["img/kitchen-u.jpg","U-shaped kitchen"],
+  mirror:["img/wardrobe-mirror.jpg","Mirror-panel wardrobe"],
+  bedroom:["img/wardrobe-bedroom.jpg","Bedroom wardrobe with feature wall"],
+  bar:["img/terrace-bar.jpg","Terrace bar"]
+};
+const inr = n => "₹" + Math.round(n).toLocaleString("en-IN");
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $ = (s, r=document) => r.querySelector(s);
+
+const JOBS = {
+bathroom:{
+  nav:"Bathroom", title:"Corebath bathroom renovation", short:"Bathroom",
+  h1:["Leak-proof bathrooms.","Proven before you pay."],
+  tagline:"Stripped, waterproofed, flood-tested, retiled to 8 ft.",
+  lede:"Corebath takes your bathroom back to the base, lays 2-coat waterproofing, floods the floor for a filmed test and retiles to 8 ft. Fixed price, fixed date, materials included.",
+  gate:{name:"The Ponding Gate", short:"Filmed flood test", desc:"Most leaks show up months after a contractor has been paid. So the 40% stage payment waits until your floor passes a filmed flood test.", fail:"If the water level drops, the waterproofing is broken out and redone at our cost before the 40% is due."},
+  per:"for a standard bathroom of about 40 sq ft",
+  variants:{std:{tiers:{
+    essential:{price:160000, for:"The full renovation, done properly.", points:["Full renovation service","Cera fixtures","Granite basin counter and EWC ledge","Somany premium ceramic tiles to 8 ft"]},
+    signature:{price:220000, tag:"Most chosen", for:"Our most chosen package.", points:["Everything in Essential","Jaquar fixtures","Large-format tile","Concealed cistern"]},
+    luxe:{price:300000, from:true, for:"Designed around you.", points:["Everything in Signature","Grohe fixtures","Custom vanity","Glass enclosure","Designed finishes"]}
+  }}},
+  inputs:[
+    {id:"band", type:"seg", label:"Bathroom size", value:"standard", options:[
+      {v:"compact",label:"Compact",sub:"under 35 sq ft",mult:.9},{v:"standard",label:"Standard",sub:"35–45 sq ft",mult:1},
+      {v:"large",label:"Large",sub:"45–60 sq ft",mult:1.2},{v:"master",label:"Master",sub:"60–80 sq ft",mult:1.45}]},
+    {id:"n", type:"step", label:"Bathrooms", min:1, max:4, step:1, value:1}
+  ],
+  hint:"A typical attached bathroom in a 2–3 BHK is about 40 sq ft. We measure on the visit.",
+  addons:[
+    {id:"enclosure", name:"Glass shower enclosure", note:"Toughened glass with hardware", price:28000, inc:["luxe"]},
+    {id:"linear", name:"Linear shower drain", note:"Stainless steel, replaces the round trap", price:9500},
+    {id:"tub", name:"Bathtub", note:"Acrylic built-in tub with mixer; needs about 5 × 2.5 ft", price:48000},
+    {id:"rails", name:"Grab rails for elders", note:"Pair of stainless rails, wall-anchored", price:7000},
+    {id:"plumb", name:"Plumbing relocation", note:"Moving WC, basin or shower points", visit:true},
+    {id:"elec", name:"Electrical rewiring", note:"New points, geyser line, exhaust fan", visit:true}
+  ],
+  base(st, tp){ const b = optOf(this,"band",st.band); return {lines:[[`${TN[st.tier]} · ${b.label} (${b.sub})`, tp*b.mult]], sub:tp*b.mult}; },
+  count(st){ return st.n; }, countLabel:"bathrooms",
+  scope:{inc:["Floor guarding, demolition and fixture removal","Wall plastering and floor levelling","Ledge wall 1000 × 200 × 1200 mm","2-coat waterproofing with flood test","New plumbing lines, PCC, wall and floor tiling","Fixture installation, electrical fittings refitted","Granite basin counter 40 mm, EWC ledge 20 mm","Epoxy grouting, debris removal, deep cleaning"], fixtures:["Wall diverter, shower head with arm, hand shower, spout","Basin and basin mixer, bottle trap, waste coupling","Angle valves, connection pipes, angle cock flange","EWC with cistern and flush plate, health faucet","Floor drain cover"], not:["Partition changes","Plumbing relocation","Electrical rewiring","Civil works not in your package"]},
+  faq:[["What does the warranty cover?","Every Corebath package carries a 5-year waterproofing warranty and one free service visit after handover."],["What if the flood test fails?","The waterproofing is broken out and redone at our cost, and the 40% stage payment waits until it passes."],["Do we need to move out?","No. This bathroom is out of use during the work; if it is your only one, tell us on the visit and we plan around it."],["Can I choose my own tiles or fittings?","Yes. Pick at the visit and pay only the difference against the package allowance."]]
+},
+kitchen:{
+  nav:"Kitchen", title:"Kitchens: refit or new modular", short:"Kitchen",
+  h1:["Kitchens, refit","or built new."],
+  tagline:"Refit on your existing cabinets, or a new modular kitchen.",
+  lede:"If your cabinet boxes are sound, we replace everything you see and touch: shutters, countertop, backsplash and hardware. If not, we build a new modular kitchen. Both at a fixed price.",
+  gate:{name:"The Dry-fit Gate", short:"Shutters checked before fixing", desc:"Shutters that don't line up are the most common kitchen complaint. Every shutter is dry-fitted and checked with you before the 40% stage payment.", fail:"Any shutter that doesn't align or close evenly is re-cut or remade before the 40% is due."},
+  per:"10 ft base and 8 ft wall cabinets",
+  variants:{
+    refit:{label:"Refit", sub:"New fronts on existing cabinets", tiers:{
+      essential:{price:69000, rates:{shutter:1100,counter:0}, for:"Replace tired, swollen shutters and hardware. Keep your countertop.", points:["Carcass checked and re-fixed","BWP ply shutters, 1 mm laminate","Hettich soft-close hinges","All edges sealed"]},
+      signature:{price:159000, tag:"Most chosen", rates:{shutter:1500,counter:3200}, for:"New shutters plus a new counter and backsplash.", points:["Acrylic shutters, gloss or matte","Quartz countertop, 20 mm","Backsplash tiles","Chimney and hob refitted"]},
+      luxe:{price:249000, rates:{shutter:2100,counter:4200}, for:"Handle-less, well lit and organised inside.", points:["PU or fluted glass shutters","Handle-less G-profile","Tandem drawers, soft close","Under-cabinet LED"]}
+    }},
+    modular:{label:"New modular", sub:"Cabinets, counter and fronts built new", tiers:{
+      essential:{price:150000, for:"A complete, durable kitchen at an honest price.", points:["BWP ply base, MR ply wall units","Laminate shutters","Granite countertop","Hettich hinges and channels"]},
+      signature:{price:250000, tag:"Most chosen", for:"A brighter finish with a quartz top.", points:["Everything in Essential","Acrylic shutters","Quartz countertop, 20 mm","Backsplash tiles"]},
+      luxe:{price:375000, from:true, for:"Handle-less, lit and organised.", points:["PU or glass shutters","Handle-less G-profile","Tandem drawers, soft close","Under-cabinet LED"]}
+    }}
+  },
+  inputs:[
+    {id:"lay", type:"select", label:"Layout", value:"L-shaped", options:[{v:"Straight",label:"Straight"},{v:"L-shaped",label:"L-shaped"},{v:"U-shaped",label:"U-shaped"},{v:"Parallel",label:"Parallel"}]},
+    {id:"B", type:"step", label:"Base cabinet run (ft)", min:6, max:24, step:1, value:10},
+    {id:"T", type:"step", label:"Wall cabinet run (ft)", min:0, max:20, step:1, value:8}
+  ],
+  hint:"Measure along the front of the cabinets, including corners. We re-measure on site.",
+  addons:[
+    {id:"quartz", name:"Quartz countertop, 20 mm", note:"Replaces the existing counter", rate:3200, per:st=>st.B, unit:"rft", inc:["signature","luxe"], only:"refit"},
+    {id:"backsplash", name:"Backsplash tiles", note:"Counter to wall cabinets", price:14000, inc:["signature","luxe"]},
+    {id:"tandem", name:"Tandem drawer set, soft close", note:"Three drawers for cutlery and utensils", price:14000, inc:["luxe"]},
+    {id:"led", name:"Under-cabinet LED", note:"Warm white, own switch", price:6500, inc:["luxe"]},
+    {id:"profile", name:"Handle-less G-profile", note:"Aluminium, black or champagne", price:9000, inc:["luxe"]},
+    {id:"sink", name:"New sink with pull-out tap", note:"Fitted and sealed", price:12500},
+    {id:"tall", name:"Tall pantry unit", note:"Full height, with baskets", price:38000}
+  ],
+  base(st, tp){
+    const L = [];
+    if (st.variant === "modular"){
+      const f = Math.max(.6, (st.B + .6*st.T) / (10 + .6*8));
+      L.push([`${TN[st.tier]} · new modular, ${st.lay}`, tp*f]);
+      return {lines:L, sub:tp*f};
+    }
+    const t = this.variants.refit.tiers[st.tier];
+    let sub = tp; L.push([`${TN[st.tier]} · refit, ${st.lay}`, tp]);
+    const extra = Math.max(0, (st.B + st.T)*2.5 - 45);
+    if (extra){ L.push([`Extra shutter area, ${Math.round(extra)} sq ft`, extra*t.rates.shutter]); sub += extra*t.rates.shutter; }
+    const ec = Math.max(0, st.B - 10);
+    if (ec && t.rates.counter){ L.push([`Extra countertop, ${ec} rft`, ec*t.rates.counter]); sub += ec*t.rates.counter; }
+    return {lines:L, sub};
+  },
+  faq:[["Can you really keep my existing cabinets?","Only if the cabinet boxes are sound. We check for swelling and termites at the site visit; if a panel needs replacing, it is on the Locked Quote before you sign."],["How long will we be without a kitchen?","For a refit, only a few days without a working counter. For a new modular kitchen, the dates are written on your quote."],["Do you supply the chimney and hob?","We refit your existing appliances. Sinks, taps and hardware can be added."]]
+},
+flooring:{
+  nav:"Flooring", title:"Flooring", short:"Flooring",
+  h1:["Floors laid level.","Every tile tapped."],
+  tagline:"Vitrified, GVT and large slabs on adhesive.",
+  lede:"Hollow tiles and uneven joints show up a year later. We lay on adhesive, not a cement bed, and tap-test every tile with you before the 40% stage payment.",
+  gate:{name:"The Level Gate", short:"Every tile tap-tested", desc:"A hollow tile cracks later. Before the 40% stage payment, every tile is tap-tested and the levels are checked in front of you.", fail:"Any hollow or uneven tile is lifted and relaid before the 40% is due."},
+  per:"for 400 sq ft, material and laying", baseArea:400,
+  variants:{std:{tiers:{
+    essential:{price:56000, for:"A clean, durable floor for bedrooms and rentals.", points:["Vitrified tiles, 600 × 600 mm","Polymer tile adhesive","Spacer-laid joints","Matching skirting"]},
+    signature:{price:76000, tag:"Most chosen", for:"Larger tiles, fewer joints.", points:["Everything in Essential","GVT tiles, 600 × 1200 mm","Epoxy grout","Threshold strips"]},
+    luxe:{price:120000, for:"Large slabs, almost no visible joints.", points:["Large slabs, 800 × 1600 mm","Self-levelling base where needed","Door bottoms trimmed"]}
+  }}},
+  inputs:[
+    {id:"A", type:"step", label:"Floor area (sq ft)", min:100, max:3000, step:25, value:400},
+    {id:"old", type:"select", label:"Existing floor", value:"remove", options:[{v:"remove",label:"Remove old tiles"},{v:"over",label:"Lay over existing (if sound)"},{v:"bare",label:"Bare base"}]}
+  ],
+  hint:"Add up length × width of each room. We tap-test the old floor on the visit.",
+  addons:[
+    {id:"epoxy", name:"Epoxy grout", note:"Stain and water resistant joints", rate:18, per:st=>st.A, unit:"sq ft", inc:["signature","luxe"]},
+    {id:"threshold", name:"Threshold strips at doorways", note:"Aluminium or marble", price:4500, inc:["signature","luxe"]},
+    {id:"level", name:"Self-levelling base", note:"Where the floor is uneven", rate:35, per:st=>st.A, unit:"sq ft", inc:["luxe"]},
+    {id:"doors", name:"Door bottom trimming", note:"All doors in the area", price:4500, inc:["luxe"]},
+    {id:"shift", name:"Furniture shifting and protection", note:"Room by room, covered", price:6000}
+  ],
+  base(st, tp){ const rate = tp/this.baseArea; const L=[[`${TN[st.tier]} · ${st.A} sq ft at ${inr(rate)}/sq ft`, rate*st.A]]; let sub=rate*st.A;
+    if (st.old==="remove"){ L.push([`Remove old tiles, ${st.A} sq ft`, 40*st.A]); sub+=40*st.A; } return {lines:L, sub}; },
+  faq:[["Can new tiles go over my old floor?","Only if the old floor has no hollow or cracked tiles. We tap-test it at the visit. Laying over raises the floor, so doors may need trimming."],["Can we stay at home?","Yes. We work room by room and move and cover furniture as we go."]]
+},
+ceiling:{
+  nav:"False ceiling", title:"False ceiling", short:"False ceiling",
+  h1:["Ceilings planned","around your lights."],
+  tagline:"Gypsum ceilings with the frame checked before boarding.",
+  lede:"A false ceiling should hide wiring and hold good lighting. We plan the lights first, build the frame, and check it with you before any board closes.",
+  gate:{name:"The Frame Gate", short:"Frame checked before boarding", desc:"Once boards are up, a sagging frame or misplaced wire means breaking the ceiling. The frame, levels and wiring are checked with you first.", fail:"Any frame or wiring issue is corrected before boarding and before the 40% is due."},
+  per:"for 150 sq ft, including paint", baseArea:150,
+  variants:{std:{tiers:{
+    essential:{price:16500, for:"A clean border ceiling that hides wiring.", points:["Peripheral gypsum ceiling, 12.5 mm board","Galvanised steel frame","Tape, putty, two coats of paint","Cut-outs for lights"]},
+    signature:{price:25500, tag:"Most chosen", for:"Full ceiling with soft cove light.", points:["Everything in Essential","Recessed cove with LED strip","Access panel for AC or wiring"]},
+    luxe:{price:39000, for:"Layered ceiling with planned lighting.", points:["Layered gypsum with feature panel","6 COB spotlights on own switch","Fan hook anchored to the slab"]}
+  }}},
+  inputs:[
+    {id:"A", type:"step", label:"Ceiling area (sq ft)", min:60, max:1500, step:10, value:150},
+    {id:"room", type:"select", label:"Room type", value:"dry", options:[{v:"dry",label:"Living or bedroom"},{v:"wet",label:"Kitchen or bathroom"}]}
+  ],
+  hint:"Ceiling area is the room's floor area. A 12 × 15 ft living room is 180 sq ft.",
+  addons:[
+    {id:"cove", name:"Cove LED strip", note:"Warm white, driver kept accessible", rate:180, per:st=>Math.round(4*Math.sqrt(st.A)), unit:"rft", inc:["signature","luxe"]},
+    {id:"spots", name:"COB spotlights, set of 6", note:"Wired to a separate switch", price:7200, inc:["luxe"]},
+    {id:"access", name:"Access panel", note:"For AC, junction boxes or valves", price:2500, inc:["signature","luxe"]},
+    {id:"fan", name:"Fan hook reinforcement", note:"Anchored to the slab", price:1200, inc:["luxe"]},
+    {id:"pelmet", name:"Curtain pelmet recess", note:"Hides the curtain track", price:3500}
+  ],
+  base(st, tp){ const rate=tp/this.baseArea; const L=[[`${TN[st.tier]} · ${st.A} sq ft at ${inr(rate)}/sq ft`, rate*st.A]]; let sub=rate*st.A;
+    if (st.room==="wet"){ L.push(["Moisture-resistant boards", 25*st.A]); sub+=25*st.A; } return {lines:L, sub}; },
+  faq:[["Will it make my room feel low?","On lower ceilings we recommend a border ceiling only, keeping the centre at full height."],["Gypsum or POP?","Gypsum is faster, cleaner and cracks less at joints. We use moisture-resistant boards in kitchens and bathrooms."]]
+},
+wardrobe:{
+  nav:"Wardrobe", title:"Wardrobe shutters", short:"Wardrobe",
+  h1:["New wardrobe fronts.","No new wardrobe."],
+  tagline:"New shutters and hardware on your existing wardrobe.",
+  lede:"Sagging doors and peeling laminate don't mean a new wardrobe. We replace shutters and hardware on your existing carcass and align every door before the 40% stage payment.",
+  gate:{name:"The Alignment Gate", short:"Every door aligned", desc:"Uneven gaps and doors that don't close flush are the tell of a rushed job. Every shutter is hung and aligned in front of you first.", fail:"Any shutter with uneven gaps is adjusted or remade before the 40% is due."},
+  per:"per wardrobe, up to 8 × 7 ft",
+  variants:{std:{tiers:{
+    essential:{price:42000, rate:700, for:"Straight, sealed new shutters.", points:["Carcass checked and re-fixed","19 mm block board, 1 mm laminate","Hettich soft-close hinges","Knob or bar handles"]},
+    signature:{price:79000, rate:1250, tag:"Most chosen", for:"A smooth premium finish.", points:["Acrylic or PU on 25 mm HDHMR","Handle-less G-profile","Full-length mirror shutter"]},
+    luxe:{price:115000, rate:1800, for:"Fluted glass fronts with lighting inside.", points:["Fluted glass in black aluminium frames","Sensor LED inside","Loft shutters matched"]}
+  }}},
+  inputs:[
+    {id:"W", type:"step", label:"Wardrobe width (ft)", min:3, max:16, step:.5, value:8},
+    {id:"H", type:"select", label:"Shutter height", value:"7", options:[{v:"7",label:"7 ft"},{v:"8",label:"8 ft"},{v:"9",label:"9 ft (to ceiling)"}]},
+    {id:"n", type:"step", label:"Wardrobes", min:1, max:5, step:1, value:1}
+  ],
+  hint:"Measure the full width of the wardrobe front. Lofts are an add-on.",
+  addons:[
+    {id:"profile", name:"Handle-less G-profile", note:"Aluminium, black or champagne", price:6000, inc:["signature","luxe"]},
+    {id:"mirror", name:"Full-length mirror shutter", note:"Safety-backed mirror", price:9500, inc:["signature","luxe"]},
+    {id:"led", name:"Sensor LED inside", note:"Lights up when doors open", price:7500, inc:["luxe"]},
+    {id:"loft", name:"Loft shutters", note:"Matched to the main shutters", rate:1100, per:st=>st.W, unit:"rft", inc:["luxe"]},
+    {id:"lock", name:"Lock on one shutter", note:"For valuables", price:1200}
+  ],
+  base(st, tp){ const t=this.variants.std.tiers[st.tier]; const a=st.W*(+st.H); const L=[[`${TN[st.tier]} · ${st.W} × ${st.H} ft`, tp]]; let sub=tp;
+    const ex=Math.max(0,a-56); if(ex){ L.push([`Extra shutter area, ${Math.round(ex)} sq ft`, ex*t.rate]); sub+=ex*t.rate; } return {lines:L, sub}; },
+  count(st){ return st.n; }, countLabel:"wardrobes",
+  faq:[["Will new shutters fit my old wardrobe?","Yes, they are made to your measured openings. If the carcass is sagging, we show you on the visit and quote the repair."],["Can I switch from swing to sliding?","Sometimes, depending on depth. We check on site and quote it separately."]]
+}};
+const ENQ = {
+  living:{nav:"Living and TV units", title:"Living and TV units", h1:["Living rooms,","built in."], lede:"TV units, feature walls and built-in storage, designed to your room and quoted after a site visit.", img:"bedroom", points:["TV units and media walls","Feature wall panelling","Display and storage units","Lighting planned with the joinery"]},
+  painting:{nav:"Painting", title:"Painting", h1:["Fresh walls.","Clean finish."], lede:"Interior repainting with surface preparation, putty and two finish coats. Quoted after we see the walls.", img:"grey", points:["Wall and ceiling repainting","Crack and damp patch treatment","Putty and primer","Furniture covered and moved"]},
+  fullhome:{nav:"Full home interiors", title:"Full home interiors", h1:["Your home,","room by room."], lede:"Every room handled by one team under one contract, priced room by room after a site visit.", img:"island", points:["Kitchen, wardrobes, living and bathrooms","One crew and one project manager","One contract, one handover date","Room-by-room fixed prices"]}
+};
+
+const ICONS = {
+  tiles:'<rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="1"/><rect x="13" y="13" width="7.5" height="7.5" rx="1"/>',
+  sanitary:'<path d="M6 3h7v6H6z"/><path d="M4 9h16a6 6 0 0 1-6 6h-1l1 6H9l1-6h-.5A5.5 5.5 0 0 1 4 9.5z"/>',
+  faucets:'<path d="M4 10h8a5 5 0 0 1 5 5v1"/><path d="M8 10V6h3v4"/><path d="M5.5 5.5h8"/><path d="M17 19.5v.5"/>',
+  showers:'<path d="M3 4h5a7 7 0 0 1 7 7"/><path d="M9 11h12"/><path d="M11 14.5v1.5M15 14.5v2.5M19 14.5v1.5M13 19v1.5M17 19v1.5"/>',
+  drains:'<circle cx="12" cy="12" r="8.5"/><path d="M8 9h8M7 12h10M8 15h8"/>',
+  accessories:'<path d="M3 7h18"/><path d="M5 7v2.5M19 7v2.5"/><path d="M7.5 7v10a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2V7"/>',
+  glass:'<rect x="5" y="3" width="14" height="18" rx="1.2"/><path d="M9 7.5l6 6M9 12l3.5 3.5"/>',
+  electrical:'<path d="M9.5 18h5M10.5 21h3"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.6 1 2.5h6c0-.9.3-1.8 1-2.5A6 6 0 0 0 12 3z"/>',
+  fixing:'<path d="M5 9h14l-1.6 11H6.6z"/><path d="M8.5 9a3.5 3.5 0 0 1 7 0"/>',
+  plumbing:'<path d="M3 6h9a5 5 0 0 1 5 5v10"/><path d="M3 10.5h8.5a1.5 1.5 0 0 1 1.5 1.5v9"/>',
+  kitchen:'<path d="M3 11h18v1.5A6.5 6.5 0 0 1 14.5 19h-5A6.5 6.5 0 0 1 3 12.5z"/><path d="M13 11V6a2.5 2.5 0 0 1 5 0"/>',
+  kits:'<path d="M3 7.5l9-4.5 9 4.5-9 4.5z"/><path d="M3 7.5v9l9 4.5 9-4.5v-9"/><path d="M12 12v9"/>',
+  all:'<circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/>',
+  cart:'<path d="M3 4h2.2l2.3 11h10.8l2-8H6.3"/><circle cx="9" cy="19.5" r="1.4"/><circle cx="17" cy="19.5" r="1.4"/>',
+  menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',
+  close:'<path d="M6 6l12 12M18 6L6 18"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+  chev:'<path d="M6 9l6 6 6-6"/>',
+  filter:'<path d="M4 6h16M7 12h10M10 18h4"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'
+};
+const ico = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[k]||ICONS.all}</svg>`;
+const SHOPCATS = [["all","All"],["kits","Bathroom kits"],["tiles","Tiles"],["sanitary","Sanitaryware"],["faucets","Faucets"],["showers","Showers"],["drains","Drains & traps"],["accessories","Accessories"],["glass","Glass & mirrors"],["electrical","Fans, lights & geysers"],["fixing","Waterproofing & fixing"],["plumbing","Plumbing"],["kitchen","Kitchen"]];
+const P = (id,cat,grp,brand,name,spec,price,unit,tier,cov) => ({id,cat,grp,brand,name,spec,price,unit,tier,cov});
+const PRODUCTS = [
+  P("t1","tiles","wall-tile","Somany","Ceramic wall tile, glossy","300 × 450 mm",45,"sqft","essential"),
+  P("t2","tiles","wall-tile","Kajaria","Digital wall tile, satin","300 × 600 mm",62,"sqft","signature"),
+  P("t3","tiles","wall-tile","Kajaria","Glazed porcelain slab","600 × 1200 mm, wall and floor",115,"sqft","luxe"),
+  P("t4","tiles","floor-tile","Somany","Anti-skid ceramic floor tile","300 × 300 mm, high grip",48,"sqft","essential"),
+  P("t5","tiles","floor-tile","Kajaria","Matte vitrified floor tile, anti-skid","600 × 600 mm",70,"sqft","signature"),
+  P("t6","tiles","floor-tile","Orientbell","Textured porcelain floor tile","600 × 600 mm, stone look",98,"sqft","luxe"),
+  P("t7","tiles","feature-tile","Kajaria","Highlighter decor tile","300 × 600 mm, for a feature wall",125,"sqft","signature"),
+  P("t8","tiles","feature-tile","Orientbell","Fluted 3D feature tile","300 × 600 mm, matte",140,"sqft","luxe"),
+  P("s1","sanitary","wc","Cera","Floor-mounted EWC with cistern","Close-coupled, S-trap, soft-close seat",9500,"set","essential"),
+  P("s2","sanitary","wc","Jaquar","Rimless wall-hung WC","Soft-close seat; needs a concealed cistern",18500,"set","signature"),
+  P("s3","sanitary","wc","Grohe","Rimless wall-hung WC","Soft-close seat; needs a concealed cistern",32000,"set","luxe"),
+  P("s4","sanitary","cistern","Jaquar","Concealed cistern with flush plate","Dual flush, frame and access panel",16500,"set","signature"),
+  P("s5","sanitary","cistern","Grohe","Concealed cistern with flush plate","Dual flush, for wall-hung WC",26000,"set","luxe"),
+  P("s6","sanitary","basin","Cera","Wall-hung wash basin","500 mm, white",2800,"each","essential"),
+  P("s9","sanitary","basin","Parryware","Counter-top basin","White ceramic, 500 mm",3900,"each","essential"),
+  P("s7","sanitary","basin","Jaquar","Counter-top basin, designer oval","500 mm, white",6500,"each","signature"),
+  P("s8","sanitary","basin","Grohe","Counter-top basin, thin rim","600 mm, white",14000,"each","luxe"),
+  P("s10","sanitary","vanity","CoreSpace pick","Vanity unit with basin and mirror","600 mm, water-resistant carcass",22000,"set","luxe"),
+  P("f1","faucets","basin-tap","Cera","Pillar tap for basin","Chrome, quarter turn",1800,"each","essential"),
+  P("f2","faucets","basin-tap","Jaquar","Single-lever basin mixer","Chrome, ceramic cartridge",4850,"each","signature"),
+  P("f3","faucets","basin-tap","Grohe","Single-lever basin mixer","Chrome, water-saving",9500,"each","luxe"),
+  P("f4","faucets","wall-mixer","Cera","Wall mixer with bend","For overhead and hand shower",3600,"each","essential"),
+  P("f5","faucets","wall-mixer","Jaquar","Concealed 3-in-1 diverter","Body and trim, chrome",12900,"set","signature"),
+  P("f6","faucets","wall-mixer","Grohe","Thermostatic concealed mixer","Body and trim, 2 outlets",38000,"set","luxe"),
+  P("f7c","faucets","health-faucet","Cera","Health faucet with hose","ABS, 1 m hose and holder",950,"set","essential"),
+  P("f7j","faucets","health-faucet","Jaquar","Health faucet with hose","Chrome, 1 m hose and holder",2200,"set","signature"),
+  P("f7g","faucets","health-faucet","Grohe","Health faucet with hose","Chrome, 1.25 m hose",4500,"set","luxe"),
+  P("f8c","faucets","angle-valve","Cera","Angle valves, pair","Chrome, with wall flange",900,"pair","essential"),
+  P("f8j","faucets","angle-valve","Jaquar","Angle valves, pair","Chrome, quarter turn",1900,"pair","signature"),
+  P("f8g","faucets","angle-valve","Grohe","Angle valves, pair","Chrome",3800,"pair","luxe"),
+  P("f9","faucets","bib-tap","Jaquar","Bib tap for bucket","Chrome, quarter turn",1600,"each","signature"),
+  P("f10","faucets","spout","Jaquar","Bath spout with diverter","Chrome",2400,"each","signature"),
+  P("h1","showers","overhead","Cera","Overhead shower with arm","150 mm, ABS",1400,"set","essential"),
+  P("h2","showers","overhead","Jaquar","Overhead shower with arm","200 mm round, chrome",4200,"set","signature"),
+  P("h4","showers","overhead","Hindware","Rain shower with arm","250 mm, stainless steel",5600,"set","signature"),
+  P("h3","showers","overhead","Grohe","Rain shower with arm","250 mm",12500,"set","luxe"),
+  P("h5c","showers","hand-shower","Cera","Hand shower with hose and holder","Single flow",1200,"set","essential"),
+  P("h5j","showers","hand-shower","Jaquar","Hand shower with hose and holder","Multi-flow, chrome",3200,"set","signature"),
+  P("h5g","showers","hand-shower","Grohe","Hand shower set with rail","Multi-flow, 600 mm rail",6800,"set","luxe"),
+  P("d1","drains","floor-drain","Cera","Floor trap with cockroach-proof grating","100 mm",650,"each","essential"),
+  P("d2","drains","floor-drain","CoreSpace pick","Stainless steel square grating","125 mm, anti-odour",1100,"each","signature"),
+  P("d3","drains","floor-drain","CoreSpace pick","Linear shower drain","600 mm, stainless steel, anti-odour",3200,"each","luxe"),
+  P("d4c","drains","bottle-trap","Cera","Bottle trap","Chrome-plated",750,"each","essential"),
+  P("d4","drains","bottle-trap","Jaquar","Bottle trap","Chrome, with wall flange",1600,"each","signature"),
+  P("d5","drains","waste","Jaquar","Full-thread waste coupling","32 mm, chrome",550,"each","essential"),
+  P("d6","drains","conn-pipe","CoreSpace pick","Braided connection pipes, pair","18 in, stainless steel",700,"pair","essential"),
+  P("a1","accessories","accessories","Cera","4-piece accessory set","Towel rod, ring, robe hook, paper holder",2400,"set","essential"),
+  P("a2","accessories","accessories","Jaquar","Accessory set","Towel rail, ring, robe hook, paper holder",6400,"set","signature"),
+  P("a3","accessories","accessories","Hindware","Matte black accessory set with shelf","5 pieces",11800,"set","luxe"),
+  P("a4","accessories","shelf","CoreSpace pick","Glass shelf","600 mm, toughened, chrome brackets",1500,"each","essential"),
+  P("a5","accessories","grab","CoreSpace pick","Grab bar for elders","450 mm, stainless steel",1800,"each","essential"),
+  P("a6","accessories","towel","CoreSpace pick","Double towel rack","600 mm, stainless steel",2500,"each","signature"),
+  P("a7","accessories","soap","Jaquar","Soap dish and tumbler holder","Chrome",1900,"set","signature"),
+  P("g3","glass","mirror","CoreSpace pick","Bevelled bathroom mirror","600 × 800 mm",2200,"each","essential"),
+  P("g4","glass","mirror","CoreSpace pick","Anti-fog LED mirror","600 × 800 mm, touch switch",7800,"each","signature"),
+  P("g1","glass","glass","CoreSpace pick","Fixed glass shower partition","8 mm toughened, up to 900 × 1950 mm",18000,"set","signature"),
+  P("g2","glass","glass","CoreSpace pick","Hinged shower enclosure","10 mm toughened, with hardware",28000,"set","luxe"),
+  P("e1","electrical","exhaust","Havells","Exhaust fan","150 mm",1900,"each","essential"),
+  P("e2","electrical","light","Philips","LED ceiling light, moisture-proof","15 W, IP44",1100,"each","essential"),
+  P("e4","electrical","geyser","AO Smith","Instant water heater","3 litre",4800,"each","essential"),
+  P("e3","electrical","geyser","Racold","Storage water heater","15 litre",9500,"each","signature"),
+  P("w1","fixing","waterproofing","Dr. Fixit","Pidifin 2K waterproofing kit","About 60 sq ft in 2 coats",3800,"kit","essential",60),
+  P("w3","fixing","adhesive","MYK Laticrete","Polymer tile adhesive (C2)","20 kg bag, about 40 sq ft",650,"bag","essential",40),
+  P("w5","fixing","grout","MYK Laticrete","Cement grout","1 kg, about 25 sq ft",150,"kg","essential",25),
+  P("w4","fixing","grout","MYK Laticrete","Epoxy grout, stain-proof","1 kg, about 45 sq ft",950,"kg","signature",45),
+  P("w7","fixing","trim","CoreSpace pick","Aluminium tile edge trim","8 ft length",350,"each","signature"),
+  P("w6","plumbing","plumbing","Ashirvad","CPVC pipes and fittings for one bathroom","Hot and cold lines, pressure-rated",6500,"set","essential"),
+  P("w8","plumbing","stopcock","Ashirvad","Concealed stop cock","20 mm, chrome cap",1300,"each","essential"),
+  P("k1","kitchen","sink","Franke","Single-bowl kitchen sink","Stainless steel, 32 × 18 in",8900,"each","signature"),
+  P("k2","kitchen","sink","Carysil","Quartz double-bowl sink","Black granite composite",14500,"each","luxe"),
+  P("k3","kitchen","kitchen-tap","Grohe","Pull-out kitchen faucet","Chrome, dual spray",11800,"each","luxe"),
+  P("k4","kitchen","counter","Quartz","Engineered quartz countertop, 20 mm","White, grey or beige",3200,"rft","signature"),
+  P("k5","kitchen","counter","Granite","Black granite countertop, 18 mm","Polished, edge finished",1800,"rft","essential"),
+  P("k6","kitchen","drawer","Hettich","Tandem drawer, soft close","Full extension, 30 kg",5400,"each","signature"),
+  P("k7","kitchen","handle","Aluminium","G-profile handle","Black or champagne",450,"rft","signature")
+];
+const PBY = Object.fromEntries(PRODUCTS.map(p=>[p.id,p]));
+const GRP = {"floor-tile":"Floor tiles","wall-tile":"Wall tiles","wc":"WC","cistern":"Concealed cistern","basin":"Basin","vanity":"Vanity","basin-tap":"Basin tap","wall-mixer":"Shower mixer","overhead":"Overhead shower","hand-shower":"Hand shower","health-faucet":"Health faucet","angle-valve":"Angle valves","floor-drain":"Floor drain","bottle-trap":"Bottle trap","waste":"Waste coupling","conn-pipe":"Connection pipes","accessories":"Accessory set","mirror":"Mirror","glass":"Shower glass","exhaust":"Exhaust fan","light":"Ceiling light","waterproofing":"Waterproofing","adhesive":"Tile adhesive","grout":"Grout","plumbing":"Plumbing lines"};
+const UNIT = u => ({sqft:"per sq ft",rft:"per rft",kg:"per kg",bag:"per bag",pair:"per pair",set:"per set",kit:"per kit",each:"each"}[u]||u);
+const STEP = p => p.unit==="sqft"?10:1;
+const DEFQ = p => p.unit==="sqft"?50:p.unit==="kg"||p.unit==="bag"?2:p.unit==="rft"?10:1;
+const KITDEF = {
+  essential:[["floor-tile","t4","floor"],["wall-tile","t1","wall"],["wc","s1",1],["basin","s6",1],["basin-tap","f1",1],["wall-mixer","f4",1],["overhead","h1",1],["hand-shower","h5c",1],["health-faucet","f7c",1],["angle-valve","f8c",2],["floor-drain","d1",1],["bottle-trap","d4c",1],["waste","d5",1],["conn-pipe","d6",1],["accessories","a1",1],["mirror","g3",1],["exhaust","e1",1],["light","e2",1],["waterproofing","w1","wp"],["adhesive","w3","tiled"],["grout","w5","tiled"],["plumbing","w6",1]],
+  signature:[["floor-tile","t5","floor"],["wall-tile","t2","wall"],["wc","s2",1],["cistern","s4",1],["basin","s7",1],["basin-tap","f2",1],["wall-mixer","f5",1],["overhead","h2",1],["hand-shower","h5j",1],["health-faucet","f7j",1],["angle-valve","f8j",2],["floor-drain","d2",1],["bottle-trap","d4",1],["waste","d5",1],["conn-pipe","d6",1],["accessories","a2",1],["mirror","g4",1],["glass","g1",1],["exhaust","e1",1],["light","e2",1],["waterproofing","w1","wp"],["adhesive","w3","tiled"],["grout","w4","tiled"],["plumbing","w6",1]],
+  luxe:[["floor-tile","t6","floor"],["wall-tile","t3","wall"],["wc","s3",1],["cistern","s5",1],["basin","s8",1],["vanity","s10",1],["basin-tap","f3",1],["wall-mixer","f6",1],["overhead","h3",1],["hand-shower","h5g",1],["health-faucet","f7g",1],["angle-valve","f8g",2],["floor-drain","d3",1],["bottle-trap","d4",1],["waste","d5",1],["conn-pipe","d6",1],["accessories","a3",1],["mirror","g4",1],["glass","g2",1],["exhaust","e1",1],["light","e2",1],["waterproofing","w1","wp"],["adhesive","w3","tiled"],["grout","w4","tiled"],["plumbing","w6",1]]
+};
+const KTN = {essential:"Essential kit", signature:"Signature kit", luxe:"Luxe kit"};
+const KIT = {L:8, W:5, tier:"signature", swap:{essential:{},signature:{},luxe:{}}, off:{essential:{},signature:{},luxe:{}}};
+const SHOP = {cat:"all", q:"", brands:new Set(), tier:"", sort:"pop", fopen:false};
+const CART = {}; let PENDING_SCROLL = null;
+function kitAreas(){ const floor=KIT.L*KIT.W, wall=Math.max(0, 2*(KIT.L+KIT.W)*8 - 17.5); return {floor, wall, tiled:floor+wall, wp:floor+2*(KIT.L+KIT.W)+30}; }
+function kitLines(tier){
+  const a=kitAreas();
+  return KITDEF[tier].map(([grp,def,qk])=>{
+    const p=PBY[KIT.swap[tier][grp]||def];
+    let q = typeof qk==="number"?qk : qk==="floor"?Math.ceil(a.floor*1.1) : qk==="wall"?Math.ceil(a.wall*1.1) : Math.max(1,Math.ceil(a[qk]/(p.cov||40)));
+    return {grp, p, q, on:!KIT.off[tier][grp]};
+  });
+}
+function kitTotal(tier){ return kitLines(tier).filter(l=>l.on).reduce((t,l)=>t+l.p.price*l.q,0); }
+function cartItems(){ return Object.entries(CART).filter(([,q])=>q>0).map(([id,q])=>({...PBY[id], q})); }
+function cartTotal(){ return cartItems().reduce((t,i)=>t+i.price*i.q,0); }
+function cartText(){ const it=cartItems(); if(!it.length) return ""; return ["Products:",...it.map(i=>`- ${i.brand} ${i.name} × ${i.q} ${i.unit}: ${inr(i.price*i.q)}`),`Products total: ${inr(cartTotal())} (indicative, excl. GST)`].join("\n"); }
+function setCart(id, q){ q=Math.max(0, Math.round(q)); if(q) CART[id]=q; else delete CART[id]; updateBadge(); saveCartSoon(); }
+let PROFILE=null, CARTT=null, CARTQ=Promise.resolve();
+function saveCartSoon(){ if(!DB||!UID) return; clearTimeout(CARTT); CARTT=setTimeout(()=>{ const items={...CART}; CARTQ=CARTQ.then(()=>DB.doc(`data/users/${UID}/cart`).set({items, ts:new Date().toISOString()})).catch(()=>{}); },900); }
+function updateBadge(){ const n=cartItems().length; const b=$("#cartcount"); if(b) b.textContent = n?String(n):""; }
+
+/* ============ STATE ============ */
+let OVR = {prices:{}, bookingsOpen:true};
+let LAST="";
+const ST = {};
+function optOf(job, id, v){ return job.inputs.find(i=>i.id===id).options.find(o=>o.v===v); }
+function stateFor(id){
+  if (!ST[id]){ const j=JOBS[id]; const s={tier:"signature", variant:Object.keys(j.variants)[0], add:{}}; j.inputs.forEach(i=>s[i.id]=i.value); ST[id]=s; }
+  return ST[id];
+}
+function tierPrice(jobId, variant, tier){
+  const k = `${jobId}.${variant}.${tier}`; const o = OVR.prices && OVR.prices[k];
+  return (typeof o==="number" && o>0) ? o : JOBS[jobId].variants[variant].tiers[tier].price;
+}
+function startPrice(jobId){ const j=JOBS[jobId]; return Math.min(...Object.keys(j.variants).map(v=>tierPrice(jobId,v,"essential"))); }
+function addonsFor(job, st){ return job.addons.filter(a=>!a.only || a.only===st.variant); }
+function estimate(jobId){
+  const job=JOBS[jobId], st=stateFor(jobId), tp=tierPrice(jobId,st.variant,st.tier);
+  const r = job.base(st, tp); const lines=r.lines.map(l=>({label:l[0], amt:l[1]})); let sub=r.sub; const visit=[];
+  for (const a of addonsFor(job, st)){
+    const inc = a.inc && a.inc.includes(st.tier);
+    if (inc){ lines.push({label:a.name, amt:0, inc:true}); continue; }
+    if (!st.add[a.id]) continue;
+    if (a.visit){ visit.push(a.name); lines.push({label:a.name, amt:null}); continue; }
+    const amt = a.rate ? a.rate*a.per(st) : a.price; lines.push({label:a.rate?`${a.name}, ${a.per(st)} ${a.unit}`:a.name, amt}); sub+=amt;
+  }
+  const n = job.count ? job.count(st) : 1; const total = sub*n;
+  const from = !!job.variants[st.variant].tiers[st.tier].from;
+  return {lines, sub, n, total, visit, from, tier:st.tier, variant:st.variant};
+}
+
+/* ============ RENDER HELPERS ============ */
+const ROUTES = ["account","shop","kits","photo","home","bathroom","kitchen","flooring","ceiling","wardrobe","more","living","painting","fullhome","process","projects","about","book","terms","admin"];
+function waLink(text){ return `https://wa.me/${CO.wa}?text=${encodeURIComponent(text)}`; }
+function payBar(total){
+  return `<div class="paybar">${SPLIT.map(([p,l,h])=>`<div class="${h?'held':''} ${p===10?'narrow':''}"><b>${p}%</b><small>${l}${total?`<span class="amt">${inr(total*p/100)}</span>`:""}</small></div>`).join("")}</div>`;
+}
+function figure(k){ const [src,alt]=IMG[k]; return `<figure><img src="${src}" alt="${esc(alt)}" loading="lazy"><figcaption>${esc(alt)}</figcaption></figure>`; }
+function finalCta(){ return `<section class="final"><div class="wrap"><h2>Get it measured this week.</h2><p>An architect visits, checks the problem at the source and gives you a Locked Quote with a fixed price and handover date. The ₹999 visit fee is adjusted against your first payment when you sign.</p><div class="actions"><a class="btn" href="#book">Book a site visit</a><a class="btn line" href="${waLink("Hi CoreSpace, I'd like to book a site visit.")}" target="_blank" rel="noopener">WhatsApp ${CO.waShow}</a></div></div></section>`; }
+
+function renderNav(route){
+  const jobCur = !!JOBS[route] || ["more","living","painting","fullhome"].includes(route);
+  const shopCur = route==="shop";
+  $("#nav").innerHTML = `<div class="dd"><button type="button" class="ddbtn ${jobCur?"cur":""}" data-act="dd" aria-expanded="false" aria-controls="ddp">Renovate ${ico("chev")}</button>
+    <div class="ddpanel" id="ddp" hidden>${Object.entries(JOBS).map(([id,j])=>`<a href="#${id}"><b>${j.short}</b><span>${j.tagline}</span><em>from ${inr(startPrice(id))}</em></a>`).join("")}<a href="#more"><b>More services</b><span>Living and TV units, painting, full home interiors</span><em>quoted after visit</em></a>
+    <div class="ddfoot"><a href="#process">How a job runs</a><a href="#photo">Price from a photo</a><a href="#book">Book a site visit</a></div></div></div>
+    <a href="#shop" ${shopCur?'aria-current="page"':''}>Shop</a>
+    <a href="#kits" ${route==="kits"?'aria-current="page"':''}>Bathroom kits <span class="tagnew">NEW</span></a>
+    <a href="#photo" ${route==="photo"?'aria-current="page"':''}>Photo quote</a>
+    <a href="#projects" ${route==="projects"?'aria-current="page"':''}>Projects</a>
+    <a href="#process" ${route==="process"?'aria-current="page"':''}>How it works</a>
+    <a href="#about" ${route==="about"?'aria-current="page"':''}>About</a>`;
+  $("#fjobs").innerHTML = Object.entries(JOBS).map(([id,j])=>`<li><a href="#${id}">${j.title}</a></li>`).join("") + `<li><a href="#shop">Shop</a></li><li><a href="#kits">Bathroom kits</a></li>`;
+  $("#ico-cart").innerHTML = ico("cart"); $("#ico-user").innerHTML = PROFILE&&PROFILE.name ? `<span style="font:800 16px var(--display)">${esc(PROFILE.name.trim()[0].toUpperCase())}</span>` : ico("user"); $("#ico-menu").innerHTML = ico("menu");
+  updateBadge();
+}
+function closeDD(){ const b=$(".ddbtn"), p=$("#ddp"); if(b){ b.setAttribute("aria-expanded","false"); } if(p) p.hidden=true; }
+function openSheet(kind, html){
+  const sh=$("#sheet"); sh.className = "sheet" + (kind==="center"?" center":""); sh.hidden=false;
+  sh.innerHTML = `<div class="scrim" data-act="closesheet"></div><div class="sheetp" role="dialog" aria-modal="true">${html}</div>`;
+  document.body.style.overflow="hidden"; setTimeout(()=>sh.querySelector(".sheetp button, .sheetp a, .sheetp input")?.focus(),30);
+}
+function closeSheet(){ const sh=$("#sheet"); if(!sh || sh.hidden) return; sh.hidden=true; sh.innerHTML=""; document.body.style.overflow=""; }
+function sheetHead(t){ return `<div class="sheeth"><h3>${t}</h3><button type="button" class="iconbtn" data-act="closesheet" aria-label="Close">${ico("close")}</button></div>`; }
+function openMenu(){
+  openSheet("right", sheetHead("Menu") + `<nav class="mnav" aria-label="Mobile"><h4>Renovate</h4>${Object.entries(JOBS).map(([id,j])=>`<a href="#${id}">${j.short}<span>from ${inr(startPrice(id))}</span></a>`).join("")}<a href="#more">More services</a>
+  <h4>Shop</h4><a href="#shop">Shop all products</a><a href="#kits">Bathroom kits <span>NEW</span></a><a href="#photo">Photo quote</a>
+  <h4>CoreSpace</h4><a href="#projects">Projects</a><a href="#process">How it works</a><a href="#about">About and contact</a><a href="#account">My account</a></nav>
+  <a class="btn block" href="#book">Book a site visit</a><a class="btn line block" href="${waLink("Hi CoreSpace")}" target="_blank" rel="noopener">WhatsApp ${CO.waShow}</a>`);
+}
+
+/* ============ PAGES ============ */
+function pageHome(){
+  const st0 = {tier:"signature"}; const tp = tierPrice("bathroom","std","signature");
+  return `
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <p class="label">Interiors, space by space · Bengaluru</p>
+    <h1 class="mega" style="margin-top:14px"><span>Fixed price.</span><span>Fixed date.</span><span>No surprises.</span></h1>
+    <p class="lede">Fixed-price renovation for Bengaluru apartments. One crew, one contract, and the biggest payment held until a check you can see passes.</p>
+    <div class="actions"><a class="btn" href="#home" data-act="scroll" data-to="jobs">Price my renovation</a><a class="btn line" href="#process">How a job runs</a></div>
+  </div>
+  <div class="doc" aria-label="Sample estimate">
+    <div class="doc-h"><span class="label">Sample Locked Quote</span><span class="label">Corebath</span></div>
+    <div class="doc-b">
+      <div class="kv"><span>Core Signature · Standard (35–45 sq ft)</span><span>${inr(tp)}</span></div>
+      <div class="kv inc"><span>Jaquar fixtures, large-format tile, concealed cistern</span><span>Included</span></div>
+      <div class="kv inc"><span>2-coat waterproofing with flood test</span><span>Included</span></div>
+      <div class="kv inc"><span>5-year waterproofing warranty</span><span>Included</span></div>
+      <div class="total"><span class="label">Fixed price</span><span class="num">${inr(tp)}</span></div>
+      ${payBar(tp)}
+    </div>
+  </div>
+</div></section>
+<section class="band" id="jobs"><div class="wrap">
+  <div class="head"><h2>What we renovate</h2><p class="lede">Each job has three fixed-price packages. Pick one, enter your sizes, and see the price before anyone visits.</p></div>
+  <div class="rows">${Object.entries(JOBS).map(([id,j])=>`<a class="row" href="#${id}"><span class="rname">${j.short}</span><span class="rdesc">${j.tagline}</span><span class="rgate"><b>${j.gate.name}</b>${j.gate.short}</span><span class="rprice">${inr(startPrice(id))}<small>starting price</small></span></a>`).join("")}</div>
+  <p class="fine">Also: <a href="#living">living and TV units</a>, <a href="#painting">painting</a> and <a href="#fullhome">full home interiors</a>, quoted after a visit.</p>
+</div></section>
+<section class="block"><div class="wrap">
+  <div class="head"><h2>One crew. One contract. Fixed price.</h2><p class="lede">Every job, from a bathroom to a wardrobe, runs on the same four rules.</p></div>
+  <div class="rules"><div><b>The Locked Quote</b><span>Scope, price and handover date agreed in writing before work starts. Changes only with your written approval.</span></div><div><b>The Daily Report</b><span>Photos of the day's work on WhatsApp, so you see progress without visiting.</span></div><div><b>The Gate</b><span>40% of the price waits until a check you can see passes. In bathrooms it is a filmed flood test.</span></div><div><b>The Handover</b><span>Snag list closed, warranty issued, site cleaned, then the final 10%.</span></div></div>
+  <div class="facts"><div><b>5-year</b><span>waterproofing warranty on every bathroom</span></div><div><b>1 free</b><span>service visit after handover</span></div><div><b>Certified</b><span>crew, trained in Jaquar and Hindware brand programs</span></div></div>
+  <div class="brands"><span>Cera</span><span>Jaquar</span><span>Grohe</span><span>Somany</span><span>Hindware</span><span>Hettich</span></div>
+</div></section>
+<section class="block"><div class="wrap builder">
+  <div><p class="label">Photo quote</p><h2 style="margin-top:8px">Price it from a photo.</h2><p class="lede" style="margin-top:14px">Upload a photo of the look you want, or of your room as it is. We match it to the closest package and show the price.</p><div class="actions"><a class="btn" href="#photo">Try photo quote</a></div></div>
+  <div><p class="label">Shop</p><h2 style="margin-top:8px">Pick the fittings. We fit them.</h2><p class="lede" style="margin-top:14px">Over 70 products for bathrooms and kitchens, plus complete one-bathroom kits sized to your room. Order the products, or have our crew install them.</p><div class="actions"><a class="btn line" href="#shop">Browse the shop</a><a class="btn line" href="#kits">Bathroom kits</a></div></div>
+</div></section>
+<section class="block"><div class="wrap">
+  <div class="head"><h2>Proof, not promises.</h2><p class="lede">Real sites, real finishes, from our own crews.</p></div>
+  <div class="gallery big">${figure("island")}${figure("mirror")}${figure("grey")}${figure("bar")}${figure("lshape")}</div>
+  <p style="margin-top:20px"><a class="linkbtn" href="#projects">See all projects</a></p>
+</div></section>
+<section class="block"><div class="wrap">
+  <div class="head"><h2>Where we work.</h2><p class="lede">We take jobs in these corridors. Elsewhere in Bengaluru, send your area and we'll tell you if we can come.</p></div>
+  <div class="chips">${AREAS.slice(0,5).map(a=>`<span class="chip">${a}</span>`).join("")}</div>
+</div></section>${finalCta()}`;
+}
+
+function pageJob(id){
+  const j=JOBS[id], st=stateFor(id), vkeys=Object.keys(j.variants);
+  const tierCards = (vk) => TIERS.map(t=>{ const tt=j.variants[vk].tiers[t]; return `<article class="tier ${tt.tag?'pop':''}"><span class="tag">${tt.tag||""}</span><h3>${TN[t]}</h3><p class="for">${tt.for}</p><div class="price"><div class="from">${tt.from?"From":"Fixed price"}</div><div class="amt">${inr(tierPrice(id,vk,t))}</div><div class="per">${j.per}</div></div><ul>${tt.points.map(p=>`<li>${p}</li>`).join("")}</ul><button type="button" class="btn line" data-act="pick" data-job="${id}" data-variant="${vk}" data-tier="${t}">Price this package</button></article>`; }).join("");
+  return `
+<section class="hero"><div class="wrap cat-hero">
+  <div><p class="crumb"><a href="#home">Home</a> / ${j.title}</p>
+    <h1>${j.h1.map(s=>`<span>${s}</span>`).join("")}</h1><p class="lede">${j.lede}</p>
+    <div class="actions"><a class="btn" href="#${id}" data-act="scroll" data-to="estimate">Price my ${j.short.toLowerCase()}</a><a class="btn line" href="#photo">Price from a photo</a></div></div>
+  <div class="doc gate"><div class="doc-h"><span class="label">The Gate for this job</span><span class="label">${j.gate.short}</span></div><div class="doc-b"><h3>${j.gate.name}</h3><p class="d">${j.gate.desc}</p>${payBar(0)}<p class="fail">${j.gate.fail}</p></div></div>
+</div></section>
+<section class="block"><div class="wrap">
+  ${vkeys.map(vk=>`<div class="head" style="margin-top:${vk===vkeys[0]?0:56}px"><h2>${vkeys.length>1?j.variants[vk].label:"Three packages"}</h2><p class="lede">${vkeys.length>1?j.variants[vk].sub+". ":""}Fixed price ${j.per}. Exact price after site measurement, locked before work starts.</p></div><div class="tiers">${tierCards(vk)}</div>`).join("")}
+  <p class="fine">Prices exclude GST. Package includes select fixtures; final pricing may vary with selections and deviations from the standard package.</p>
+</div></section>
+${j.scope?`<section class="block"><div class="wrap"><div class="head"><h2>What is included</h2><p class="lede">The core scope is the same in every Corebath package. Fixture brand changes by package.</p></div><div class="scope"><div><h3>Full renovation service</h3><ul>${j.scope.inc.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><h3>Fixtures</h3><ul>${j.scope.fixtures.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><h3>Not included</h3><ul>${j.scope.not.map(x=>`<li>${x}</li>`).join("")}</ul><p class="fine">Anything outside this scope is quoted separately.</p></div></div></div></section>`:""}
+<section class="block" id="estimate"><div class="wrap">
+  <div class="head"><h2>Price it now.</h2><p class="lede">An indicative price from your sizes. Your fixed price is set in the Locked Quote after we measure.</p></div>
+  <div class="builder"><div class="panel" id="est-in"></div><div class="summary"><div class="doc" id="est-out"></div></div></div>
+</div></section>
+<section class="block"><div class="wrap"><div class="head"><h2>Questions.</h2><p class="lede">Short answers.</p></div><div class="faq">${j.faq.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join("")}<details><summary>When do I pay?</summary><p>10% when you sign the Locked Quote, 40% when work starts, 40% after the Gate passes, and the final 10% at handover. The ₹999 visit fee is adjusted against your first payment.</p></details></div></div></section>
+${finalCta()}`;
+}
+
+function renderEstimator(id){
+  const j=JOBS[id], st=stateFor(id), inEl=$("#est-in"); if(!inEl) return;
+  const vkeys=Object.keys(j.variants); let n=1; const steps=[];
+  if (vkeys.length>1) steps.push(`<div class="step"><div class="step-h"><i>${n++}</i><h3>Type of job</h3></div><div class="seg">${vkeys.map(vk=>`<label><input type="radio" name="v-${id}" data-set="variant" value="${vk}" ${st.variant===vk?"checked":""}><span>${j.variants[vk].label}<small>${j.variants[vk].sub}</small></span></label>`).join("")}</div></div>`);
+  steps.push(`<div class="step"><div class="step-h"><i>${n++}</i><h3>Package</h3></div><div class="seg">${TIERS.map(t=>`<label><input type="radio" name="t-${id}" data-set="tier" value="${t}" ${st.tier===t?"checked":""}><span>${TN[t]}<small>${j.variants[st.variant].tiers[t].from?"from ":""}${inr(tierPrice(id,st.variant,t))}</small></span></label>`).join("")}</div></div>`);
+  const fields = j.inputs.map(i=>{
+    if (i.type==="seg") return `<div class="field" style="grid-column:1/-1"><span class="lbl">${i.label}</span><div class="seg">${i.options.map(o=>`<label><input type="radio" name="${id}-${i.id}" data-set="${i.id}" value="${o.v}" ${st[i.id]===o.v?"checked":""}><span>${o.label}<small>${o.sub}</small></span></label>`).join("")}</div></div>`;
+    if (i.type==="select") return `<div class="field"><label for="${id}-${i.id}">${i.label}</label><select id="${id}-${i.id}" data-set="${i.id}">${i.options.map(o=>`<option value="${o.v}" ${String(st[i.id])===o.v?"selected":""}>${o.label}</option>`).join("")}</select></div>`;
+    return `<div class="field"><span class="lbl">${i.label}</span><div class="stepper"><button type="button" data-act="step" data-k="${i.id}" data-d="-1" aria-label="Decrease ${i.label}">−</button><output class="tnum">${st[i.id]}</output><button type="button" data-act="step" data-k="${i.id}" data-d="1" aria-label="Increase ${i.label}">+</button></div></div>`;
+  }).join("");
+  steps.push(`<div class="step"><div class="step-h"><i>${n++}</i><h3>Size</h3></div><div class="inputs">${fields}</div><p class="hint">${j.hint}</p></div>`);
+  steps.push(`<div class="step"><div class="step-h"><i>${n++}</i><h3>Add-ons</h3></div><div class="addons">${addonsFor(j,st).map(a=>{ const inc=a.inc&&a.inc.includes(st.tier); const pr = a.visit?"Priced at visit":a.rate?`${inr(a.rate)}/${a.unit}`:"+ "+inr(a.price);
+    return `<label class="addon ${inc?"inc":""}"><input type="checkbox" data-add="${a.id}" ${inc||st.add[a.id]?"checked":""} ${inc?"disabled":""}><span><b>${a.name}</b><small>${a.note}</small></span><span class="ap">${inc?"In "+TN[st.tier].replace("Core ",""):pr}</span></label>`; }).join("")}</div></div>`);
+  inEl.innerHTML = steps.join("");
+  renderSummary(id);
+}
+function renderSummary(id){
+  const out=$("#est-out"); if(!out) return; const j=JOBS[id]; const e=estimate(id); const st=stateFor(id);
+  const open = OVR.bookingsOpen !== false;
+  out.innerHTML = `<div class="doc-h"><span class="label">Your estimate</span><span class="label">${j.short}${Object.keys(j.variants).length>1?" · "+j.variants[st.variant].label:""}</span></div>
+  <div class="doc-b">
+    ${e.lines.map(l=>`<div class="kv ${l.inc?"inc":""}"><span>${esc(l.label)}</span><span>${l.inc?"Included":l.amt===null?"At visit":inr(l.amt)}</span></div>`).join("")}
+    ${e.n>1?`<div class="kv"><span>× ${e.n} ${j.countLabel}</span><span>${inr(e.sub)} each</span></div>`:""}
+    <div class="total"><span class="label">${e.from?"From":"Indicative price"}<br><span class="muted" style="text-transform:none;letter-spacing:0">excl. GST</span></span><span class="num">${inr(e.total)}</span></div>
+    ${payBar(e.total)}
+    ${e.visit.length?`<div class="notice warn">${e.visit.join(" and ")} priced at the site visit.</div>`:""}
+    <div class="sub-actions"><button type="button" class="btn line sm" data-act="pdf" data-job="${id}" id="pdfbtn" ${DL?"":"hidden"}>Download PDF</button><a class="btn line sm" href="${waLink(estimateText(id))}" target="_blank" rel="noopener">Send on WhatsApp</a></div>
+    <div class="leadform" id="lf-${id}">${leadForm(id, open)}</div>
+  </div>`;
+}
+function leadForm(job, open, enquiry){
+  return `<h4>${open?"Book the site visit":"Join the waitlist"}</h4>
+  ${open?"":`<div class="notice warn" style="margin:0 0 12px">We're fully booked right now. Leave your details and we'll call when a slot opens.</div>`}
+  <form data-form="${job}" ${enquiry?'data-enquiry="1"':""} novalidate>
+  <div class="grid2">
+    <div class="field"><label for="f-${job}-name">Name</label><input type="text" id="f-${job}-name" name="name" autocomplete="name" placeholder="Priya Rao" value="${esc(PROFILE?.name||"")}"></div>
+    <div class="field"><label for="f-${job}-phone">Mobile</label><input type="tel" id="f-${job}-phone" name="phone" inputmode="numeric" autocomplete="tel" placeholder="98450 12345" value="${esc(PROFILE?.phone||"")}"></div>
+    <div class="field"><label for="f-${job}-area">Area</label><select id="f-${job}-area" name="area">${AREAS.map(a=>`<option ${PROFILE?.area===a?"selected":""}>${a}</option>`).join("")}</select></div>
+    <div class="field"><label for="f-${job}-apt">Apartment and tower</label><input type="text" id="f-${job}-apt" name="apt" placeholder="Prestige Lakeside, Tower 4" value="${esc(PROFILE?[PROFILE.apt,PROFILE.flat].filter(Boolean).join(", "):"")}"></div>
+    <div class="field"><label for="f-${job}-date">Preferred date</label><input type="date" id="f-${job}-date" name="date" min="${tomorrow()}" value="${tomorrow()}"></div>
+    <div class="field"><label for="f-${job}-slot">Time slot</label><select id="f-${job}-slot" name="slot">${SLOTS.map(s=>`<option>${s}</option>`).join("")}</select></div>
+    <div class="field full"><label for="f-${job}-notes">${enquiry?"What do you have in mind?":"Anything we should know"}</label><textarea id="f-${job}-notes" name="notes" placeholder="${enquiry?"Rooms, ideas, timing":"Leak under the floor, society work hours"}"></textarea></div>
+  </div>
+  <label class="consent"><input type="checkbox" name="consent" id="f-${job}-consent" ${PROFILE?"checked":""}><span>Call or WhatsApp me about this visit. I understand the ₹999 visit fee is adjusted against my first payment if I sign, and is not refunded otherwise.</span></label>
+  <div class="notice bad" data-err hidden></div>
+  <button class="btn block" type="submit" style="margin-top:14px">${open?"Book site visit":"Join waitlist"}</button>
+  </form>`;
+}
+function tomorrow(){ const d=new Date(); d.setDate(d.getDate()+1); return d.toISOString().slice(0,10); }
+function estimateText(id, ref){
+  const j=JOBS[id], st=stateFor(id), e=estimate(id);
+  const L=[`CoreSpace estimate${ref?" "+ref:""}`, `${j.title}${Object.keys(j.variants).length>1?" ("+j.variants[st.variant].label+")":""}`];
+  e.lines.forEach(l=>L.push(`- ${l.label}: ${l.inc?"included":l.amt===null?"priced at visit":inr(l.amt)}`));
+  if (e.n>1) L.push(`- × ${e.n} ${j.countLabel}`);
+  L.push(`${e.from?"From":"Indicative price"}: ${inr(e.total)} (excl. GST)`);
+  L.push(`Payments: ${SPLIT.map(([p,l])=>`${p}% ${l.toLowerCase()}`).join(", ")}`);
+  return L.join("\n");
+}
+
+function pageEnquiry(id){
+  const s=ENQ[id];
+  return `<section class="hero"><div class="wrap cat-hero">
+  <div><p class="crumb"><a href="#home">Home</a> / <a href="#more">More services</a> / ${s.title}</p><h1>${s.h1.map(x=>`<span>${x}</span>`).join("")}</h1><p class="lede">${s.lede}</p>
+  <ul style="margin:22px 0 0;padding-left:18px;color:var(--ink-2);display:grid;gap:4px">${s.points.map(p=>`<li>${p}</li>`).join("")}</ul></div>
+  <div class="gallery" style="grid-template-columns:1fr">${figure(s.img)}</div>
+</div></section>
+<section class="block"><div class="wrap builder"><div><h2>Tell us about the space.</h2><p class="lede" style="margin-top:14px">No fixed packages for this service. We visit, measure and send a Locked Quote with a fixed price and handover date.</p>${payBar(0)}</div>
+<div class="doc"><div class="doc-b">${leadForm(id, OVR.bookingsOpen!==false, true)}</div></div></div></section>${finalCta()}`;
+}
+function pageMore(){
+  return `<section class="hero"><div class="wrap"><p class="crumb"><a href="#home">Home</a> / More services</p><h1 class="mega"><span>Everything else,</span><span>one team.</span></h1><p class="lede">These jobs are quoted after a site visit rather than from a package.</p></div></section>
+<section class="block"><div class="wrap"><div class="rows light">${Object.entries(ENQ).map(([id,s])=>`<a class="row" href="#${id}"><span class="rname">${s.nav}</span><span class="rdesc">${s.lede}</span><span class="rgate"><b>Quoted after visit</b>Fixed price before work</span><span class="rprice">Enquire</span></a>`).join("")}</div></div></section>${finalCta()}`;
+}
+function pageProcess(){
+  const steps=[["Site visit","An architect visits, checks the problem at the source and measures. ₹999, adjusted against your first payment.","₹999 visit"],["Locked Quote","Scope, fixed price and handover date in writing. You sign when you're happy.","10% at signing"],["Work starts","One dedicated crew. Daily photos on WhatsApp.","40% at work start"],["The Gate","The check for your job passes in front of you.","40% after it passes",1],["Handover","Snag list closed, warranty issued, site cleaned. Support after.","10% at handover"]];
+  return `<section class="hero"><div class="wrap"><p class="crumb"><a href="#home">Home</a> / How it works</p><h1 class="mega"><span>Pay for work</span><span>you have seen.</span></h1><p class="lede">Every job follows the same five steps and the same 10, 40, 40, 10 payment split.</p></div></section>
+<section class="block"><div class="wrap"><ol class="process">${steps.map((s,i)=>`<li class="${s[3]?"g":""}"><span class="n">Step ${i+1}</span><h3>${s[0]}</h3><p>${s[1]}</p><span class="pay">${s[2]}</span></li>`).join("")}</ol></div></section>
+<section class="block"><div class="wrap"><div class="head"><h2>The Gate for each job.</h2><p class="lede">One check per job, written into your Locked Quote.</p></div>
+<div class="tbl"><table><thead><tr><th>Job</th><th>Gate</th><th>What is checked</th></tr></thead><tbody>${Object.entries(JOBS).map(([id,j])=>`<tr><td class="nw"><a href="#${id}">${j.short}</a></td><td class="nw">${j.gate.name}</td><td>${j.gate.desc}</td></tr>`).join("")}</tbody></table></div></div></section>${finalCta()}`;
+}
+function pageProjects(){
+  return `<section class="hero"><div class="wrap"><p class="crumb"><a href="#home">Home</a> / Projects</p><h1 class="mega"><span>Real sites.</span><span>Real finishes.</span></h1><p class="lede">Work by CoreSpace crews across Bengaluru.</p></div></section>
+<section class="block"><div class="wrap"><div class="gallery big">${Object.keys(IMG).map(figure).join("")}</div></div></section>${finalCta()}`;
+}
+function pageAbout(){
+  return `<section class="hero"><div class="wrap"><p class="crumb"><a href="#home">Home</a> / About</p><h1 class="mega"><span>Architect-led.</span><span>Owner-run.</span></h1><p class="lede">CoreSpace is a Bengaluru renovation and interiors company. We take on the whole job, from strip-out to handover, with one accountable team. No juggling contractors and no chasing updates.</p></div></section>
+<section class="block"><div class="wrap about">
+  <div class="person"><span class="label">Founder</span><h3 style="margin-top:6px">Iliyas</h3><ul><li>B.Arch</li><li>Fit-out project management, Embassy Services</li><li>Key Account Manager, Asian Paints</li><li>Material Depot, Bengaluru</li></ul></div>
+  <div class="person"><span class="label">Co-founder</span><h3 style="margin-top:6px">Nawaz Kazi</h3><ul><li>Co-founder, CoreSpace</li></ul></div>
+</div></section>
+<section class="block"><div class="wrap"><div class="head"><h2>Talk to us.</h2><p class="lede">WhatsApp is fastest. Tap to copy any of these.</p></div>
+<div class="contact"><div><span class="label">WhatsApp</span><div class="v tnum">${CO.waShow}</div><a class="linkbtn" href="${waLink("Hi CoreSpace")}" target="_blank" rel="noopener">Open chat</a></div><div><span class="label">Phone</span><div class="v tnum">${CO.phone}</div><button type="button" class="linkbtn" data-act="copy" data-v="${CO.phone}">Copy number</button></div><div><span class="label">Email</span><div class="v">${CO.email}</div><button type="button" class="linkbtn" data-act="copy" data-v="${CO.email}">Copy email</button></div></div></div></section>${finalCta()}`;
+}
+function pageBook(){
+  return `<section class="hero"><div class="wrap builder"><div><p class="crumb"><a href="#home">Home</a> / Book a site visit</p><h1 class="mega" style="font-size:clamp(44px,7vw,84px)"><span>Book a</span><span>site visit.</span></h1><p class="lede" style="margin-top:20px">An architect visits, measures and checks the problem at the source. You get a Locked Quote with a fixed price and handover date.</p>
+  <div class="doc" style="margin-top:24px"><div class="doc-b"><div class="kv"><span>Visit fee</span><span>₹999</span></div><div class="kv"><span>If you sign</span><span>Adjusted against your first payment</span></div><div class="kv"><span>If you don't sign</span><span>Not refunded</span></div><div class="kv"><span>How you pay it</span><span>Agreed on our confirmation call</span></div></div></div>
+  <p class="fine">Want a price first? <a href="#home">Use the estimator</a> on any job page.</p></div>
+  <div class="doc"><div class="doc-b">${cartItems().length?`<div class="notice ok" style="margin:0 0 14px">Your fittings list (${cartItems().length} item${cartItems().length===1?"":"s"}, ${inr(cartTotal())}) is attached to this request. <a href="#shop">Edit list</a></div>`:""}${leadForm("general", OVR.bookingsOpen!==false)}</div></div></div></section>`;
+}
+function pageTerms(){
+  return `<section class="hero"><div class="wrap"><p class="crumb"><a href="#home">Home</a> / Terms</p><h1 class="mega" style="font-size:clamp(44px,7vw,84px)"><span>Terms, privacy</span><span>and refunds.</span></h1></div></section>
+<section class="block"><div class="wrap prose">
+<h3>Prices</h3><p>Prices on this site are indicative and exclude GST. Your price is fixed once you sign the Locked Quote after site measurement, and it does not change during the work. Any change you request after signing is quoted separately and done only after your written approval.</p>
+<h3>Payments</h3><p>10% at signing, 40% at work start, 40% after the Gate for your job passes, and 10% at handover after the snag list is closed. Payments are made directly to CoreSpace; this website does not take payments.</p>
+<h3>Site-visit fee and refunds</h3><p>The site visit costs ₹999. It is adjusted against your first payment if you sign the Locked Quote. It is not refunded if you do not sign, or if the visit is cancelled or rescheduled. How you pay it is agreed on our confirmation call.</p>
+<h3>Exclusions</h3><p>Unless listed in your package: partition changes, plumbing relocation, electrical rewiring, structural repairs, building common lines and shafts, society deposits or fees, and civil works not in your package.</p>
+<h3>Warranty</h3><p>Every Corebath bathroom carries a 5-year waterproofing warranty and one free service visit after handover, as stated on the warranty certificate.</p>
+<h3>Privacy</h3><p>We collect the name, mobile number, area, apartment and notes you enter, plus your estimate, only to arrange and quote your site visit. We contact you by phone or WhatsApp with your consent. We don't sell or share your details. To have them deleted, write to ${CO.email}.</p>
+</div></section>`;
+}
+
+function pageShop(){
+  return `<section class="hero" style="padding-bottom:40px"><div class="wrap shophero">
+  <div><p class="crumb"><a href="#home">Home</a> / Shop</p><h1 class="mega" style="font-size:clamp(44px,7vw,88px)"><span>Everything for</span><span>your bathroom.</span></h1><p class="lede" style="margin-top:18px">Tiles, sanitaryware, faucets, showers, drains, glass, fittings and fixing materials from Cera, Jaquar, Grohe, Kajaria, Somany and more. Order the products, or have our crew install them.</p></div>
+  <a class="promo" href="#kits">${ico("kits")}<span><b>One bathroom, one cart.</b><span>Every product for a full bathroom, sized to your room. Essential kit from ${inr(kitTotalFor("essential"))}.</span></span></a>
+</div></section>
+<section class="block" style="padding-top:28px"><div class="wrap">
+  <div class="shopbar"><label class="search">${ico("search")}<input type="search" id="shopq" placeholder="Search products, brands or sizes" value="${esc(SHOP.q)}" aria-label="Search products"></label>
+    <select class="selectp" id="shopsort" aria-label="Sort"><option value="pop">Recommended</option><option value="lo" ${SHOP.sort==="lo"?"selected":""}>Price: low to high</option><option value="hi" ${SHOP.sort==="hi"?"selected":""}>Price: high to low</option></select>
+    <button type="button" class="addbtn ftoggle" data-act="ftoggle" aria-expanded="${SHOP.fopen}">${ico("filter").replace('<svg','<svg style="width:16px;height:16px;vertical-align:-3px;margin-right:6px"')}Filters</button></div>
+  <div class="catrow" role="group" aria-label="Category">${SHOPCATS.map(([k,l])=>`<button type="button" class="cat" data-act="shopcat" data-k="${k}" aria-pressed="${SHOP.cat===k}"><span class="ci">${ico(k)}</span>${l}</button>`).join("")}</div>
+  <div class="shopgrid"><aside class="fpanel ${SHOP.fopen?"open":""}" id="fpanel" aria-label="Filters"></aside><div><div class="rhead"><span class="label" id="rcount"></span><span class="muted" style="font-size:13.5px">Indicative prices, excl. GST. Confirmed on our call.</span></div><div class="pgrid" id="pgrid"></div></div></div>
+</div></section>${finalCta()}`;
+}
+function kitTotalFor(t){ return kitTotal(t); }
+function shopList(){
+  const q=SHOP.q.toLowerCase().trim();
+  let L=PRODUCTS.filter(p=>(SHOP.cat==="all"||p.cat===SHOP.cat) && (!SHOP.tier||p.tier===SHOP.tier) && (!q || `${p.brand} ${p.name} ${p.spec} ${GRP[p.grp]||""}`.toLowerCase().includes(q)));
+  const brandsAvail=[...new Set(L.map(p=>p.brand))].sort();
+  if (SHOP.brands.size) L=L.filter(p=>SHOP.brands.has(p.brand));
+  if (SHOP.sort==="lo") L=[...L].sort((a,b)=>a.price-b.price); else if (SHOP.sort==="hi") L=[...L].sort((a,b)=>b.price-a.price);
+  return {L, brandsAvail};
+}
+function drawShop(){
+  const g=$("#pgrid"); if(!g) return; const {L, brandsAvail}=shopList();
+  $("#rcount").textContent = `${L.length} product${L.length===1?"":"s"}`;
+  g.innerHTML = L.length ? L.map(productCard).join("") : `<div class="empty" style="grid-column:1/-1">No products match. <button type="button" class="linkbtn" data-act="fclear">Clear filters</button></div>`;
+  const allB=[...new Set([...brandsAvail, ...SHOP.brands])].sort();
+  $("#fpanel").innerHTML = `<div><h4>Range</h4>${[["","All ranges"],["essential","Essential"],["signature","Signature"],["luxe","Luxe"]].map(([k,l])=>`<label><input type="radio" name="ftier" data-f="tier" value="${k}" ${SHOP.tier===k?"checked":""}>${l}</label>`).join("")}</div>
+  <div><h4>Brand</h4>${allB.map(b=>`<label><input type="checkbox" data-f="brand" value="${esc(b)}" ${SHOP.brands.has(b)?"checked":""}>${esc(b)}<span class="cnt">${PRODUCTS.filter(p=>p.brand===b&&(SHOP.cat==="all"||p.cat===SHOP.cat)).length}</span></label>`).join("")}</div>
+  ${(SHOP.tier||SHOP.brands.size||SHOP.q)?`<button type="button" class="linkbtn" data-act="fclear">Clear filters</button>`:""}`;
+}
+function qtyCtl(p, q, act="q"){ return `<span class="qty"><button type="button" data-act="${act}" data-id="${p.id}" data-d="-1" aria-label="Less">−</button><output>${q}${p.unit==="sqft"?" sq ft":""}</output><button type="button" data-act="${act}" data-id="${p.id}" data-d="1" aria-label="More">+</button></span>`; }
+function productCard(p){
+  const q=CART[p.id]||0;
+  return `<article class="pcard"><button type="button" class="pimg" data-act="pdetail" data-id="${p.id}" aria-label="${esc(p.name)} details">${ico(p.cat)}<span class="tierpill t-${p.tier}">${p.tier}</span></button>
+  <div class="pbody"><span class="brand">${esc(p.brand)}</span><button type="button" class="nm" data-act="pdetail" data-id="${p.id}">${esc(p.name)}</button><span class="spec">${esc(p.spec)}</span>
+  <div class="prow"><span class="pr">${inr(p.price)} <small>${UNIT(p.unit)}</small></span>${q?qtyCtl(p,q):`<button type="button" class="addbtn" data-act="add" data-id="${p.id}">Add</button>`}</div></div></article>`;
+}
+function openProduct(id){
+  const p=PBY[id]; const q=CART[id]||DEFQ(p);
+  const pairs=PRODUCTS.filter(x=>x.cat!==p.cat && x.cat!=="kitchen" && p.cat!=="kitchen" && x.tier===p.tier && x.unit!=="sqft").slice(0,3);
+  openSheet("center", sheetHead(esc(p.brand)) + `<div class="pd"><div class="art">${ico(p.cat)}<span class="tierpill t-${p.tier}">${p.tier} range</span></div><div>
+    <span class="label">${esc(GRP[p.grp]||SHOPCATS.find(c=>c[0]===p.cat)[1])}</span><h3>${esc(p.name)}</h3>
+    <div class="pr" style="font-size:34px;margin-top:10px">${inr(p.price)} <small>${UNIT(p.unit)}, excl. GST</small></div>
+    <dl><dt>Brand</dt><dd>${esc(p.brand)}</dd><dt>Specification</dt><dd>${esc(p.spec)}</dd><dt>Range</dt><dd style="text-transform:capitalize">${p.tier}</dd>${p.cov?`<dt>Coverage</dt><dd>About ${p.cov} sq ft ${UNIT(p.unit)}</dd>`:""}<dt>Delivery</dt><dd>Bengaluru, confirmed on our call</dd></dl>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><span class="qty"><button type="button" data-act="pdq" data-d="-1" aria-label="Less">−</button><output id="pdq" data-id="${p.id}" data-v="${q}">${q}${p.unit==="sqft"?" sq ft":""}</output><button type="button" data-act="pdq" data-d="1" aria-label="More">+</button></span><button type="button" class="btn" data-act="pdadd" data-id="${p.id}">${CART[id]?"Update cart":"Add to cart"}</button></div>
+    <p class="fine">Need it installed? <a href="#book">Book a site visit</a> and we'll fit it with your job.</p>
+    ${pairs.length?`<p class="label" style="margin-top:18px">Goes well with</p><div class="pairs">${pairs.map(x=>`<div class="pair"><span class="ci">${ico(x.cat)}</span><span><b>${esc(x.name)}</b><small>${esc(x.brand)} · ${inr(x.price)} ${UNIT(x.unit)}</small></span><button type="button" class="addbtn ${CART[x.id]?"in":""}" data-act="add" data-id="${x.id}">${CART[x.id]?"Added":"Add"}</button></div>`).join("")}</div>`:""}
+  </div></div>`);
+}
+function openCart(){
+  const it=cartItems();
+  openSheet("right", sheetHead("Your cart") + (it.length ? `<div>${it.map(i=>`<div class="citem"><span class="ci">${ico(i.cat)}</span><span><span class="cn">${esc(i.name)}</span><span class="cm">${esc(i.brand)} · ${inr(i.price)} ${UNIT(i.unit)}</span></span><span class="ca">${inr(i.price*i.q)}</span>${qtyCtl(i,i.q,"cq")}<button type="button" class="rm" data-act="crm" data-id="${i.id}">Remove</button></div>`).join("")}</div>
+    <div class="total"><span class="label">Products total<br><span class="muted" style="text-transform:none;letter-spacing:0">indicative, excl. GST</span></span><span class="num" style="font-size:40px">${inr(cartTotal())}</span></div>
+    <p class="fine" style="margin-top:0">No payment now. We call to confirm stock, delivery and installation, then share the final bill.</p>
+    <div class="leadform" style="margin-top:4px"><h4>Request this order</h4><form data-form="shop" novalidate><div class="grid2">
+      <div class="field"><label for="f-shop-name">Name</label><input type="text" id="f-shop-name" name="name" autocomplete="name" value="${esc(PROFILE?.name||"")}"></div>
+      <div class="field"><label for="f-shop-phone">Mobile</label><input type="tel" id="f-shop-phone" name="phone" inputmode="numeric" autocomplete="tel" value="${esc(PROFILE?.phone||"")}"></div>
+      <div class="field"><label for="f-shop-area">Area</label><select id="f-shop-area" name="area">${AREAS.map(a=>`<option ${PROFILE?.area===a?"selected":""}>${a}</option>`).join("")}</select></div>
+      <div class="field"><label for="f-shop-apt">Apartment and tower</label><input type="text" id="f-shop-apt" name="apt" value="${esc(PROFILE?[PROFILE.apt,PROFILE.flat].filter(Boolean).join(", "):"")}"></div>
+      <div class="field full"><label for="f-shop-need">I need</label><select id="f-shop-need" name="need"><option>Delivery only</option><option>Delivery and installation by CoreSpace</option></select></div>
+      <div class="field full"><label for="f-shop-notes">Notes</label><textarea id="f-shop-notes" name="notes" placeholder="Colours, timing, anything else"></textarea></div></div>
+      <label class="consent"><input type="checkbox" name="consent" id="f-shop-consent" ${PROFILE?"checked":""}><span>Call or WhatsApp me about this order.</span></label>
+      <div class="notice bad" data-err hidden></div><button class="btn block" type="submit" style="margin-top:14px">Request order</button></form></div>
+    <p><button type="button" class="linkbtn" data-act="cclear">Empty cart</button></p>`
+  : `<div class="empty">${ico("cart").replace('<svg','<svg style="width:48px;height:48px;opacity:.5"')}<p style="margin-top:10px">Your cart is empty.</p><div class="actions" style="justify-content:center"><a class="btn" href="#shop">Browse the shop</a><a class="btn line" href="#kits">Bathroom kits</a></div></div>`));
+}
+function pageKits(){
+  const a=kitAreas();
+  return `<section class="hero" style="padding-bottom:36px"><div class="wrap"><p class="crumb"><a href="#home">Home</a> / <a href="#shop">Shop</a> / Bathroom kits</p>
+  <h1 class="mega" style="font-size:clamp(44px,7vw,92px)"><span>One bathroom.</span><span>Every product.</span></h1>
+  <p class="lede" style="margin-top:18px">Pick a range and enter your bathroom size. We list every product a full renovation needs, from tiles and adhesive to the health faucet and the last angle valve, with quantities worked out for your room. Swap anything, then add the whole kit to your cart.</p>
+  <div class="kitsize" style="margin-top:26px">
+    <div class="field"><span class="lbl">Length (ft)</span><div class="stepper" style="width:170px"><button type="button" data-act="kdim" data-k="L" data-d="-0.5" aria-label="Shorter">−</button><output class="tnum" id="kL">${KIT.L}</output><button type="button" data-act="kdim" data-k="L" data-d="0.5" aria-label="Longer">+</button></div></div>
+    <div class="field"><span class="lbl">Width (ft)</span><div class="stepper" style="width:170px"><button type="button" data-act="kdim" data-k="W" data-d="-0.5" aria-label="Narrower">−</button><output class="tnum" id="kW">${KIT.W}</output><button type="button" data-act="kdim" data-k="W" data-d="0.5" aria-label="Wider">+</button></div></div>
+    <p class="muted" id="kareas" style="font-size:14.5px;padding-bottom:10px"></p>
+  </div>
+  <div class="kittiers" id="kittiers"></div>
+</div></section>
+<section class="block" style="padding-top:20px"><div class="wrap kitwrap"><div id="kitlist"></div><aside class="summary"><div class="doc" id="kitsum"></div></aside></div></section>${finalCta()}`;
+}
+function drawKit(){
+  const el=$("#kitlist"); if(!el) return; const a=kitAreas();
+  $("#kL").textContent=KIT.L; $("#kW").textContent=KIT.W;
+  $("#kareas").textContent=`Floor ${Math.round(a.floor)} sq ft · walls tiled to 8 ft ${Math.round(a.wall)} sq ft · tile quantities include 10% for cuts`;
+  $("#kittiers").innerHTML = TIERS.map(t=>`<button type="button" class="kt" data-act="ktier" data-k="${t}" aria-pressed="${KIT.tier===t}"><b>${KTN[t]}</b><span>${t==="essential"?"Cera, Somany. Clean and durable.":t==="signature"?"Jaquar, Kajaria. Concealed cistern, glass partition.":"Grohe, large slabs. Thermostatic mixer, enclosure, vanity."}</span><span class="amt">${inr(kitTotal(t))}</span><span>${kitLines(t).filter(l=>l.on).length} products</span></button>`).join("");
+  const lines=kitLines(KIT.tier); const order=["tiles","sanitary","faucets","showers","drains","accessories","glass","electrical","fixing","plumbing"];
+  el.innerHTML = order.map(c=>{ const ls=lines.filter(l=>l.p.cat===c); if(!ls.length) return ""; return `<div class="kitgrp">${SHOPCATS.find(x=>x[0]===c)[1]}</div>${ls.map(l=>{ const alts=PRODUCTS.filter(x=>x.grp===l.grp); return `<div class="kline ${l.on?"":"off"}"><input type="checkbox" data-act="kon" data-g="${l.grp}" ${l.on?"checked":""} aria-label="Include ${GRP[l.grp]}"><span class="ci">${ico(l.p.cat)}</span><span style="min-width:0"><label for="ks-${l.grp}">${GRP[l.grp]}</label><select id="ks-${l.grp}" data-act="kswap" data-g="${l.grp}">${alts.map(x=>`<option value="${x.id}" ${x.id===l.p.id?"selected":""}>${esc(x.brand)} · ${esc(x.name)} · ${inr(x.price)} ${UNIT(x.unit)}</option>`).join("")}</select></span><span class="kq">${l.q} ${l.p.unit==="sqft"?"sq ft":l.p.unit}${l.q>1&&l.p.unit!=="sqft"&&!["kg"].includes(l.p.unit)?"s":""}</span><span class="ka">${inr(l.p.price*l.q)}</span></div>`; }).join("")}`; }).join("");
+  const tot=kitTotal(KIT.tier), on=lines.filter(l=>l.on);
+  const svc=tierPrice("bathroom","std",KIT.tier);
+  $("#kitsum").innerHTML = `<div class="doc-h"><span class="label">${KTN[KIT.tier]}</span><span class="label">${KIT.L} × ${KIT.W} ft</span></div><div class="doc-b">
+    <div class="kv"><span>Products</span><span>${on.length}</span></div><div class="kv"><span>Tiles</span><span>${on.filter(l=>l.p.unit==="sqft").reduce((t,l)=>t+l.q,0)} sq ft</span></div>
+    <div class="total"><span class="label">Kit total<br><span class="muted" style="text-transform:none;letter-spacing:0">products only, excl. GST</span></span><span class="num">${inr(tot)}</span></div>
+    <button type="button" class="btn block" data-act="kadd" style="margin-top:16px">Add kit to cart</button>
+    <div class="notice ok">Want it fitted too? The Corebath ${TN[KIT.tier].replace("Core ","")} package covers products and work at a fixed price from ${inr(svc)}, with a 5-year waterproofing warranty. <a href="#bathroom" data-act="gobath">See the package</a></div></div>`;
+}
+
+function pagePhoto(){
+  return `<section class="hero"><div class="wrap builder">
+  <div><p class="crumb"><a href="#home">Home</a> / Photo quote</p><h1 class="mega" style="font-size:clamp(44px,7.5vw,92px)"><span>Price it</span><span>from a photo.</span></h1><p class="lede" style="margin-top:20px">Upload a photo of the finish you want (a Pinterest save, a showroom shot, a render) or of your room as it is now. We match it to the closest job and package and show your estimate.</p>
+  <p class="fine">Works for bathrooms, kitchens, flooring, false ceilings and wardrobes. Your photo is read once to match it and is not stored.</p></div>
+  <div><label class="drop" id="drop"><span class="inner"><strong>Drop a photo here</strong><span class="muted">or tap to choose · JPG, PNG or WebP</span></span><input type="file" id="photo-file" accept="image/jpeg,image/png,image/webp" aria-label="Upload a photo"></label><div id="photo-out"></div></div>
+</div></section>${finalCta()}`;
+}
+const PHOTO_ERR = {not_granted:"Photo matching is switched off for this page. Pick a package on any job page instead; the price works the same.", rate_limited:"Too many photos at once. Wait a minute, then try again.", images_unavailable:"Photo matching isn't available in this view.", image_rejected:"That file couldn't be read. Try a JPG or PNG under 5 MB.", invalid_json:"We couldn't read the match. Try the photo again."};
+async function handlePhoto(file){
+  const out=$("#photo-out"); if(!out) return;
+  if(!file || !/^image\//.test(file.type)){ out.innerHTML=`<div class="notice bad">Choose an image file (JPG, PNG or WebP).</div>`; return; }
+  const url=URL.createObjectURL(file);
+  const shell=(html)=>`<div class="photo-row"><img src="${url}" alt="Your photo"><div>${html}</div></div>`;
+  const fallback=`<div class="actions" style="margin-top:12px"><a class="btn sm" href="${waLink("Hi CoreSpace, I'd like a quote for a photo I have. Sending it here.")}" target="_blank" rel="noopener">Send the photo on WhatsApp</a><a class="btn line sm" href="#bathroom">Pick a package instead</a></div>`;
+  const lim = SAMPLE ? await SAMPLE.limits().catch(()=>null) : null;
+  if(!SAMPLE || !lim?.images){ out.innerHTML=shell(`<p class="label">Photo ready</p><p class="muted" style="margin-top:6px">Automatic matching isn't available in this view. Send the photo on WhatsApp and we'll price it, or pick the closest package yourself.</p>${fallback}`); return; }
+  out.innerHTML=shell(`<p class="label"><span class="pulse"></span>Reading the photo</p><p class="muted" style="margin-top:6px">Matching fittings, tiles and finishes to our packages.</p>`);
+  const catalog = Object.entries(JOBS).map(([id,j])=>`${id}: ${Object.entries(j.variants).map(([vk,v])=>`${vk==="std"?"":vk+" variant - "}${TIERS.map(t=>`${t}: ${v.tiers[t].points.join(", ")}`).join(" | ")}`).join(" || ")}. add-ons: ${j.addons.map(a=>a.id+" ("+a.name+")").join(", ")}`).join("\n");
+  const prompt = `You are the estimator for CoreSpace, a fixed-price apartment renovation company in Bengaluru. The attached image is a customer's photo: either a reference of the finished look they want, or their room as it is now.
+Jobs, package tiers and add-ons:
+${catalog}
+Pick the ONE job the photo is about. Pick the closest tier by finish level (essential = simple, standard brands; signature = cleaner modern look, larger formats; luxe = designer finishes, premium brands, glass, fluting, feature lighting). For kitchen also pick variant "refit" (existing cabinets kept, new fronts) or "modular" (whole kitchen new); for a reference photo of a finished kitchen choose "modular". For bathroom also pick size_band: compact, standard, large or master (default standard). List add-on ids clearly visible in the photo.
+Reply ONLY with JSON: {"is_room":true|false,"job":"bathroom|kitchen|flooring|ceiling|wardrobe","variant":"refit|modular|std","tier":"essential|signature|luxe","size_band":"compact|standard|large|master","addons":["ids"],"reason":"one plain sentence","features":["3-5 short visible features"],"outside_scope":["visible items not in any package, quoted at the visit; empty if none"]}`;
+  try{
+    const r = await SAMPLE.json(prompt, {images:[file], modelTier:"default"});
+    if(!r || r.is_room===false || !JOBS[r.job]){ out.innerHTML=shell(`<p class="label">No room found</p><p class="muted" style="margin-top:6px">We couldn't match that photo to a bathroom, kitchen, floor, ceiling or wardrobe. Try another photo, or pick a package yourself.</p>${fallback}`); return; }
+    const j=JOBS[r.job], st=stateFor(r.job);
+    if (j.variants[r.variant]) st.variant=r.variant;
+    if (TIERS.includes(r.tier)) st.tier=r.tier;
+    if (r.job==="bathroom" && ["compact","standard","large","master"].includes(r.size_band)) st.band=r.size_band;
+    st.add={}; (r.addons||[]).forEach(id=>{ if(addonsFor(j,st).some(a=>a.id===id)) st.add[id]=true; });
+    const e=estimate(r.job); const extra=(r.outside_scope||[]).filter(Boolean);
+    out.innerHTML=shell(`<p class="label">Closest match</p><h3 style="margin-top:6px">${esc(j.short)}${Object.keys(j.variants).length>1?" · "+esc(j.variants[st.variant].label):""} · ${TN[st.tier]}</h3><p style="margin-top:6px">${esc(r.reason||"")}</p>${(r.features||[]).length?`<ul class="feat">${r.features.slice(0,5).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}${extra.length?`<div class="notice warn">Quoted at the visit: ${extra.map(esc).join(", ")}</div>`:""}
+      <div class="total"><span class="label">${e.from?"From":"Estimate"}, excl. GST</span><span class="num" style="font-size:44px">${inr(e.total)}</span></div>
+      <div class="actions" style="margin-top:14px"><button type="button" class="btn sm" data-act="openest" data-job="${r.job}">Adjust and book</button><a class="btn line sm" href="${waLink("Hi CoreSpace, my photo quote:\n"+estimateText(r.job))}" target="_blank" rel="noopener">Send on WhatsApp</a></div>`);
+  }catch(err){
+    if(err?.code==="cancelled") return;
+    out.innerHTML=shell(`<p class="label">No match this time</p><p class="muted" style="margin-top:6px">${PHOTO_ERR[err?.code]||"Something went wrong reading the photo. Try again, or pick a package yourself."}</p>${fallback}`);
+  }
+}
+
+let ACCT = {edit:false, confirmDel:false, reqs:null};
+function pageAccount(){ return `<section class="hero"><div class="wrap"><p class="crumb"><a href="#home">Home</a> / My account</p><h1 class="mega" style="font-size:clamp(44px,7vw,88px)"><span>My account.</span></h1><div id="acct" style="margin-top:28px"><p class="muted">Loading your account…</p></div></div></section>`; }
+function profileForm(p){
+  p=p||{};
+  return `<div class="doc" style="max-width:720px"><div class="doc-h"><span class="label">${PROFILE?"Edit profile":"Create your profile"}</span><span class="label">Takes a minute</span></div><div class="doc-b">
+  <p class="muted" style="margin-bottom:14px">Save your details once. We fill them in on every booking and order, keep your cart, and show the status of your requests here.</p>
+  <form data-form="profile" novalidate><div class="grid2">
+    <div class="field"><label for="p-name">Full name</label><input type="text" id="p-name" name="name" autocomplete="name" value="${esc(p.name||"")}"></div>
+    <div class="field"><label for="p-phone">Mobile</label><input type="tel" id="p-phone" name="phone" inputmode="numeric" autocomplete="tel" value="${esc(p.phone||"")}"></div>
+    <div class="field"><label for="p-email">Email (optional)</label><input type="text" id="p-email" name="email" inputmode="email" autocomplete="email" value="${esc(p.email||"")}"></div>
+    <div class="field"><label for="p-contact">Best way to reach you</label><select id="p-contact" name="contact">${["WhatsApp","Phone call","Email"].map(c=>`<option ${p.contact===c?"selected":""}>${c}</option>`).join("")}</select></div>
+    <div class="field"><label for="p-area">Area</label><select id="p-area" name="area">${AREAS.map(a=>`<option ${p.area===a?"selected":""}>${a}</option>`).join("")}</select></div>
+    <div class="field"><label for="p-apt">Apartment and tower</label><input type="text" id="p-apt" name="apt" autocomplete="address-line1" value="${esc(p.apt||"")}" placeholder="Prestige Lakeside, Tower 4"></div>
+    <div class="field"><label for="p-flat">Flat number</label><input type="text" id="p-flat" name="flat" value="${esc(p.flat||"")}" placeholder="1203"></div>
+    <div class="field"><label for="p-home">Home type</label><select id="p-home" name="home">${["2 BHK","3 BHK","4 BHK","Villa","Other"].map(h=>`<option ${p.home===h?"selected":""}>${h}</option>`).join("")}</select></div>
+    <div class="field full"><label for="p-notes">Anything we should know (optional)</label><textarea id="p-notes" name="notes" placeholder="Society work hours, parking, elders at home">${esc(p.notes||"")}</textarea></div>
+  </div>
+  <label class="consent"><input type="checkbox" name="consent" id="p-consent" ${PROFILE?"checked":""}><span>Save my details with CoreSpace and contact me about my requests. I can delete my profile any time.</span></label>
+  <div class="notice bad" data-err hidden></div>
+  <div class="actions" style="margin-top:14px"><button class="btn" type="submit">${PROFILE?"Save changes":"Create profile"}</button>${PROFILE?`<button type="button" class="btn line" data-act="pcancel">Cancel</button>`:""}</div></form></div></div>`;
+}
+async function mountAccount(){
+  const el=$("#acct"); if(!el) return;
+  if(!READY){ return; }
+  if(!DB || !UID){ el.innerHTML=`<div class="notice warn" style="max-width:720px">Profiles need you to be signed in. In this preview that's your claude.ai account; on the live site customers sign in with their mobile number and a one-time code.</div>`; return; }
+  if(!PROFILE || ACCT.edit){ el.innerHTML=profileForm(PROFILE); return; }
+  if(ACCT.reqs===null){ el.innerHTML=`<p class="muted">Loading your requests…</p>`; try{ const q=await DB.collection(`leads/${UID}/items`).get(); ACCT.reqs=q.docs.map(d=>d.data()).sort((a,b)=>String(b.ts).localeCompare(String(a.ts))); }catch(_){ ACCT.reqs=[]; } }
+  const p=PROFILE, it=cartItems();
+  el.innerHTML = `<div class="acct"><div class="doc"><div class="doc-b">
+    <div style="display:flex;gap:14px;align-items:center"><span class="avatar">${esc((p.name||"?").trim()[0].toUpperCase())}</span><div><h3 style="font-size:28px;font-stretch:76%;font-weight:900">${esc(p.name)}</h3><span class="muted" style="font-size:14px">Member since ${esc(new Date(p.created||Date.now()).toLocaleDateString("en-IN",{month:"short",year:"numeric"}))}</span></div></div>
+    <div class="pfacts"><div class="kv"><span>Mobile</span><span>${esc(p.phone)}</span></div>${p.email?`<div class="kv"><span>Email</span><span style="overflow-wrap:anywhere">${esc(p.email)}</span></div>`:""}<div class="kv"><span>Address</span><span>${esc([p.flat,p.apt].filter(Boolean).join(", "))}</span></div><div class="kv"><span>Area</span><span>${esc(p.area)}</span></div><div class="kv"><span>Home</span><span>${esc(p.home||"")}</span></div><div class="kv"><span>Contact by</span><span>${esc(p.contact)}</span></div></div>
+    <div class="actions" style="margin-top:16px"><button type="button" class="btn line sm" data-act="pedit">Edit profile</button><button type="button" class="linkbtn" data-act="pdel">Delete profile</button></div>
+    ${ACCT.confirmDel?`<div class="confirm"><span>Delete your profile and saved cart? Requests you've already sent stay with CoreSpace for follow-up.</span><button type="button" class="btn sm" style="background:var(--err);border-color:var(--err);color:#fff" data-act="pdelyes">Delete</button><button type="button" class="linkbtn" data-act="pdelno">Keep it</button></div>`:""}
+  </div></div>
+  <div style="display:grid;gap:28px">
+    <div><div class="rhead"><h3>My requests</h3><a class="linkbtn" href="#book">Book a site visit</a></div>
+      ${ACCT.reqs.length?`<div class="reqs">${ACCT.reqs.map(r=>`<div class="req"><span><b>${esc(r.jobLabel)}</b><br><span class="meta">${esc(r.ref)} · sent ${esc(new Date(r.ts).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"}))}${r.date?` · visit ${esc(r.date)}, ${esc(r.slot)}`:""}</span></span><span style="text-align:right"><span class="pill ${r.status==="New"?"new":r.status==="Signed"||r.status==="Visit booked"?"ok":""}">${esc(r.status)}</span>${r.total?`<br><b class="tnum" style="font-size:14px">${inr(r.total)}</b>`:""}</span></div>`).join("")}</div>`:`<div class="notice ok">No requests yet. Price a job or shop for products, then book. Your requests and their status show up here.</div>`}</div>
+    <div><div class="rhead"><h3>Saved cart</h3>${it.length?`<button type="button" class="linkbtn" data-act="opencart">Open cart</button>`:""}</div>
+      ${it.length?`<p class="muted">${it.length} product${it.length===1?"":"s"}, ${inr(cartTotal())}. Your cart is saved to your profile and follows you to any device.</p>`:`<p class="muted">Empty. Anything you add in the <a href="#shop">shop</a> or from a <a href="#kits">bathroom kit</a> is saved here.</p>`}</div>
+  </div></div>`;
+}
+async function saveProfileFromLead(lead){
+  if(!DB||!UID||PROFILE) return;
+  try{ await DB.doc(`data/users/${UID}/profile`).set({name:lead.name, phone:lead.phone, email:"", area:lead.area, apt:lead.apt, flat:"", home:"", contact:"WhatsApp", notes:"", created:new Date().toISOString(), updated:new Date().toISOString()}); toast("Profile created"); }catch(_){ toast("Couldn't create the profile here."); }
+}
+
+/* ============ ADMIN ============ */
+let ADMIN = {tab:"leads", leads:[], filter:"all", unsub:null};
+function pageAdmin(){ return `<section class="block"><div class="wrap" id="admin"><p class="label">Team</p><h2 style="margin-top:8px">Dashboard</h2><div id="admin-body" style="margin-top:20px"><p class="muted">Checking your access…</p></div></div></section>`; }
+async function mountAdmin(){
+  const body=$("#admin-body"); if(!body || !READY) return;
+  const ok = USER ? await USER.canEdit() : false;
+  if (!DB || !ok){ body.innerHTML = `<div class="notice warn">This page is for the CoreSpace team. Sign in with an editor account on this site to see leads, prices and bookings.</div>`; return; }
+  if (!ADMIN.unsub){ ADMIN.unsub = DB.collection("leadindex").onSnapshot(()=>loadLeads(), e=>{ body.innerHTML=`<div class="notice bad">Couldn't load leads (${esc(e.code)}). Reload to try again.</div>`; }); }
+  drawAdmin();
+}
+async function loadLeads(){
+  try{
+    const idx = await DB.collection("leadindex").get(); const all=[];
+    for (const d of idx.docs){ const q = await DB.collection(`leads/${d.id}/items`).get(); q.docs.forEach(x=>all.push({...x.data(), _path:`leads/${d.id}/items/${x.id}`})); }
+    all.sort((a,b)=>String(b.ts).localeCompare(String(a.ts))); ADMIN.leads=all; drawAdmin();
+  }catch(e){ toast("Couldn't load leads. Reload to try again."); }
+}
+function drawAdmin(){
+  const body=$("#admin-body"); if(!body) return;
+  const tabs=[["leads","Leads"],["customers","Customers"],["prices","Prices"],["bookings","Bookings"]];
+  let h=`<div class="atabs" role="tablist">${tabs.map(([k,l])=>`<button type="button" role="tab" aria-selected="${ADMIN.tab===k}" data-act="atab" data-k="${k}">${l}</button>`).join("")}</div>`;
+  if (ADMIN.tab==="leads"){
+    const L=ADMIN.leads; const c=s=>L.filter(x=>x.status===s).length;
+    const rows = L.filter(x=>ADMIN.filter==="all"||x.status===ADMIN.filter);
+    h+=`<div class="stats"><div><b>${L.length}</b><span>All leads</span></div><div><b>${c("New")}</b><span>New, to call</span></div><div><b>${c("Visit booked")}</b><span>Visits booked</span></div><div><b>${c("Signed")}</b><span>Signed</span></div></div>
+    <div class="filters"><div class="field"><label for="af">Status</label><select id="af" data-act="afilter"><option value="all">All</option>${STATUSES.map(s=>`<option ${ADMIN.filter===s?"selected":""}>${s}</option>`).join("")}</select></div><button type="button" class="btn line sm" data-act="csv">Export CSV</button></div>
+    ${rows.length?`<div class="tbl"><table><thead><tr><th>Received</th><th>Customer</th><th>Job and estimate</th><th>Visit</th><th>Status</th><th>Fee</th></tr></thead><tbody>${rows.map((x,i)=>`<tr>
+      <td class="nw tnum">${esc(new Date(x.ts).toLocaleString("en-IN",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}))}<br><span class="label">${esc(x.ref)}</span></td>
+      <td><b>${esc(x.name)}</b><br><span class="tnum">${esc(x.phone)}</span><br><span class="muted">${esc(x.apt)}, ${esc(x.area)}</span></td>
+      <td>${esc(x.jobLabel)}${x.total?`<br><b class="tnum">${inr(x.total)}</b>`:""}${x.notes?`<br><span class="muted">${esc(x.notes)}</span>`:""}</td>
+      <td class="nw">${esc(x.date)}<br><span class="muted">${esc(x.slot)}</span></td>
+      <td><select aria-label="Status for ${esc(x.ref)}" data-act="status" data-path="${esc(x._path)}">${STATUSES.map(s=>`<option ${x.status===s?"selected":""}>${s}</option>`).join("")}</select></td>
+      <td class="nw"><label style="display:flex;gap:6px;align-items:center;font-size:14px"><input type="checkbox" data-act="fee" data-path="${esc(x._path)}" ${x.feeReceived?"checked":""}> Received</label></td></tr>`).join("")}</tbody></table></div>`
+    :`<div class="notice ok">No leads ${ADMIN.filter==="all"?"yet":"with this status"}. Bookings from the website appear here as soon as they're sent.</div>`}`;
+  } else if (ADMIN.tab==="customers"){
+    const by={}; ADMIN.leads.forEach(x=>{ const k=x.phone||x.name; (by[k]=by[k]||{name:x.name,phone:x.phone,area:x.area,apt:x.apt,n:0,signed:0,value:0,last:x.ts}); const c=by[k]; c.n++; if(x.status==="Signed"){ c.signed++; c.value+=x.total||0; } if(String(x.ts)>String(c.last)) c.last=x.ts; });
+    const cs=Object.values(by).sort((a,b)=>String(b.last).localeCompare(String(a.last)));
+    h+= cs.length?`<p class="muted" style="margin-bottom:14px">${cs.length} customer${cs.length===1?"":"s"}, grouped by mobile number from bookings and orders.</p><div class="tbl"><table><thead><tr><th>Customer</th><th>Address</th><th>Requests</th><th>Signed</th><th>Last request</th></tr></thead><tbody>${cs.map(c=>`<tr><td><b>${esc(c.name)}</b><br><span class="tnum">${esc(c.phone)}</span></td><td>${esc(c.apt)}<br><span class="muted">${esc(c.area)}</span></td><td class="tnum">${c.n}</td><td class="tnum">${c.signed}${c.value?`<br><span class="muted">${inr(c.value)}</span>`:""}</td><td class="nw">${esc(new Date(c.last).toLocaleDateString("en-IN",{day:"numeric",month:"short"}))}</td></tr>`).join("")}</tbody></table></div>`:`<div class="notice ok">No customers yet. Everyone who books or orders appears here.</div>`;
+  } else if (ADMIN.tab==="prices"){
+    h+=`<p class="muted" style="margin-bottom:14px">Base package prices shown on the site. Saved prices go live for every visitor straight away.</p><div class="tbl"><table><thead><tr><th>Job</th>${TIERS.map(t=>`<th>${TN[t]}</th>`).join("")}</tr></thead><tbody>${Object.entries(JOBS).flatMap(([id,j])=>Object.keys(j.variants).map(vk=>`<tr><td class="nw">${j.short}${Object.keys(j.variants).length>1?" · "+j.variants[vk].label:""}<br><span class="muted" style="font-size:13px">${j.per}</span></td>${TIERS.map(t=>`<td><input type="number" min="0" step="500" aria-label="${j.short} ${vk} ${TN[t]}" data-price="${id}.${vk}.${t}" value="${tierPrice(id,vk,t)}"></td>`).join("")}</tr>`)).join("")}</tbody></table></div><div class="actions"><button type="button" class="btn" data-act="saveprices">Save prices</button><button type="button" class="btn line" data-act="resetprices">Reset to defaults</button></div>`;
+  } else {
+    const open=OVR.bookingsOpen!==false;
+    h+=`<div class="switch"><div><b>${open?"Taking bookings":"Bookings paused"}</b><p class="muted" style="font-size:15px">${open?"Visitors can book site visits.":"Visitors join a waitlist instead of booking."}</p></div><label><input type="checkbox" data-act="bookings" ${open?"checked":""}> Taking bookings</label></div>`;
+  }
+  body.innerHTML=h;
+}
+
+/* ============ CAPABILITIES ============ */
+let DB=null, USER=null, DL=null, SAMPLE=null, UID=null, READY=false;
+(async()=>{
+  try{ if(!window.claude?.use) return;
+    [DB,USER,DL,SAMPLE] = await Promise.all([claude.use("db"),claude.use("user"),claude.use("downloads"),claude.use("sample")]);
+    if (USER) UID = await USER.id();
+    if (DB && UID){
+      DB.doc(`data/users/${UID}/profile`).onSnapshot(s=>{ PROFILE = s.exists ? s.data() : null; renderNav(currentRoute()); if(currentRoute()==="account" && !ACCT.edit) mountAccount(); }, ()=>{});
+      try{ const c=await DB.doc(`data/users/${UID}/cart`).get(); if(c.exists && !cartItems().length){ Object.assign(CART, c.data().items||{}); updateBadge(); } }catch(_){}
+    }
+    if (DB){ DB.doc("config/site").onSnapshot(s=>{ const d=s.exists?s.data():{}; OVR={prices:{...(d.prices||{})}, bookingsOpen:d.bookingsOpen!==false}; refresh(); }, ()=>{}); }
+  }catch(_){}
+  finally{ READY=true; refresh(); }
+})();
+function refresh(){
+  if (currentRoute()==="account" && document.activeElement?.closest?.("form")) return;
+  if (!$("#sheet").hidden) return;
+  if (currentRoute()==="photo" && $("#photo-out")?.innerHTML) return;
+  const a=document.activeElement; if (a && /INPUT|TEXTAREA|SELECT/.test(a.tagName) && a.closest("form")) return;
+  render(true);
+}
+
+/* ============ ROUTER ============ */
+function currentRoute(){ const h=(location.hash||"").slice(1); return ROUTES.includes(h)?h:"home"; }
+function render(keep){
+  const r=currentRoute();
+  renderNav(r); closeSheet();
+  const page=$("#page");
+  let html;
+  if (JOBS[r]) html=pageJob(r); else if (ENQ[r]) html=pageEnquiry(r);
+  else html=({account:pageAccount,shop:pageShop,kits:pageKits,photo:pagePhoto,home:pageHome,more:pageMore,process:pageProcess,projects:pageProjects,about:pageAbout,book:pageBook,terms:pageTerms,admin:pageAdmin}[r]||pageHome)();
+  const y=window.scrollY; page.innerHTML=html;
+  if (JOBS[r]) renderEstimator(r);
+  if (r==="admin") mountAdmin();
+  if (r==="shop") drawShop();
+  if (r==="kits") drawKit();
+  if (r==="account"){ ACCT.reqs=null; ACCT.confirmDel=false; mountAccount(); }
+  if (r==="photo") bindDrop();
+  if (PENDING_SCROLL){ const el=document.getElementById(PENDING_SCROLL); PENDING_SCROLL=null; if(el){ el.scrollIntoView(); LAST=r; return; } }
+  document.title = r==="home"?"CoreSpace":`${(JOBS[r]?.title||ENQ[r]?.title||({more:"More services",process:"How it works",projects:"Projects",about:"About",book:"Book a site visit",terms:"Terms",account:"My account",shop:"Shop",kits:"Bathroom kits",photo:"Photo quote",admin:"Dashboard"})[r])} · CoreSpace`;
+  if (keep && LAST===r) window.scrollTo(0,y); else if (LAST!==r){ window.scrollTo(0,0); }
+  LAST=r;
+  $("#wafab").href = waLink(JOBS[r]?`Hi CoreSpace, I'd like a site visit for my ${JOBS[r].short.toLowerCase()}.`:"Hi CoreSpace, I'd like to book a site visit.");
+}
+window.addEventListener("hashchange",()=>render());
+
+/* ============ EVENTS ============ */
+function toast(m){ const t=document.createElement("div"); t.className="toast"; t.textContent=m; document.body.appendChild(t); setTimeout(()=>t.remove(),2600); }
+document.addEventListener("click", async e=>{
+  const b=e.target.closest("[data-act]"); if(!b) return; const act=b.dataset.act;
+  if (act==="scroll"){ e.preventDefault(); document.getElementById(b.dataset.to)?.scrollIntoView(); return; }
+  if (act==="pick"){ const st=stateFor(b.dataset.job); st.variant=b.dataset.variant; st.tier=b.dataset.tier; renderEstimator(b.dataset.job); $("#estimate").scrollIntoView(); }
+  else if (act==="step"){ const id=currentRoute(), j=JOBS[id], st=stateFor(id), i=j.inputs.find(x=>x.id===b.dataset.k); st[i.id]=Math.min(i.max,Math.max(i.min, +(st[i.id]+(+b.dataset.d)*i.step).toFixed(1))); b.parentElement.querySelector("output").textContent=st[i.id]; renderSummary(id); }
+  else if (act==="copy"){ try{ await navigator.clipboard.writeText(b.dataset.v); toast("Copied"); }catch(_){ toast("Select the text to copy it"); } }
+  else if (act==="copysum"){ const pre=$("#sum-text"); try{ await navigator.clipboard.writeText(pre.textContent); b.textContent="Copied"; }catch(_){ const r=document.createRange(); r.selectNodeContents(pre); const s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent="Selected, press copy"; } }
+  else if (act==="pdf"){ savePdf(b.dataset.job); }
+  else if (act==="dd"){ const open=b.getAttribute("aria-expanded")!=="true"; b.setAttribute("aria-expanded",String(open)); $("#ddp").hidden=!open; return; }
+  else if (act==="menu"){ openMenu(); }
+  else if (act==="pedit"){ ACCT.edit=true; mountAccount(); }
+  else if (act==="pcancel"){ ACCT.edit=false; mountAccount(); }
+  else if (act==="pdel"){ ACCT.confirmDel=true; mountAccount(); }
+  else if (act==="pdelno"){ ACCT.confirmDel=false; mountAccount(); }
+  else if (act==="pdelyes"){ try{ await DB.doc(`data/users/${UID}/profile`).delete(); await DB.doc(`data/users/${UID}/cart`).delete(); PROFILE=null; ACCT.confirmDel=false; ACCT.edit=false; toast("Profile deleted"); mountAccount(); renderNav("account"); }catch(_){ toast("Couldn't delete. Try again."); } }
+  else if (act==="saveprof"){ const lead=window.__lastLead; if(lead){ b.disabled=true; await saveProfileFromLead(lead); b.textContent="Profile saved"; } }
+  else if (act==="opencart"){ openCart(); }
+  else if (act==="closesheet"){ closeSheet(); }
+  else if (act==="shopcat"){ if(b.dataset.k==="kits"){ location.hash="#kits"; return; } SHOP.cat=b.dataset.k; SHOP.brands.clear(); document.querySelectorAll("[data-act=shopcat]").forEach(x=>x.setAttribute("aria-pressed", String(x.dataset.k===SHOP.cat))); drawShop(); }
+  else if (act==="ftoggle"){ SHOP.fopen=!SHOP.fopen; $("#fpanel").classList.toggle("open",SHOP.fopen); b.setAttribute("aria-expanded",String(SHOP.fopen)); }
+  else if (act==="fclear"){ SHOP.tier=""; SHOP.brands.clear(); SHOP.q=""; const qi=$("#shopq"); if(qi) qi.value=""; drawShop(); }
+  else if (act==="add"){ const p=PBY[b.dataset.id]; setCart(p.id,(CART[p.id]||0)+DEFQ(p)); if($("#pgrid")) drawShop(); if(!$("#sheet").hidden && b.closest(".pair")){ b.textContent="Added"; b.classList.add("in"); } toast(`Added ${p.name}`); }
+  else if (act==="q"){ const p=PBY[b.dataset.id]; setCart(p.id,(CART[p.id]||0)+(+b.dataset.d)*STEP(p)); drawShop(); }
+  else if (act==="cq"){ const p=PBY[b.dataset.id]; setCart(p.id,(CART[p.id]||0)+(+b.dataset.d)*STEP(p)); openCart(); if($("#pgrid")) drawShop(); }
+  else if (act==="crm"){ setCart(b.dataset.id,0); openCart(); if($("#pgrid")) drawShop(); }
+  else if (act==="cclear"){ for(const k in CART) delete CART[k]; updateBadge(); saveCartSoon(); openCart(); if($("#pgrid")) drawShop(); }
+  else if (act==="pdetail"){ openProduct(b.dataset.id); }
+  else if (act==="pdq"){ const o=$("#pdq"); const p=PBY[o.dataset.id]; const v=Math.max(STEP(p), +o.dataset.v + (+b.dataset.d)*STEP(p)); o.dataset.v=v; o.textContent=v+(p.unit==="sqft"?" sq ft":""); }
+  else if (act==="pdadd"){ const o=$("#pdq"); const p=PBY[b.dataset.id]; setCart(p.id,+o.dataset.v); closeSheet(); if($("#pgrid")) drawShop(); toast(`${p.name} in cart`); }
+  else if (act==="kdim"){ const k=b.dataset.k; KIT[k]=Math.min(20,Math.max(3, KIT[k]+(+b.dataset.d))); drawKit(); }
+  else if (act==="ktier"){ KIT.tier=b.dataset.k; drawKit(); }
+  else if (act==="kadd"){ const ls=kitLines(KIT.tier).filter(l=>l.on); ls.forEach(l=>setCart(l.p.id,(CART[l.p.id]||0)+l.q)); toast(`${KTN[KIT.tier]} added: ${ls.length} products`); openCart(); }
+  else if (act==="gobath"){ e.preventDefault(); stateFor("bathroom").tier=KIT.tier; PENDING_SCROLL="estimate"; location.hash="#bathroom"; }
+  else if (act==="openest"){ PENDING_SCROLL="estimate"; if(location.hash==="#"+b.dataset.job) render(); else location.hash="#"+b.dataset.job; }
+  else if (act==="atab"){ ADMIN.tab=b.dataset.k; drawAdmin(); }
+  else if (act==="csv"){ exportCsv(); }
+  else if (act==="saveprices"){ const p={}; document.querySelectorAll("[data-price]").forEach(i=>{ const v=Math.round(+i.value); const [j,vk,t]=i.dataset.price.split("."); if(v>0 && v!==JOBS[j].variants[vk].tiers[t].price) p[i.dataset.price]=v; }); await saveConfig({prices:p}, "Prices saved"); }
+  else if (act==="resetprices"){ await saveConfig({prices:{}}, "Prices reset to defaults"); }
+});
+document.addEventListener("change", async e=>{
+  const t=e.target;
+  if (t.dataset.set){ const id=currentRoute(); const st=stateFor(id); const inp=JOBS[id].inputs.find(i=>i.id===t.dataset.set); st[t.dataset.set] = (inp&&inp.type==="step")?+t.value:t.value; if(t.dataset.set==="variant"||t.dataset.set==="tier") renderEstimator(id); else renderSummary(id); }
+  else if (t.id==="photo-file"){ handlePhoto(t.files[0]); }
+  else if (t.dataset.f==="tier"){ SHOP.tier=t.value; drawShop(); }
+  else if (t.dataset.f==="brand"){ t.checked?SHOP.brands.add(t.value):SHOP.brands.delete(t.value); drawShop(); }
+  else if (t.id==="shopsort"){ SHOP.sort=t.value; drawShop(); }
+  else if (t.dataset.act==="kswap"){ KIT.swap[KIT.tier][t.dataset.g]=t.value; drawKit(); }
+  else if (t.dataset.act==="kon"){ KIT.off[KIT.tier][t.dataset.g]=!t.checked; drawKit(); }
+  else if (t.dataset.add){ const id=currentRoute(); stateFor(id).add[t.dataset.add]=t.checked; renderSummary(id); }
+  else if (t.dataset.act==="afilter"){ ADMIN.filter=t.value; drawAdmin(); }
+  else if (t.dataset.act==="status"){ try{ await DB.doc(t.dataset.path).update({status:t.value}); toast("Status updated"); }catch(_){ toast("Couldn't update. Try again."); } }
+  else if (t.dataset.act==="fee"){ try{ await DB.doc(t.dataset.path).update({feeReceived:t.checked}); toast(t.checked?"Visit fee marked received":"Visit fee unmarked"); }catch(_){ toast("Couldn't update. Try again."); } }
+  else if (t.dataset.act==="bookings"){ await saveConfig({bookingsOpen:t.checked}, t.checked?"Taking bookings":"Bookings paused"); }
+});
+function bindDrop(){
+  const d=$("#drop"); if(!d) return;
+  ["dragenter","dragover"].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.add("over");}));
+  ["dragleave","drop"].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.remove("over");}));
+  d.addEventListener("drop",e=>handlePhoto(e.dataTransfer.files[0]));
+}
+document.addEventListener("input", e=>{ if(e.target.id==="shopq"){ SHOP.q=e.target.value; drawShop(); } });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ closeSheet(); closeDD(); } });
+document.addEventListener("click", e=>{ if(!e.target.closest(".dd")) closeDD(); }, true);
+window.addEventListener("scroll", ()=>{ $("#hdr").classList.toggle("scrolled", window.scrollY>8); }, {passive:true});
+async function saveConfig(patch, msg){
+  if(!DB){ toast("Saving needs the live site."); return; }
+  try{ const ref=DB.doc("config/site"); const cur=await ref.get(); const base=cur.exists?{...cur.data()}:{}; await ref.set({...base, ...patch}); toast(msg); }catch(_){ toast("Couldn't save. Only editors can change settings."); }
+}
+document.addEventListener("submit", async e=>{
+  const f=e.target.closest("form[data-form]"); if(!f) return; e.preventDefault();
+  if (f.dataset.form==="profile"){
+    const g=k=>((f.elements[k]&&f.elements[k].value)||"").trim(); const ph=g("phone").replace(/\D/g,"").replace(/^91(?=\d{10}$)/,"");
+    const errs=[]; if(!g("name")) errs.push("your name"); if(!/^[6-9]\d{9}$/.test(ph)) errs.push("a 10-digit mobile number"); if(g("email") && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(g("email"))) errs.push("a valid email or leave it blank"); if(!g("apt")) errs.push("your apartment"); if(!f.elements.consent.checked) errs.push("your OK to save your details");
+    const er=f.querySelector("[data-err]"); if(errs.length){ er.textContent="Add "+errs.join(", ")+"."; er.hidden=false; return; } er.hidden=true;
+    const now=new Date().toISOString(); const data={name:g("name"), phone:ph, email:g("email"), contact:g("contact"), area:g("area"), apt:g("apt"), flat:g("flat"), home:g("home"), notes:g("notes"), created:PROFILE?.created||now, updated:now};
+    try{ await DB.doc(`data/users/${UID}/profile`).set(data); PROFILE=data; ACCT.edit=false; toast("Profile saved"); renderNav("account"); mountAccount(); }catch(_){ er.textContent="Couldn't save your profile. Check that you're signed in, then try again."; er.hidden=false; }
+    return;
+  }
+  const job=f.dataset.form, enquiry=!!f.dataset.enquiry, v=k=>((f.elements[k]&&f.elements[k].value)||"").trim();
+  const phone=v("phone").replace(/\D/g,"").replace(/^91(?=\d{10}$)/,"");
+  const errs=[]; if(!v("name")) errs.push("your name"); if(!/^[6-9]\d{9}$/.test(phone)) errs.push("a 10-digit mobile number"); if(!v("apt")) errs.push("your apartment"); if(!f.elements.consent.checked) errs.push("your OK to be contacted");
+  const err=f.querySelector("[data-err]"); if(errs.length){ err.textContent="Add "+errs.join(", ")+" to continue."; err.hidden=false; return; } err.hidden=true;
+  const btn=f.querySelector("button[type=submit]"); btn.disabled=true;
+  const ref="CS-"+Date.now().toString(36).slice(-6).toUpperCase();
+  const open=OVR.bookingsOpen!==false;
+  let jobLabel, total=null, est="";
+  if (JOBS[job]){ const st=stateFor(job), e2=estimate(job); jobLabel=`${JOBS[job].short}${Object.keys(JOBS[job].variants).length>1?" ("+JOBS[job].variants[st.variant].label+")":""} · ${TN[st.tier]}`; total=Math.round(e2.total); est=estimateText(job, ref); }
+  else if (ENQ[job]){ jobLabel=ENQ[job].title+" (enquiry)"; } else if (job==="shop"){ jobLabel="Shop order · "+v("need"); total=Math.round(cartTotal()); } else { jobLabel="Site visit (general)"; }
+  const ct=cartText(); if(ct) est=(est?est+"\n\n":"")+ct;
+  const lead={ref, ts:new Date().toISOString(), job, jobLabel, total, estimate:est, fittingsTotal:ct?cartTotal():null, name:v("name"), phone, area:v("area"), apt:v("apt"), date:v("date"), slot:v("slot"), notes:v("notes"), status:(open||job==="shop")?"New":"Waitlist", feeReceived:false, source:"website"};
+  let saved=false;
+  if (DB && UID){ try{ await DB.doc(`leads/${UID}/items/${ref}`).set(lead); await DB.doc(`leadindex/${UID}`).set({last:lead.ts}); saved=true; }catch(_){ saved=false; } }
+  const text=[`${job==="shop"?"Order request":open?"Site visit request":"Waitlist request"} ${ref}`,`Name: ${lead.name}`,`Mobile: ${phone}`,`Location: ${lead.apt}, ${lead.area}`,lead.date?`Preferred: ${lead.date}, ${lead.slot}`:"",`Job: ${jobLabel}`, est?"\n"+est:"", lead.notes?`\nNotes: ${lead.notes}`:""].filter(Boolean).join("\n");
+  window.__lastLead=lead; if(saved && job==="shop"){ for(const k in CART) delete CART[k]; updateBadge(); saveCartSoon(); }
+  f.parentElement.innerHTML = `<div class="done"><h4>${saved?(open?"Visit requested":"You're on the waitlist"):"One more step"}</h4><div class="ref">Reference ${ref}</div>
+    <p>${job==="shop"?(saved?`We'll call you on ${esc(phone)} to confirm stock, delivery and the final bill.`:"Send this order on WhatsApp so we can confirm stock and delivery."):saved?`We'll call you on ${esc(phone)} to confirm the slot and agree how you pay the ₹999 visit fee.`:"Send this request on WhatsApp so we can confirm your slot and the visit fee."}</p>
+    <div class="sub-actions"><a class="btn" href="${waLink(text)}" target="_blank" rel="noopener">${saved?"Also send on WhatsApp":"Send on WhatsApp"}</a><button type="button" class="btn line" data-act="copysum">Copy details</button></div>${saved&&!PROFILE?`<div class="notice ok">Save these details to a profile so you can track this request and skip typing next time. <button type="button" class="linkbtn" data-act="saveprof">Create my profile</button></div>`:saved?`<p class="fine">Track it in <a href="#account">My account</a>.</p>`:""}<pre id="sum-text"></pre></div>`;
+  $("#sum-text").textContent=text;
+});
+async function savePdf(id){
+  if(!DL || !window.jspdf){ toast("PDF download isn't available here. Use Send on WhatsApp."); return; }
+  const {jsPDF}=window.jspdf; const d=new jsPDF({unit:"pt",format:"a4"}); const j=JOBS[id], e=estimate(id), st=stateFor(id); const R=s=>String(s).replace(/₹/g,"Rs ").replace(/[^\x20-\x7E]/g,"-");
+  let y=56; d.setFont("helvetica","bold"); d.setFontSize(22); d.text("CoreSpace",48,y); d.setTextColor(52,195,99); d.text("estimate",168,y); d.setTextColor(0);
+  d.setFont("helvetica","normal"); d.setFontSize(10); y+=18; d.text(R(`Fixed price. Fixed date. One crew, one contract.  ${new Date().toLocaleDateString("en-IN")}`),48,y);
+  y+=30; d.setFont("helvetica","bold"); d.setFontSize(14); d.text(R(j.title+(Object.keys(j.variants).length>1?" - "+j.variants[st.variant].label:"")),48,y); d.setFont("helvetica","normal"); d.setFontSize(11);
+  y+=10; e.lines.forEach(l=>{ y+=20; d.text(R(l.label).slice(0,70),48,y); d.text(R(l.inc?"Included":l.amt===null?"At visit":inr(l.amt)),547,y,{align:"right"}); d.setDrawColor(222); d.line(48,y+6,547,y+6); });
+  if(e.n>1){ y+=20; d.text(R(`x ${e.n} ${j.countLabel}`),48,y); }
+  y+=34; d.setFont("helvetica","bold"); d.setFontSize(18); d.text(R(`${e.from?"From":"Indicative price"}: ${inr(e.total)} (excl. GST)`),48,y);
+  d.setFontSize(11); y+=30; d.text("Payment schedule",48,y); d.setFont("helvetica","normal");
+  SPLIT.forEach(([p,l])=>{ y+=18; d.text(R(`${p}%  ${l}`),48,y); d.text(R(inr(e.total*p/100)),547,y,{align:"right"}); });
+  y+=30; d.setFontSize(9.5); d.text(d.splitTextToSize(R("Indicative estimate. Your fixed price is set in the Locked Quote after a site visit (Rs 999, adjusted against your first payment if you sign). Contact: WhatsApp +91 86601 17432 | Phone +91 99450 39109 | Corebuildconindia@gmail.com"),500),48,y);
+  try{ await DL.save({filename:`CoreSpace-${id}-estimate.pdf`, data:d.output("arraybuffer")}); }catch(err){ if(err?.code!=="declined") toast("Couldn't save the PDF here."); }
+}
+async function exportCsv(){
+  const cols=["ref","ts","name","phone","area","apt","jobLabel","total","date","slot","status","feeReceived","notes"];
+  const q=v=>`"${String(v??"").replace(/"/g,'""')}"`; const csv=[cols.join(","),...ADMIN.leads.map(x=>cols.map(c=>q(x[c])).join(","))].join("\n");
+  if (DL){ try{ await DL.save({filename:"corespace-leads.csv", data:csv}); return; }catch(err){ if(err?.code==="declined") return; } }
+  try{ await navigator.clipboard.writeText(csv); toast("CSV copied"); }catch(_){ toast("Couldn't export here."); }
+}
+render();
+</script>
+
+</body></html>
